@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#141311">
 <meta name="description" content="กระดานแสดงคิวรถที่แจ้งปัญหา SUMMER CITY SS2">
-<title>กระดานคิวรถ SS2</title>
+<title>กระดานคิวแก้ไขปัญหารถ SS2</title>
 <link rel="icon" href="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png">
 <link rel="apple-touch-icon" href="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,12 +54,25 @@ button,input,select,textarea{font:inherit;color:inherit}
 svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
 /* top bar */
-.topbar{display:flex;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+/* ป้ายผู้สร้างเว็บ (มุมขวา) */
+.creator{flex:none;display:inline-flex;align-items:center;gap:9px;padding:4px 11px 4px 4px;border-radius:999px;border:1px solid rgba(255,122,26,.4);background:linear-gradient(135deg,rgba(255,122,26,.16),rgba(255,255,255,.03));color:#fff;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .25s var(--ease,ease),border-color .25s,background .25s}
+.creator:hover{transform:translateY(-1px);border-color:rgba(255,122,26,.8);background:linear-gradient(135deg,rgba(255,122,26,.26),rgba(255,255,255,.05))}
+.creator:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.cr-av{flex:none;width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.9);background:#0e0c0a;display:grid;place-items:center;font-family:var(--font-plate);font-weight:700;font-size:15px;color:var(--accent)}
+.cr-av img{display:block;width:100%;height:100%;object-fit:cover}
+.cr-txt{display:grid;line-height:1.15}
+.cr-by{font-size:9px;letter-spacing:.15em;color:var(--muted);font-weight:600}
+.cr-name{font-family:var(--font-display,inherit);font-size:14px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.cr-fb{flex:none;width:17px;height:17px}
+@media (max-width:560px){.cr-by,.cr-fb{display:none}.creator{gap:7px;padding-right:10px}.cr-av{width:32px;height:32px}.cr-name{font-size:13px}}
+@media (max-width:400px){.cr-txt{display:none}.creator{padding:4px}}
 .logo-btn{padding:0;margin:0;border:0;background:none;cursor:default;display:block;max-width:100%;-webkit-tap-highlight-color:transparent;border-radius:8px}
 .logo-btn img{display:block;height:52px;width:auto;max-width:min(280px,72vw);object-fit:contain}
 .logo-mark{width:44px;height:44px;border-radius:11px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--font-plate);font-weight:700;font-size:17px;letter-spacing:.02em}
 
-.logo-btn{display:inline-flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.logo-btn{display:inline-flex;align-items:center;flex:none}
 .logo-btn img{max-width:min(280px,40vw)}
 .logo-text{font-family:'Anton','Prompt',Impact,sans-serif;font-size:clamp(20px,5vw,32px);line-height:1;letter-spacing:.04em;white-space:nowrap;text-transform:uppercase;-webkit-text-stroke:1.2px currentColor;paint-order:stroke fill}
 .lt-or{color:var(--accent);text-shadow:0 0 14px rgba(255,122,26,.45)}
@@ -170,8 +183,18 @@ textarea{resize:vertical;min-height:84px}
 .notice-view{flex:1 1 0;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
 .notice-track{display:flex;width:max-content;animation:mqmove 30s linear infinite;will-change:transform}
 .mq-g{display:flex;flex:none;align-items:center}
-.mq-i{white-space:nowrap;font-weight:500;font-size:15.5px;line-height:1.5}
-.mq-i{margin-right:64px}
+.mq-i{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-weight:700;font-size:15px;line-height:1.4;margin-right:18px;padding:3px 14px 3px 11px;border-radius:999px;color:var(--cc,#fff);background:rgba(0,0,0,.34);background:color-mix(in srgb,var(--cc,#fff) 16%,rgba(0,0,0,.4));border:1px solid var(--cc,#fff);border:1px solid color-mix(in srgb,var(--cc,#fff) 70%,transparent)}
+.mq-i::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--cc,#fff)}   /* จุดสีทึบ ไม่ใช้เงาเรืองแสง เพราะทำให้เห็นเป็นลายสี่เหลี่ยมใน mask */
+/* ตัวแก้ประกาศหลายเรื่อง (แอดมิน) */
+.nlist{display:grid;gap:10px;max-height:min(46vh,380px);overflow:auto;padding:2px}
+.nrow{display:grid;gap:8px;padding:10px 12px;border:1px solid var(--line-strong);border-left:4px solid var(--c);border-radius:10px;background:rgba(255,255,255,.02)}
+.nrow-top{display:flex;align-items:center;gap:8px}
+.nrow-no{font-size:12.5px;color:var(--muted);font-weight:600}
+.nsw{display:flex;gap:8px;flex:1;flex-wrap:wrap}
+.nsw button{width:26px;height:26px;padding:0;border-radius:50%;border:2px solid transparent;background:var(--sw);cursor:pointer;box-shadow:inset 0 0 0 2px rgba(0,0,0,.35)}
+.nsw button[aria-pressed="true"]{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25),inset 0 0 0 2px rgba(0,0,0,.35)}
+.nrow input{font-weight:600;color:var(--c)}
+.nadd{width:100%;border-style:dashed}
 .notice-empty{flex:1 1 0;min-width:0;margin:0;color:var(--muted);font-size:14px}
 .notice-edit{flex:none}
 @keyframes mqmove{to{transform:translateX(-50%)}}
@@ -262,8 +285,9 @@ textarea{resize:vertical;min-height:84px}
 .modal-actions .spacer{margin-right:auto}
 .lb-head{display:flex;gap:12px;align-items:center;justify-content:space-between}
 .lb-title{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;min-width:0}
-.lb-img{aspect-ratio:16/10;max-width:100%;max-height:68vh;background:var(--bg);border-radius:10px;display:grid;place-items:center;overflow:hidden}
-.lb-img img{max-width:100%;max-height:100%;object-fit:contain}
+.lb-img{position:relative;width:100%;aspect-ratio:16/10;max-height:68vh;background:var(--bg);border-radius:10px;display:grid;place-items:center;overflow:hidden}
+.lb-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;display:block}
+.lb-img img[hidden]{display:none}
 .lb-img p{margin:0;color:var(--muted);padding:16px;text-align:center}
 .lb a.btn{justify-self:start;text-decoration:none;color:var(--accent);border-color:rgba(255,122,26,.5)}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:999px;font-weight:500;z-index:80;max-width:calc(100% - 32px);text-align:center}
@@ -302,7 +326,6 @@ h1,.action-txt b,.modal h2,.gname{font-family:var(--font-display)}
 h1{font-size:clamp(32px,5.6vw,54px);line-height:1.15;letter-spacing:-.01em;background:linear-gradient(180deg,#fff 30%,#e9d9c6);-webkit-background-clip:text;background-clip:text;color:transparent}
 .eyebrow{display:inline-flex;padding:4px 12px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(255,122,26,.35);font-size:13.5px}
 .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
-.logo-btn img{transition:transform .3s var(--ease),filter .3s}
 
 /* live stats */
 .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
@@ -417,26 +440,20 @@ body.ld :not(#loader):not(#loader *){animation-play-state:paused!important}
 @media (max-width:860px){.banner{aspect-ratio:16/8;border-radius:16px}}
 /* tier button + modal */
 html{scrollbar-gutter:stable}
+/* แถบเลื่อน: ราง(แถบ)ดำ ตัวเลื่อนสีส้ม */
+::-webkit-scrollbar{width:14px;height:14px;background:#000}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#c9610f,#a84a06);border:3px solid #000;border-radius:999px;min-height:48px}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#e0731a,#bf560a)}
+::-webkit-scrollbar-corner{background:#000}
+@supports not selector(::-webkit-scrollbar){html,*{scrollbar-color:#b8540b #000;scrollbar-width:auto}}
 html.lock,html.lock body{overflow:hidden}
 .overlay{overscroll-behavior:contain}
 .tier-open{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:14px;border:1px solid #ffa35c;background:linear-gradient(135deg,#ff8f33,#ff6a00);color:var(--accent-ink);font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 8px 22px -6px rgba(255,106,0,.6),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s var(--ease),filter .25s,box-shadow .3s}
 .tier-open svg.i{width:18px;height:18px}
 .tier-open:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 12px 28px -6px rgba(255,106,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
 .tier-open:active{transform:scale(.96)}
-.tier-modal{width:min(1120px,100%);height:min(600px,calc(100dvh - 32px));grid-template-rows:auto minmax(0,1fr);gap:18px;padding:24px;overflow:hidden}
-.tier-modal{position:relative}
-.tier-close{position:absolute;top:10px;right:12px;z-index:3;width:34px;height:34px;display:grid;place-items:center;padding:0;border-radius:10px;border:1px solid rgba(255,90,78,.6);background:rgba(255,90,78,.16);color:#ff5a4e;cursor:pointer;transition:background .2s,transform .2s,color .2s}
-.tier-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
-.tier-close:hover{background:#ff4136;color:#fff;transform:scale(1.06)}
-.tier-close:active{transform:scale(.94)}
-.mini.save{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
-.tier-prompt{position:absolute;inset:0;z-index:6;display:grid;place-items:center;padding:20px;background:rgba(6,5,4,.72);backdrop-filter:blur(3px);border-radius:inherit}
-.tier-prompt[hidden]{display:none}
-.tp-card{width:min(460px,100%);max-height:100%;overflow:auto;padding:22px;border-radius:16px;border:1px solid rgba(255,122,26,.55);background:#1a1613;box-shadow:0 24px 60px -12px rgba(0,0,0,.8)}
-.tp-card h3{margin:0 0 6px;font-size:18px}
-.tp-card p{margin:0 0 12px;color:var(--muted);font-size:14px}
-.tp-card ul{margin:0 0 16px;padding:10px 12px 10px 28px;border-radius:10px;background:rgba(255,255,255,.04);font-size:13.5px;line-height:1.7}
-.tp-acts{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.tier-modal{border-color:rgba(255,255,255,.14);background:radial-gradient(760px 340px at 50% -12%,rgba(255,255,255,.07),transparent 70%),linear-gradient(100deg,#26160b 0%,#18120d 40%,#0e1419 60%,#0a1219 100%);width:min(1120px,100%);height:min(600px,calc(100dvh - 32px));grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:24px;overflow:hidden}
 .tier-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .tier-ttl{display:flex;align-items:center;gap:14px;min-width:0}
 .tier-ttl h2{font-size:22px;line-height:1.2}
@@ -444,33 +461,43 @@ html.lock,html.lock body{overflow:hidden}
 .tier-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,#ff8f33,#ff6a00);color:var(--accent-ink);box-shadow:0 8px 20px -6px rgba(255,106,0,.55)}
 .tier-ico svg.i{width:24px;height:24px}
 .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:0}
-.tier-panel{--tc:var(--accent);--tcs:rgba(255,122,26,.14);position:relative;display:flex;flex-direction:column;min-height:0;min-width:0;border:1px solid var(--tb);border-radius:16px;background:linear-gradient(180deg,#171411,#0f0d0b);overflow:hidden;box-shadow:0 0 0 1px var(--tbg) inset,0 10px 30px -18px var(--tb)}
-.tier-panel{--tb:rgba(255,122,26,.55);--tbg:rgba(255,122,26,.08)}
-.tier-panel.ev{--tc:var(--st-review);--tcs:rgba(108,182,255,.14);--tb:rgba(108,182,255,.55);--tbg:rgba(108,182,255,.08)}
-.tp-head{display:flex;align-items:center;gap:12px;padding:16px 18px 14px}
-.tp-ico{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--tcs);color:var(--tc);border:1px solid var(--tcs)}
-.tp-ico svg.i{width:19px;height:19px}
-.tp-head h3{margin:0;font-family:var(--font-display);font-size:18px;font-weight:600}
-.tp-count{margin-left:auto;font-size:12.5px;color:var(--tc);background:var(--tcs);padding:2px 11px;border-radius:99px;font-weight:600}
-.tier-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 10px 10px;scrollbar-width:none;-ms-overflow-style:none}
+.tier-panel{--tc:#ff7a1a;--tcl:#ffc08a;--tcg:#ffd27a;--tcs:rgba(255,122,26,.14);--tcs2:rgba(255,122,26,.30);--tcb:rgba(255,122,26,.55);--tbg:#15100b;--rowbg:rgba(20,15,10,.82);position:relative;display:flex;flex-direction:column;min-height:0;min-width:0;border:1px solid rgba(255,122,26,.38);border-radius:18px;overflow:hidden;
+  /* แสงมุมนุ่ม ๆ + พื้นน้ำตาลเข้ม (ไม่มีลายเส้น) */
+  background:
+    radial-gradient(420px 260px at 100% 0%,rgba(255,138,40,.22),transparent 70%),
+    radial-gradient(360px 240px at 0% 100%,rgba(255,90,0,.10),transparent 70%),
+    linear-gradient(180deg,#1a120b,#0f0b08)}
+.tier-panel.ev{--tc:#2ec4ff;--tcl:#a6e9ff;--tcg:#b8f1ff;--tcs:rgba(46,196,255,.13);--tcs2:rgba(46,196,255,.30);--tcb:rgba(46,196,255,.55);--tbg:#0a1118;--rowbg:rgba(8,14,20,.82);border-color:rgba(46,196,255,.38);
+  /* แสงมุมนุ่ม ๆ + พื้นน้ำเงินเข้ม (ไม่มีลายเส้น) */
+  background:
+    radial-gradient(420px 260px at 100% 0%,rgba(46,196,255,.22),transparent 70%),
+    radial-gradient(360px 240px at 0% 100%,rgba(30,120,255,.12),transparent 70%),
+    linear-gradient(180deg,#0e1822,#080d12)}
+.tier-panel::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--tc),var(--tcg))}
+.tp-head{display:flex;align-items:center;gap:13px;padding:20px 18px 14px}
+.tp-ico{width:44px;height:44px;flex:none;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--tcg),var(--tc));color:#10100f;box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.tp-ico svg.i{width:23px;height:23px;stroke-width:2.2}
+.tp-ttl{min-width:0}
+.tp-head h3{margin:0;font-family:var(--font-display);font-size:19px;font-weight:700;line-height:1.2;color:var(--tcl)}
+.tp-count{margin-left:auto;flex:none;font-size:12.5px;color:var(--tc);background:var(--tcs);border:1px solid var(--tcb);padding:3px 12px;border-radius:99px;font-weight:700}
+.tier-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 12px 12px;scrollbar-width:none;-ms-overflow-style:none}
 .tier-scroll::-webkit-scrollbar{display:none;width:0;height:0}
-.tier-table{width:100%;border-collapse:separate;border-spacing:0 6px;table-layout:fixed}
-.tier-table thead th{position:sticky;top:0;z-index:1;background:#13110f;padding:8px 12px;text-align:left;color:var(--muted);font-size:12px;font-weight:500;letter-spacing:.04em}
+.tier-table{width:100%;border-collapse:separate;border-spacing:0 7px;table-layout:fixed}
+.tier-table thead th{position:sticky;top:0;z-index:1;background:var(--tbg);padding:8px 12px;text-align:left;color:var(--tc);font-size:11.5px;font-weight:700;letter-spacing:.08em;border-bottom:1px solid var(--tcb)}
 .tier-table thead th:first-child{width:52%}
-.tier-table td{padding:11px 12px;background:rgba(255,255,255,.03);border-top:1px solid transparent;border-bottom:1px solid transparent;vertical-align:middle;transition:background .2s}
-.tier-table td:first-child{border-radius:12px 0 0 12px}
-.tier-table td:last-child{border-radius:0 12px 12px 0}
-.tier-table tbody tr:hover td{background:var(--tcs)}
+.tier-table td{padding:11px 12px;background:var(--rowbg);border-top:1px solid transparent;border-bottom:1px solid transparent;vertical-align:middle;transition:background .2s}
+.tier-table td:first-child{border-radius:13px 0 0 13px;border-left:3px solid var(--tcb)}
+.tier-table td:last-child{border-radius:0 13px 13px 0}
+.tier-table tbody tr:hover td{background:color-mix(in srgb,var(--tc) 16%,var(--rowbg))}
 .t-cell{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px;line-height:1.4;min-width:0}
 .t-name{min-width:0;overflow-wrap:anywhere}
-.t-badge{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;font-family:var(--font-plate);font-weight:600;font-size:14px;background:var(--tcs);color:var(--tc);border:1px solid var(--tc)}
-.s-cell{display:grid;gap:7px}
+.t-badge{width:32px;height:32px;flex:none;border-radius:10px;display:grid;place-items:center;font-family:var(--font-plate);font-weight:700;font-size:14px;background:var(--tcs);color:var(--tc);border:1px solid var(--tcb)}
+.s-cell{display:grid;gap:8px}
 .s-num{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
-.s-num b{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1;color:var(--fg)}
-.s-num small{font-size:12px;color:var(--muted)}
-.s-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
-.s-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--tc),#ffd2a1);transform-origin:left;animation:grow .9s var(--ease) .15s both}
-.tier-panel.ev .s-bar i{background:linear-gradient(90deg,var(--tc),#d4ebff)}
+.s-num b{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1;color:var(--tcl)}
+.s-num small{font-size:12px;color:var(--tc);font-weight:600}
+.s-bar{height:7px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.s-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--tc),var(--tcg));transform-origin:left;animation:grow .9s var(--ease) .15s both}
 .ed{padding:7px 10px;font-size:14px;border-radius:9px}
 .ed.sp{width:96px;flex:none;font-family:var(--font-plate);font-weight:600}
 .s-top{display:flex;align-items:center;gap:8px}
@@ -482,24 +509,13 @@ html.lock,html.lock body{overflow:hidden}
 .tier-admin p{margin:0;font-size:13px}
 .tier-admin-actions{display:flex;gap:8px}
 @keyframes grow{from{transform:scaleX(0)}}
-@media (max-width:640px){.tier-grid{grid-template-columns:1fr;grid-auto-rows:minmax(260px,1fr);overflow:auto;overscroll-behavior:contain}.tier-modal{height:min(600px,calc(100dvh - 32px));padding:18px}.tier-ttl p{font-size:12.5px}}
+@media (max-width:640px){.tier-grid{grid-template-columns:1fr;grid-auto-rows:minmax(260px,1fr);overflow:auto;overscroll-behavior:contain}.tier-modal{height:min(600px,calc(100dvh - 32px));padding:18px}.tier-ttl p{display:none}}
 @media (prefers-reduced-motion:reduce){*:not(.notice-track),*::before,*::after{animation:none!important;transition:none!important}}   /* ป้ายประกาศวิ่งต้องเคลื่อนไหวเสมอ จึงยกเว้น .notice-track */
 a[role="link"]{cursor:pointer}
 /* กันคลุมดำ/คัดลอกทั้งเว็บ (ช่องกรอกข้อมูลยังพิมพ์/คัดลอกได้ตามปกติ) */
 html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text}
 img{-webkit-user-drag:none;user-drag:none}
-/* สกอร์บาร์โทนส้มเข้ม หนาขึ้น */
-/* Chrome/Edge ใหม่จะเมินสไตล์ ::-webkit-scrollbar ถ้าตั้ง scrollbar-color ไว้ จึงตั้งเฉพาะ Firefox */
-@supports not selector(::-webkit-scrollbar){*{scrollbar-width:auto;scrollbar-color:#8f4210 #14110e}}
-::-webkit-scrollbar{width:18px;height:18px}
-::-webkit-scrollbar-track{background:#14110e}
-::-webkit-scrollbar-thumb{background:#8f4210;border-radius:999px;border:4px solid #14110e}
-::-webkit-scrollbar-thumb:hover{background:#a64d12}
-::-webkit-scrollbar-corner{background:#14110e}
-::-webkit-scrollbar-button,::-webkit-scrollbar-button:single-button,::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment{display:none;width:0;height:0;background:none}
-.logo-btn,.logo-text{cursor:default}
-.logo-btn,.logo-btn *{outline:none}
 </style>
 </head>
 <body class="ld">
@@ -511,11 +527,18 @@ img{-webkit-user-drag:none;user-drag:none}
 </div>
 <div class="wrap">
   <div class="topbar">
-    <button type="button" class="logo-btn" id="logoBtn">
-      <img id="logoImg" src="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png" alt="SUMMER CITY SS2">
-      <span class="logo-mark" id="logoFallback" hidden>SC</span>
+    <div class="brand">
+      <button type="button" class="logo-btn" id="logoBtn" aria-label="เข้าสู่ระบบแอดมิน">
+        <img id="logoImg" src="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png" alt="SUMMER CITY SS2">
+        <span class="logo-mark" id="logoFallback" hidden>SC</span>
+      </button>
       <span class="logo-text"><span class="lt-or">SUMMER CITY</span> <span class="lt-wh">SS2</span></span>
-    </button>
+    </div>
+    <a class="creator" id="creatorLink" role="link" tabindex="0" data-url="https://www.facebook.com/joseph.cnv" aria-label="ผู้สร้างเว็บ JOSEPH (เปิด Facebook)">
+      <span class="cr-av"><img src="https://i.postimg.cc/bNc7ygsB/pixel-character-logo.png" alt="" onerror="this.remove()"><span class="sr">J</span></span>
+      <span class="cr-txt"><span class="cr-by">CREATED BY</span><span class="cr-name">JOSEPH</span></span>
+      <svg class="cr-fb" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877f2"/><path fill="#fff" d="M13.5 20v-6.9h2.3l.4-2.8h-2.7V8.6c0-.8.3-1.3 1.4-1.3h1.4V4.8c-.3 0-1.1-.1-2.1-.1-2.1 0-3.5 1.3-3.5 3.6v2h-2.3v2.8h2.3V20h2.8z"/></svg>
+    </a>
   </div>
 
   <section class="notice" id="notice" aria-label="ประกาศ" hidden>
@@ -528,7 +551,7 @@ img{-webkit-user-drag:none;user-drag:none}
   <section class="hero">
     <div>
       <p class="eyebrow">ติดตามสถานะรถ</p>
-      <h1>กระดานคิวรถ</h1>
+      <h1>กระดานคิวแก้ไขปัญหารถ</h1>
       <p class="sub">ตรวจสอบคิวและความคืบหน้าของรถที่แจ้งปัญหา</p>
       <div class="stats" id="stats">
         <div class="stat st-prog"><b data-k="prog">0</b><span>กำลังดำเนินการ</span></div>
@@ -598,7 +621,7 @@ img{-webkit-user-drag:none;user-drag:none}
   </div>
 
   <footer class="foot">
-    <p>SUMMER CITY SS2 · กระดานคิวรถ</p>
+    <p>SUMMER CITY SS2 · กระดานคิวแก้ไขปัญหารถ</p>
   </footer>
 </div>
 
@@ -645,34 +668,27 @@ img{-webkit-user-drag:none;user-drag:none}
     <div class="tier-head">
       <div class="tier-ttl">
         <span class="tier-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19a9 9 0 1 1 14.2 0"/><path d="m12 14 4-5"/><path d="M12 14h.01"/></svg></span>
-        <div><h2 id="tierTitle">เทียร์ความเร็วรถ</h2><p>ความเร็วปลายที่ล็อคไว้ของรถในแต่ละเทียร์ กรณีรถบัคที่ไม่ได้ล็อคความเร็ว หรือความเร็วไม่ตรงตามตาราง ให้รีบมาแจ้งกับนายก Joseph โดยทันที หากฝ่าฝืนใช้ จะมีบทลงโทษร้ายแรง</p></div>
+        <div><h2 id="tierTitle">เทียร์ความเร็วรถ</h2><p>ความเร็วปลายที่ล็อคไว้ของรถในแต่ละเทียร์</p></div>
       </div>
-      <button class="tier-close" type="button" id="tierClose" aria-label="ปิด"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button class="mini" type="button" id="tierClose">ปิด</button>
     </div>
     <div class="tier-grid">
       <section class="tier-panel fuel" aria-labelledby="tierFuelT">
         <header class="tp-head">
           <span class="tp-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M3 21h12"/><path d="M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="M7 8h4"/></svg></span>
-          <h3 id="tierFuelT">รถน้ำมัน</h3><span class="tp-count" id="tierFuelN"></span>
+          <div class="tp-ttl"><h3 id="tierFuelT">รถน้ำมัน</h3></div><span class="tp-count" id="tierFuelN"></span>
         </header>
         <div class="tier-scroll"><table class="tier-table"><thead><tr><th scope="col">เทียร์รถ</th><th scope="col">ความเร็วปลายที่ล็อค</th></tr></thead><tbody id="tierFuel"></tbody></table><button type="button" class="tier-add" data-add="fuel" hidden>+ เพิ่มเทียร์รถน้ำมัน</button></div>
       </section>
       <section class="tier-panel ev" aria-labelledby="tierEvT">
         <header class="tp-head">
           <span class="tp-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
-          <h3 id="tierEvT">รถไฟฟ้า</h3><span class="tp-count" id="tierEvN"></span>
+          <div class="tp-ttl"><h3 id="tierEvT">รถไฟฟ้า</h3></div><span class="tp-count" id="tierEvN"></span>
         </header>
         <div class="tier-scroll"><table class="tier-table"><thead><tr><th scope="col">เทียร์รถ</th><th scope="col">ความเร็วปลายที่ล็อค</th></tr></thead><tbody id="tierEv"></tbody></table><button type="button" class="tier-add" data-add="ev" hidden>+ เพิ่มเทียร์รถไฟฟ้า</button></div>
       </section>
     </div>
-    <div class="tier-prompt" id="tierPrompt" role="alertdialog" aria-modal="true" aria-labelledby="tpTitle" hidden>
-      <div class="tp-card">
-        <h3 id="tpTitle">บันทึกการแก้ไขนี้ไหม?</h3>
-        <p>ต้องเลือกก่อน ถึงจะแก้ไขต่อได้ ป้องกันการแก้ผิดโดยไม่ตั้งใจ</p>
-        <ul id="tpList"></ul>
-        <div class="tp-acts"><button class="btn" type="button" id="tpCancel">ยกเลิก (คืนค่าเดิม)</button><button class="btn primary" type="button" id="tpSave">บันทึก</button></div>
-      </div>
-    </div>
+    <div class="tier-admin" id="tierAdmin" hidden><p id="tierAdminNote"></p></div>
   </div>
 </div>
 
@@ -681,10 +697,11 @@ img{-webkit-user-drag:none;user-drag:none}
     <h2>ตั้งค่าประกาศ</h2>
     <p class="lead">ข้อความจะวิ่งไปทางซ้ายเรื่อยๆ ที่หัวเว็บ ให้ทุกคนที่เข้ามาเห็น</p>
     <div class="field full">
-      <label for="n-text">ข้อความประกาศ</label>
-      <textarea id="n-text" rows="5" maxlength="500" placeholder="เช่น ปิดปรับปรุงระบบคืนนี้ 22:00–23:00 น."></textarea>
-      <p class="help">ขึ้นบรรทัดใหม่เพื่อแยกหลายประกาศ (จะวิ่งต่อกันเป็นวง) · เว้นว่างแล้วบันทึกเพื่อปิดป้ายประกาศ · ไม่เกิน 500 ตัวอักษร</p>
+      <label>รายการประกาศ (แต่ละเรื่องเลือกสีตัวหนังสือได้)</label>
+      <div class="nlist" id="nList"></div>
+      <p class="help">เพิ่มได้สูงสุด 8 เรื่อง เรื่องละไม่เกิน 150 ตัวอักษร · ลบทุกเรื่องหรือเว้นว่างแล้วบันทึกเพื่อปิดป้ายประกาศ</p>
     </div>
+    <button class="btn nadd" type="button" id="nAdd">+ เพิ่มประกาศอีกเรื่อง</button>
     <p class="form-err" id="noticeErr" role="alert" hidden></p>
     <div class="modal-actions">
       <button class="btn spacer" type="button" id="btnNoticeClear">ล้างข้อความ</button>
@@ -737,7 +754,6 @@ img{-webkit-user-drag:none;user-drag:none}
       <button class="mini" type="button" id="lbClose">ปิด</button>
     </div>
     <div class="lb-img"><img id="lbImg" alt="รูปรถที่แจ้งปัญหา"><p id="lbFail" hidden>โหลดรูปไม่สำเร็จ ลองเปิดรูปต้นฉบับ</p></div>
-    <a class="btn" id="lbLink" role="link" tabindex="0" hidden>เปิดรูปต้นฉบับ ↗</a>
   </div>
 </div>
 
@@ -861,20 +877,48 @@ img{-webkit-user-drag:none;user-drag:none}
     },
     write: function(key, val){ try { localStorage.setItem(LOCAL_KEYS[key], JSON.stringify(val)); } catch(e) {} }
   };
+  /* ----- กันรีเฟรชรัว ๆ ให้โควต้า Firebase เต็ม -----
+     เก็บข้อมูลล่าสุดไว้ในเครื่อง (cache) แล้วแสดงจาก cache ทันที
+     จะยิงไปอ่าน Firestore ก็ต่อเมื่อ cache เก่ากว่า CACHE_TTL เท่านั้น
+     รีเฟรชกี่ครั้งภายในช่วงนี้ = อ่าน Firestore 0 ครั้ง
+     ถ้ารีเฟรชถี่ผิดปกติ จะยืดเวลารอเป็น COOL_TTL */
+  var CACHE_TTL = 45000, COOL_TTL = 180000, BURST_N = 6, BURST_MS = 60000;
+  function cget(key){ try { var r = JSON.parse(localStorage.getItem('fbc.' + key)); return (r && typeof r.t === 'number') ? r : null; } catch(e) { return null; } }
+  function cset(key, v){ try { localStorage.setItem('fbc.' + key, JSON.stringify({t: Date.now(), v: v})); } catch(e) {} }
+  var burst = (function(){
+    var now = Date.now(), arr = [];
+    try { arr = (JSON.parse(localStorage.getItem('fbc.loads')) || []).filter(function(t){ return now - t < BURST_MS; }); } catch(e) {}
+    arr.push(now);
+    try { localStorage.setItem('fbc.loads', JSON.stringify(arr)); } catch(e) {}
+    return arr.length > BURST_N;
+  })();
+  if (burst) setTimeout(function(){ if (window.__toast) window.__toast('รีเฟรชถี่เกินไป กำลังใช้ข้อมูลที่เก็บไว้ในเครื่องก่อน'); }, 1500);
   function firebaseBackend(cfg){
     var ready = fbCore;
     return {
       listen: function(key, cb){
-        ready.then(function(r){
-          r.fs.onSnapshot(r.fs.doc(r.db, FIREBASE_COLLECTION, key), function(snap){
-            if (snap.metadata.hasPendingWrites) return;   // ข้ามเสียงสะท้อนของที่เราเพิ่งเขียนเอง
-            var v = null;
-            if (snap.exists()) { try { v = JSON.parse(snap.data().json); } catch(e) {} }
-            cb(v);
-          }, function(err){ console.error(err); cb(null); });
-        }).catch(function(err){ console.error(err); cb(null); });
+        function attach(){
+          ready.then(function(r){
+            r.fs.onSnapshot(r.fs.doc(r.db, FIREBASE_COLLECTION, key), function(snap){
+              if (snap.metadata.hasPendingWrites) return;   // ข้ามเสียงสะท้อนของที่เราเพิ่งเขียนเอง
+              var v = null;
+              if (snap.exists()) { try { v = JSON.parse(snap.data().json); } catch(e) {} }
+              cset(key, v);
+              cb(v);
+            }, function(err){ console.error(err); if (!cget(key)) cb(null); });
+          }).catch(function(err){ console.error(err); if (!cget(key)) cb(null); });
+        }
+        var c = cget(key);
+        if (c) {
+          cb(c.v);                                   // โชว์จาก cache ทันที ไม่แตะ Firestore
+          var ttl = burst ? COOL_TTL : CACHE_TTL;
+          var wait = Math.max(0, ttl - (Date.now() - c.t));
+          if (wait > 0) { setTimeout(attach, wait); return; }   // ค่อยเริ่มซิงก์เมื่อ cache หมดอายุ
+        }
+        attach();
       },
       write: function(key, val){
+        cset(key, val);
         ready.then(function(r){
           return r.fs.setDoc(r.fs.doc(r.db, FIREBASE_COLLECTION, key), {json: JSON.stringify(val), updatedAt: Date.now()});
         }).catch(function(err){ console.error(err); if (window.__toast) window.__toast('บันทึกไม่สำเร็จ ตรวจสอบการเชื่อมต่อหรือสิทธิ์'); });
@@ -893,7 +937,7 @@ img{-webkit-user-drag:none;user-drag:none}
     };
   })();
 
-  var state = {items: [], ready:false, filter:'review', q:'', admin:false, confirmId:null, editId:null, pending:{}};
+  var state = {items: [], ready:false, filter:'review', q:'', admin:false, confirmId:null, editId:null};
   var find = function(id){ return state.items.filter(function(i){ return i.id === id; })[0]; };
 
   var toastTimer;
@@ -950,18 +994,24 @@ img{-webkit-user-drag:none;user-drag:none}
   }
   /* ลิงก์ไม่มี href จริง เพื่อไม่ให้เบราว์เซอร์โชว์ URL ที่มุมซ้ายล่างตอนเมาส์ชี้ — เปิดลิงก์ด้วย JS แทน */
   function openUrl(u){ var w = window.open(u, '_blank'); if (w) { try { w.opener = null; } catch(_){} } }
-  ['actReport','actCars','lbLink'].forEach(function(id){
+  ['actReport','actCars'].forEach(function(id){
     var el = $(id);
     function go(e){
       e.preventDefault();
       var u = el.getAttribute('data-url');
       if (u) { openUrl(u); return; }
-      if (id === 'lbLink') return;
       if (state.admin) openLinkForm(); else toast('ปุ่มนี้ยังไม่เปิดใช้งานในตอนนี้');
     }
     el.addEventListener('click', go);
     el.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') go(e); });
   });
+
+  (function(){
+    var el = $('creatorLink');
+    function go(e){ e.preventDefault(); openUrl(el.getAttribute('data-url')); }
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') go(e); });
+  })();
 
   function openLinkForm(){
     var l = effectiveLinks();
@@ -1017,17 +1067,14 @@ img{-webkit-user-drag:none;user-drag:none}
     var thumb = src
       ? '<button type="button" class="thumb" data-act="zoom" data-id="' + esc(it.id) + '" aria-label="ดูรูปรถ ' + esc(it.code) + '"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async"><span class="fb">เปิดรูป</span></button>'
       : '<div class="thumb empty">ไม่มีรูป</div>';
-    var pend = state.admin && state.pending && state.pending[it.id];
     var statusCell = state.admin
-      ? '<select class="st-select ' + (ST[pend] || st).cls + '" data-act="status" data-id="' + esc(it.id) + '" aria-label="สถานะของ ' + esc(it.code) + '">' + ORDER.map(function(k){ return '<option value="' + k + '"' + (k === (pend || it.status) ? ' selected' : '') + '>' + ST[k].label + '</option>'; }).join('') + '</select>'
+      ? '<select class="st-select ' + st.cls + '" data-act="status" data-id="' + esc(it.id) + '" aria-label="สถานะของ ' + esc(it.code) + '">' + ORDER.map(function(k){ return '<option value="' + k + '"' + (k === it.status ? ' selected' : '') + '>' + ST[k].label + '</option>'; }).join('') + '</select>'
       : '<span class="pill ' + st.cls + '"><i></i>' + st.label + '</span>';
     var timeMain = it.status === 'done' && it.doneAt ? hhmm(it.doneAt) : hhmm(it.at);
-    var timeSub = it.status === 'done' && it.doneAt ? 'เสร็จ · ' + dayLabel(it.doneAt) : 'แจ้ง · ' + rel(it.at);
+    var timeSub = it.status === 'review' ? 'แจ้ง · ' + rel(it.at) : '';   // กำลังดำเนินการ / ดำเนินการสำเร็จ: โชว์แค่เวลาที่บันทึก
     var act = '';
     if (state.admin) {
-      act = pend
-        ? '<button type="button" class="mini save" data-act="st-save" data-id="' + esc(it.id) + '">บันทึก</button><button type="button" class="mini" data-act="st-cancel" data-id="' + esc(it.id) + '">ยกเลิก</button>'
-        : state.confirmId === it.id
+      act = state.confirmId === it.id
         ? '<button type="button" class="mini danger" data-act="del-yes" data-id="' + esc(it.id) + '">ยืนยันลบ</button><button type="button" class="mini" data-act="del-no" data-id="' + esc(it.id) + '">ไม่ลบ</button>'
         : '<button type="button" class="mini" data-act="edit" data-id="' + esc(it.id) + '">แก้ไข</button><button type="button" class="mini danger" data-act="del" data-id="' + esc(it.id) + '">ลบ</button>';
       act = '<div class="c-act" role="cell">' + act + '</div>';
@@ -1038,7 +1085,7 @@ img{-webkit-user-drag:none;user-drag:none}
       + '<div class="c-car" role="cell"><div class="plate-line"><span class="no no-inline">' + fmtNo(it.no) + '</span><span class="plate">' + esc(it.code) + '</span></div></div>'
       + '<div class="c-issue" role="cell"><div class="issue">' + esc(it.issue) + '</div>' + (it.reporter ? '<div class="reporter">แจ้งโดย ' + esc(it.reporter) + '</div>' : '') + '</div>'
       + '<div class="c-status" role="cell">' + statusCell + '</div>'
-      + '<div class="c-time" role="cell"><span class="t-main">' + timeMain + '</span><span class="t-sub">' + esc(timeSub) + '</span></div>'
+      + '<div class="c-time" role="cell"><span class="t-main">' + timeMain + '</span>' + (timeSub ? '<span class="t-sub">' + esc(timeSub) + '</span>' : '') + '</div>'
       + act
       + '</div>';
   }
@@ -1088,7 +1135,7 @@ img{-webkit-user-drag:none;user-drag:none}
       closeLogin();
     }
     if (!$('tierModal').hidden) renderTiers();
-    if (!on) { closeNotice(); state.pending = {}; if (typeof resetTierDraft === 'function') { resetTierDraft(); $('tierPrompt').hidden = true; } }
+    if (!on) closeNotice();
     applyLinks();
     renderNotice();
     render();
@@ -1108,8 +1155,7 @@ img{-webkit-user-drag:none;user-drag:none}
     loginBusy = on; $('btnLoginGo').disabled = on; $('loginForm').classList.toggle('busy', on);
     $('loginGoTxt').textContent = on ? 'กำลังตรวจสอบ…' : 'เข้าสู่ระบบ';
   }
-  /* ทางเข้าแอดมิน: กดได้เฉพาะรูปโลโก้เล็กๆ เท่านั้น (ตัวหนังสือ SUMMER CITY SS2 กดไม่ได้) */
-  ['logoImg','logoFallback'].forEach(function(id){ $(id).addEventListener('click', function(e){ e.stopPropagation(); if (!state.admin) openLogin(); }); });
+  $('logoBtn').addEventListener('click', function(){ if (!state.admin) openLogin(); });
   $('btnLoginCancel').addEventListener('click', closeLogin);
   $('loginModal').addEventListener('click', function(e){ if (e.target === this) closeLogin(); });
   $('loginForm').addEventListener('submit', function(e){
@@ -1188,13 +1234,11 @@ img{-webkit-user-drag:none;user-drag:none}
     else if (act === 'del') { state.confirmId = id; render(); }
     else if (act === 'del-no') { state.confirmId = null; render(); }
     else if (act === 'del-yes') removeItem(id);
-    else if (act === 'st-save') { var pv = state.pending[id]; delete state.pending[id]; if (pv) setStatus(id, pv); else render(); }
-    else if (act === 'st-cancel') { delete state.pending[id]; render(); }
     else if (act === 'clear') { state.filter = 'review'; state.q = ''; $('q').value = ''; render(); }
   });
   document.addEventListener('change', function(e){
     var s = e.target.closest('select[data-act="status"]');
-    if (s) { var sid = s.getAttribute('data-id'), it2 = find(sid); if (!it2 || !state.admin) return; if (s.value === it2.status) delete state.pending[sid]; else state.pending[sid] = s.value; render(); var s2 = document.querySelector('select[data-id="' + sid + '"]'); if (s2) s2.focus(); }
+    if (s) setStatus(s.getAttribute('data-id'), s.value);
   });
   $('q').addEventListener('input', function(){ state.q = this.value; render(); });
 
@@ -1211,8 +1255,6 @@ img{-webkit-user-drag:none;user-drag:none}
     var src = imgSrc(it); if (!src) return;
     $('lbPlate').textContent = it.code;
     var img = $('lbImg'); img.hidden = false; $('lbFail').hidden = true; img.src = src;
-    var link = $('lbLink');
-    if (isSample(it)) { link.hidden = true; } else { link.hidden = false; link.setAttribute('data-url', src); }
     $('lightbox').hidden = false;
     $('lbClose').focus();
   }
@@ -1240,7 +1282,7 @@ img{-webkit-user-drag:none;user-drag:none}
   function closeForm(){ $('formModal').hidden = true; }
   $('btnAdd').addEventListener('click', function(){ openForm(null); });
   $('btnFormCancel').addEventListener('click', closeForm);
-  $('formModal').addEventListener('click', function(e){ if (e.target === this) closeForm(); });
+  /* ฟอร์มเพิ่ม/แก้รายการรถ: ไม่ปิดเมื่อคลิกนอกกรอบ กันข้อมูลที่กรอกหายโดยไม่ตั้งใจ (ปิดด้วยปุ่ม ยกเลิก/บันทึก หรือ Esc) */
   $('carForm').addEventListener('submit', function(e){
     e.preventDefault();
     var v = {
@@ -1275,11 +1317,8 @@ img{-webkit-user-drag:none;user-drag:none}
     var ok = function(a){ return Array.isArray(a) && a.every(function(r){ return Array.isArray(r) && typeof r[0] === 'string' && typeof r[1] === 'number'; }); };
     return !!o && ok(o.fuel) && ok(o.ev);
   }
-  var tiers = clone(TIERS_FILE), tiersSaved = clone(TIERS_FILE), tierDirty = false;
-  /* แก้เป็นฉบับร่างก่อน ต้องกด “บันทึก” ถึงจะมีผลกับทุกคน */
-  function saveTiers(){ tierDirty = true; syncTierBtns(); }
-  function syncTierBtns(){}
-  function resetTierDraft(){ tiers = clone(tiersSaved); tierDirty = false; syncTierBtns(); }
+  var tiers = clone(TIERS_FILE), tSaveT;
+  function saveTiers(){ clearTimeout(tSaveT); tSaveT = setTimeout(function(){ Store.set('tiers', tiers); }, 400); }
   var TMODES = {fuel:{tb:'tierFuel', n:'tierFuelN'}, ev:{tb:'tierEv', n:'tierEvN'}};
   function tmax(){ return Math.max.apply(null, [1].concat(tiers.fuel.concat(tiers.ev).map(function(r){ return r[1]; }))); }
   function barW(v){ return Math.max(6, Math.round(v / tmax() * 100)); }
@@ -1302,6 +1341,7 @@ img{-webkit-user-drag:none;user-drag:none}
       $(TMODES[m].n).textContent = tiers[m].length + ' เทียร์';
     });
     document.querySelectorAll('.tier-add').forEach(function(b){ b.hidden = !state.admin; });
+    $('tierAdmin').hidden = !state.admin;
   }
   function updateBars(){
     ['fuel','ev'].forEach(function(m){
@@ -1309,68 +1349,25 @@ img{-webkit-user-drag:none;user-drag:none}
       tiers[m].forEach(function(r, i){ if (bars[i]) bars[i].style.width = barW(r[1]) + '%'; });
     });
   }
-  var TLBL = {fuel:'รถน้ำมัน', ev:'รถไฟฟ้า'};
-  function tierChanges(){
-    var out = [];
-    ['fuel','ev'].forEach(function(m){
-      var a = tiersSaved[m], b = tiers[m], n = Math.max(a.length, b.length);
-      for (var i = 0; i < n; i++) {
-        var x = a[i], y = b[i], who = TLBL[m] + ' · ลำดับ ' + (i + 1);
-        if (!x) out.push(who + ': เพิ่ม “' + y[0] + '” ' + y[1] + ' กม./ชม.');
-        else if (!y) out.push(who + ': ลบ “' + x[0] + '”');
-        else {
-          if (x[0] !== y[0]) out.push(who + ': ชื่อ “' + x[0] + '” → “' + y[0] + '”');
-          if (x[1] !== y[1]) out.push(who + ' (' + y[0] + '): ' + x[1] + ' → ' + y[1] + ' กม./ชม.');
-        }
-      }
-    });
-    return out;
-  }
-  function showTierPrompt(){
-    if (!state.admin || !tierDirty) return;
-    var ch = tierChanges();
-    if (!ch.length) { tierDirty = false; syncTierBtns(); return; }
-    $('tpList').innerHTML = ch.slice(0, 8).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + (ch.length > 8 ? '<li>…และอีก ' + (ch.length - 8) + ' รายการ</li>' : '');
-    $('tierPrompt').hidden = false; $('tpSave').focus();
-  }
-  function hideTierPrompt(){ $('tierPrompt').hidden = true; }
-  function doTierSave(){
-    if (!state.admin || !tierDirty) { hideTierPrompt(); return; }
-    Store.set('tiers', tiers); tiersSaved = clone(tiers); tierDirty = false; syncTierBtns(); hideTierPrompt(); toast('บันทึกเทียร์แล้ว');
-  }
-  function doTierCancel(){ resetTierDraft(); renderTiers(); hideTierPrompt(); toast('ยกเลิกการแก้ไขแล้ว'); }
-  $('tpSave').addEventListener('click', doTierSave);
-  $('tpCancel').addEventListener('click', doTierCancel);
-  function closeTier(force){
-    if (force !== true && state.admin && tierDirty) { showTierPrompt(); return; }
-    if (tierDirty) { resetTierDraft(); renderTiers(); }
-    hideTierPrompt();
-    $('tierModal').hidden = true; document.documentElement.classList.remove('lock'); $('actTier').focus(); }
+  function closeTier(){ $('tierModal').hidden = true; document.documentElement.classList.remove('lock'); $('actTier').focus(); }
   $('actTier').addEventListener('click', function(){ renderTiers(); document.documentElement.classList.add('lock'); $('tierModal').hidden = false; $('tierClose').focus(); });
-  $('tierClose').addEventListener('click', function(){ closeTier(); });
-  /* ทุกครั้งที่แก้ค่าเสร็จ (ออกจากช่อง/กด Enter) บังคับเด้งให้เลือก บันทึก หรือ ยกเลิก ก่อน */
-  $('tierModal').addEventListener('change', function(e){
-    var t = e.target; if (state.admin && tierDirty && t && t.getAttribute && t.getAttribute('data-tf')) showTierPrompt();
-  });
-  $('tierModal').addEventListener('keydown', function(e){
-    if (e.key === 'Enter' && state.admin && tierDirty && e.target && e.target.getAttribute && e.target.getAttribute('data-tf')) { e.preventDefault(); e.target.blur(); showTierPrompt(); }
-  });
+  $('tierClose').addEventListener('click', closeTier);
   $('tierModal').addEventListener('click', function(e){
     var add = e.target.closest('[data-add]');   // คลิกพื้นหลังไม่ปิดแล้ว ต้องกดปุ่ม ปิด เท่านั้น
 
     if (add && state.admin) {
       var m = add.getAttribute('data-add'), list = tiers[m], last = list.length ? list[list.length - 1][1] : 100;
       list.push(['เทียร์ ' + (list.length + 1), last]);
-      saveTiers(); renderTiers(); showTierPrompt();
+      saveTiers(); renderTiers();
       var sc = add.closest('.tier-scroll'); if (sc) sc.scrollTop = sc.scrollHeight;
-      
+      var ins = $(TMODES[m].tb).querySelectorAll('input[data-tf="name"]'); if (ins.length) { ins[ins.length - 1].focus(); ins[ins.length - 1].select(); }
       return;
     }
     var del = e.target.closest('[data-tdel]');
     if (del && state.admin) {
       var dm = del.getAttribute('data-m'), di = parseInt(del.getAttribute('data-i'), 10);
       var removed = tiers[dm].splice(di, 1)[0];
-      saveTiers(); renderTiers(); showTierPrompt();
+      saveTiers(); renderTiers(); toast('ลบ ' + (removed && removed[0] ? removed[0] : 'เทียร์') + ' แล้ว');
     }
   });
   $('tierModal').addEventListener('input', function(e){
@@ -1381,23 +1378,48 @@ img{-webkit-user-drag:none;user-drag:none}
     else { var n = Math.max(0, Math.min(9999, Math.round(Number(t.value) || 0))); row[1] = n; updateBars(); }
     saveTiers();
   });
+  $('tierAdminNote').textContent = USING_FB ? 'โหมดแอดมิน · แก้ชื่อเทียร์และความเร็วได้เลย บันทึกอัตโนมัติ ทุกคนเห็นตรงกัน' : 'โหมดแอดมิน · แก้ไขได้เลย บันทึกอัตโนมัติ (ยังไม่ได้เชื่อม Firebase จึงเก็บในเบราว์เซอร์นี้)';
   Store.subscribe('tiers', function(v){
-    tiersSaved = validTiers(v) ? clone(v) : clone(TIERS_FILE);
-    if (!$('tierModal').hidden && state.admin && tierDirty) return;   // กำลังแก้ฉบับร่างอยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
-    tiers = clone(tiersSaved);
+    if (!$('tierModal').hidden && state.admin) return;   // กำลังแก้อยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
+    tiers = validTiers(v) ? v : clone(TIERS_FILE);
     renderTiers();
   });
-  renderTiers(); syncTierBtns();
+  renderTiers();
 
   /* ----- ป้ายประกาศวิ่ง (แอดมินตั้งข้อความได้) ----- */
   var noticeData = {}, MQ_SPEED = 45, mqW = 0;   // MQ_SPEED = ความเร็วเป็นพิกเซล/วินาที ยิ่งน้อยยิ่งช้า
-  function noticeText(){ return (noticeData && typeof noticeData.text === 'string') ? noticeData.text.trim() : ''; }
+  /* สีประกาศ: เลือกชุดที่ตัดกับพื้นหลังเข้ม อ่านง่าย */
+  var NCOLORS = [
+    {k:'w', n:'ขาว',   c:'#ffffff'},
+    {k:'y', n:'เหลือง', c:'#ffe600'},
+    {k:'g', n:'เขียว',  c:'#2dff8f'},
+    {k:'b', n:'ฟ้า',    c:'#26d4ff'},
+    {k:'p', n:'ชมพู',   c:'#ff4fb8'},
+    {k:'r', n:'แดง',    c:'#ff2d46'}
+  ];
+  var N_MAX = 8, N_LEN = 150;
+  function nColor(k){ for (var i = 0; i < NCOLORS.length; i++) if (NCOLORS[i].k === k) return NCOLORS[i].c; return NCOLORS[0].c; }
+  function nKey(i){ return NCOLORS[i % NCOLORS.length].k; }
+  /* อ่านประกาศเป็นรายการ {t, c} — รองรับข้อมูลเก่าที่เป็นข้อความบรรทัดเดียว/หลายบรรทัด (สลับสีให้เอง) */
+  function noticeItems(){
+    var d = noticeData || {}, out = [];
+    if (Array.isArray(d.items)) {
+      d.items.forEach(function(x, i){
+        var t = (x && typeof x.t === 'string') ? x.t.trim() : '';
+        if (t) out.push({t: t, c: (x && typeof x.c === 'string') ? x.c : nKey(i)});
+      });
+    } else if (typeof d.text === 'string') {
+      d.text.split(/\n+/).forEach(function(t){ t = t.trim(); if (t) out.push({t: t, c: nKey(out.length)}); });
+    }
+    return out;
+  }
+  function noticeText(){ return noticeItems().map(function(x){ return x.t; }).join('\n'); }
   function buildMarquee(){
-    var view = $('noticeView'), track = $('noticeTrack'), text = noticeText();
+    var view = $('noticeView'), track = $('noticeTrack'), items = noticeItems();
     track.style.animation = 'none';
-    if (!text) { track.innerHTML = ''; return; }
-    var unit = text.split(/\n+/).map(function(t){ return t.trim(); }).filter(Boolean).map(function(t){
-      return '<span class="mq-i">' + esc(t) + '</span>';
+    if (!items.length) { track.innerHTML = ''; return; }
+    var unit = items.map(function(x){
+      return '<span class="mq-i" style="--cc:' + nColor(x.c) + '">' + esc(x.t) + '</span>';
     }).join('');
     track.innerHTML = '<div class="mq-g">' + unit + '</div>';
     var w = track.firstChild.offsetWidth, vw = view.clientWidth;
@@ -1422,23 +1444,55 @@ img{-webkit-user-drag:none;user-drag:none}
     if (Math.abs(w - mqW) > 2) { mqW = w; buildMarquee(); }
   }).observe($('noticeView'));
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildMarquee);
+  var nRows = [];
+  function drawNRows(){
+    $('nList').innerHTML = nRows.map(function(r, i){
+      var sw = NCOLORS.map(function(c){
+        return '<button type="button" data-sw="' + c.k + '" data-i="' + i + '" style="--sw:' + c.c + '" title="' + c.n + '" aria-label="สี' + c.n + '" aria-pressed="' + (r.c === c.k) + '"></button>';
+      }).join('');
+      return '<div class="nrow" style="--c:' + nColor(r.c) + '">'
+        + '<div class="nrow-top"><span class="nrow-no">เรื่องที่ ' + (i + 1) + '</span><div class="nsw">' + sw + '</div>'
+        + '<button type="button" class="mini danger" data-del="' + i + '">ลบ</button></div>'
+        + '<input type="text" data-t="' + i + '" maxlength="' + N_LEN + '" value="' + esc(r.t) + '" placeholder="เช่น ปิดปรับปรุงระบบคืนนี้ 22:00–23:00 น.">'
+        + '</div>';
+    }).join('');
+    $('nAdd').hidden = nRows.length >= N_MAX;
+  }
   function openNotice(){
     if (!state.admin) return;
-    $('n-text').value = noticeText(); $('noticeErr').hidden = true;
-    $('noticeModal').hidden = false; $('n-text').focus();
+    nRows = noticeItems().map(function(x){ return {t: x.t, c: x.c}; });
+    if (!nRows.length) nRows.push({t: '', c: nKey(0)});
+    drawNRows();
+    $('noticeErr').hidden = true;
+    $('noticeModal').hidden = false;
+    var f = $('nList').querySelector('input'); if (f) f.focus();
   }
   function closeNotice(){ $('noticeModal').hidden = true; }
+  $('nList').addEventListener('input', function(e){
+    var i = e.target && e.target.getAttribute('data-t');
+    if (i !== null && nRows[+i]) nRows[+i].t = e.target.value;
+  });
+  $('nList').addEventListener('click', function(e){
+    var b = e.target.closest && e.target.closest('button'); if (!b) return;
+    if (b.hasAttribute('data-sw')) { nRows[+b.getAttribute('data-i')].c = b.getAttribute('data-sw'); drawNRows(); }
+    else if (b.hasAttribute('data-del')) { nRows.splice(+b.getAttribute('data-del'), 1); drawNRows(); }
+  });
+  $('nAdd').addEventListener('click', function(){
+    if (nRows.length >= N_MAX) return;
+    nRows.push({t: '', c: nKey(nRows.length)});   // สีใหม่สลับจากเรื่องก่อนหน้าให้อัตโนมัติ
+    drawNRows();
+    var f = $('nList').querySelectorAll('input'); if (f.length) f[f.length - 1].focus();
+  });
   $('btnNotice').addEventListener('click', openNotice);
   $('noticeEdit').addEventListener('click', openNotice);
   $('btnNoticeCancel').addEventListener('click', closeNotice);
-  $('btnNoticeClear').addEventListener('click', function(){ $('n-text').value = ''; $('n-text').focus(); });
+  $('btnNoticeClear').addEventListener('click', function(){ nRows = [{t: '', c: nKey(0)}]; drawNRows(); var f = $('nList').querySelector('input'); if (f) f.focus(); });
   $('noticeForm').addEventListener('submit', function(e){
     e.preventDefault();
     if (!state.admin) return;
-    var t = $('n-text').value.split(/\n/).map(function(x){ return x.trim(); }).filter(Boolean).join('\n');
-    if (t.length > 500) { var el = $('noticeErr'); el.textContent = 'ข้อความยาวเกิน 500 ตัวอักษร'; el.hidden = false; return; }
-    Store.set('notice', {text: t});
-    closeNotice(); toast(t ? 'บันทึกประกาศแล้ว' : 'ปิดป้ายประกาศแล้ว');
+    var items = nRows.map(function(r){ return {t: String(r.t || '').trim().slice(0, N_LEN), c: r.c}; }).filter(function(r){ return r.t; });
+    Store.set('notice', {text: items.map(function(r){ return r.t; }).join('\n'), items: items});
+    closeNotice(); toast(items.length ? 'บันทึกประกาศแล้ว' : 'ปิดป้ายประกาศแล้ว');
   });
 
   document.addEventListener('keydown', function(e){
