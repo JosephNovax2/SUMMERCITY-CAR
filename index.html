@@ -1,0 +1,1324 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#141311">
+<meta name="description" content="กระดานแสดงคิวรถที่แจ้งปัญหา SUMMER CITY SS2">
+<title>กระดานคิวรถ SS2</title>
+<link rel="icon" href="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png">
+<link rel="apple-touch-icon" href="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Prompt:wght@500;600;700&family=Anton&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: top bar with brand and role, a hero with the title on the left and two big action buttons on the right, a hazard stripe, filter tabs + search, then the grouped queue board. Single committed look: warm black and orange. */
+:root{
+  --bg:#141311;
+  --surface:#1b1917;
+  --surface-2:#232120;
+  --line:#2b261f;
+  --line-strong:#3b342b;
+  --fg:#f4efe8;
+  --muted:#a79e91;
+  --accent:#ff7a1a;
+  --accent-ink:#1b0e03;
+  --accent-soft:rgba(255,122,26,.14);
+  --st-prog:#ff7a1a;
+  --st-review:#6cb6ff;
+  --st-done:#4ade80;
+  --danger:#ff6b5e;
+  --shadow:0 14px 36px rgba(0,0,0,.38);
+  --font-body:'IBM Plex Sans Thai','Noto Sans Thai',system-ui,sans-serif;
+  --font-plate:'IBM Plex Mono','IBM Plex Sans Thai',ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{
+  margin:0;
+  background:radial-gradient(900px 380px at 10% -120px,rgba(255,122,26,.17),transparent 70%) no-repeat,var(--bg);
+  color:var(--fg);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  padding-top:calc(18px + env(safe-area-inset-top,0px));
+  padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* top bar */
+.topbar{display:flex;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.logo-btn{padding:0;margin:0;border:0;background:none;cursor:default;display:block;max-width:100%;-webkit-tap-highlight-color:transparent;border-radius:8px}
+.logo-btn img{display:block;height:52px;width:auto;max-width:min(280px,72vw);object-fit:contain}
+.logo-mark{width:44px;height:44px;border-radius:11px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--font-plate);font-weight:700;font-size:17px;letter-spacing:.02em}
+
+.logo-btn{display:inline-flex;align-items:center;gap:14px}
+.logo-btn img{max-width:min(280px,40vw)}
+.logo-text{font-family:'Anton','Prompt',Impact,sans-serif;font-size:clamp(20px,5vw,32px);line-height:1;letter-spacing:.04em;white-space:nowrap;text-transform:uppercase;-webkit-text-stroke:1.2px currentColor;paint-order:stroke fill}
+.lt-or{color:var(--accent);text-shadow:0 0 14px rgba(255,122,26,.45)}
+.lt-wh{color:#fff}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:24px 40px;align-items:center;padding-block:30px 26px}
+.eyebrow{margin:0;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-weight:600;font-size:14px;letter-spacing:.03em;color:var(--accent)}
+h1{margin:8px 0 8px;font-weight:700;font-size:clamp(34px,6vw,56px);line-height:1.25;text-wrap:balance}
+.sub{margin:0;color:var(--muted);max-width:52ch;font-size:16px}
+.actions{display:grid;gap:14px}
+.action{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;text-decoration:none;color:var(--fg);min-width:0}
+.action-ico{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;flex:none}
+.action-ico svg.i{width:26px;height:26px}
+.action-txt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.action-txt b{font-weight:700;font-size:19px;line-height:1.25}
+.action-txt small{font-size:13.5px;line-height:1.35}
+.action .go{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none}
+.action .go svg.i{width:18px;height:18px}
+.action.primary{background:linear-gradient(135deg,#ff8f33,#ff6a00);border:2px solid #ffa35c;color:var(--accent-ink);box-shadow:0 12px 32px rgba(255,106,0,.32),inset 0 1px 0 rgba(255,255,255,.28)}
+.action.primary .action-ico{background:var(--accent-ink);color:#ff9440}
+.action.primary small{color:rgba(27,14,3,.8)}
+.action.primary .go{background:rgba(27,14,3,.16);color:var(--accent-ink)}
+.action.primary:hover{filter:brightness(1.06);box-shadow:0 16px 40px rgba(255,106,0,.42),inset 0 1px 0 rgba(255,255,255,.28)}
+.action.secondary{background:linear-gradient(180deg,#1f1a15,#15120f);border:2px solid var(--accent);box-shadow:0 12px 30px rgba(0,0,0,.45),0 0 0 4px rgba(255,122,26,.08)}
+.action.secondary .action-ico{background:var(--accent);color:var(--accent-ink)}
+.action.secondary small{color:#cdc3b5}
+.action.secondary .go{background:var(--accent-soft);color:var(--accent)}
+.action.secondary:hover{background:linear-gradient(180deg,#27211a,#1a1612);box-shadow:0 12px 30px rgba(0,0,0,.45),0 0 28px rgba(255,122,26,.28)}
+.hazard{height:6px;border-radius:3px;background:repeating-linear-gradient(-45deg,var(--accent) 0 10px,var(--bg) 10px 20px)}
+
+/* buttons, fields */
+.btn{font-weight:500;font-size:15px;padding:8px 16px;border-radius:9px;border:1px solid var(--line-strong);background:transparent;cursor:pointer;line-height:1.3}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn.primary:hover{filter:brightness(1.08);background:var(--accent)}
+.mini{font-weight:500;font-size:12.5px;padding:4px 10px;border-radius:6px;border:1px solid var(--line-strong);background:transparent;cursor:pointer;white-space:nowrap}
+.mini:hover{background:var(--surface-2)}
+.mini.danger{color:var(--danger);border-color:rgba(255,107,94,.45)}
+.mini.danger:hover{background:rgba(255,107,94,.12)}
+input,textarea,select{background:#0e0c0a;border:1px solid var(--line-strong);border-radius:9px;padding:9px 12px;width:100%;min-width:0}
+input::placeholder,textarea::placeholder{color:#6f675c}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(255,122,26,.22)}
+textarea{resize:vertical;min-height:84px}
+
+/* login + admin bar */
+.login{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;padding:14px 16px;border:1px solid var(--line-strong);border-radius:12px;background:var(--surface)}
+.login label{font-weight:500}
+.login input{width:min(240px,100%)}
+/* login popup */
+#loginModal{background:radial-gradient(640px 420px at 50% 42%,rgba(255,122,26,.20),transparent 72%),rgba(5,4,3,.76);-webkit-backdrop-filter:blur(10px) saturate(1.15);backdrop-filter:blur(10px) saturate(1.15);animation:lgfade .3s ease both}
+.modal.login-modal{position:relative;width:min(400px,100%);padding:0;gap:0;overflow:hidden;border-radius:24px;border:1px solid rgba(255,122,26,.3);background:radial-gradient(260px 160px at 50% 0,rgba(255,122,26,.16),transparent 80%),linear-gradient(180deg,#211c18,#110e0c);box-shadow:0 40px 90px rgba(0,0,0,.72),0 0 90px -24px rgba(255,122,26,.45),inset 0 1px 0 rgba(255,255,255,.05)}
+.lg-stripe{height:6px;background:repeating-linear-gradient(-45deg,var(--accent) 0 10px,#141311 10px 20px);box-shadow:0 2px 16px rgba(255,122,26,.4)}
+.lg-x{position:absolute;top:18px;right:14px;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-strong);background:rgba(255,255,255,.04);color:var(--muted);cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.lg-x:hover{background:rgba(255,255,255,.1);color:var(--fg);transform:rotate(90deg)}
+.lg-x svg{width:16px;height:16px}
+.lg-body{display:grid;gap:16px;padding:26px 26px 28px}
+.lg-head{display:grid;justify-items:center;gap:4px;text-align:center;margin-bottom:6px}
+.lg-badge{position:relative;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;margin-bottom:8px;background:radial-gradient(circle at 50% 35%,#2a221b,#0f0c0a);border:1px solid rgba(255,122,26,.45);box-shadow:0 0 0 6px rgba(255,122,26,.08),0 0 34px rgba(255,122,26,.35)}
+.lg-badge img{width:60px;height:60px;object-fit:contain}
+.lg-badge .fb{display:none;font-family:var(--font-plate);font-weight:700;font-size:22px;color:var(--accent)}
+.lg-badge.noimg .fb{display:block}.lg-badge.noimg img{display:none}
+.lg-brand{margin:0;font-family:'Anton','Prompt',Impact,sans-serif;font-size:21px;line-height:1.1;letter-spacing:.06em;text-transform:uppercase;-webkit-text-stroke:.8px currentColor;paint-order:stroke fill}
+.modal.login-modal h2{font-size:23px;font-weight:700;margin-top:8px}
+.modal.login-modal .lead{margin:0;font-size:13.5px;color:var(--muted)}
+.lg-field label{display:block;margin:0 0 7px 2px;font-size:13px;font-weight:500;color:var(--muted)}
+.lg-in{position:relative;display:flex;align-items:center;border-radius:13px;border:1px solid var(--line-strong);background:#0c0a08;transition:border-color .2s,box-shadow .2s,background .2s}
+.lg-in:hover{border-color:#4b4237}
+.lg-in:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px rgba(255,122,26,.18),0 0 24px -6px rgba(255,122,26,.5);background:#0f0c09}
+.lg-in>svg{position:absolute;left:14px;width:19px;height:19px;color:#7d7366;pointer-events:none;transition:color .2s}
+.lg-in:focus-within>svg{color:var(--accent)}
+.lg-in input{width:100%;border:0;background:transparent;border-radius:13px;padding:14px 46px 14px 44px;font-size:16px}
+.lg-in input:focus{border:0;box-shadow:none;outline:none}
+.lg-in input::placeholder{color:#5f574c}
+.lg-in input:-webkit-autofill{-webkit-text-fill-color:var(--fg);caret-color:var(--fg);box-shadow:0 0 0 44px #0c0a08 inset}
+.lg-eye{position:absolute;right:6px;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:9px;background:transparent;color:#7d7366;cursor:pointer;transition:color .2s,background .2s}
+.lg-eye:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+.lg-eye svg{width:19px;height:19px}
+.lg-eye .off{display:none}.lg-eye[aria-pressed="true"] .on{display:none}.lg-eye[aria-pressed="true"] .off{display:block}
+.lg-caps{margin:7px 2px 0;font-size:12.5px;color:#ffb347}
+.lg-err{display:flex;gap:10px;align-items:flex-start;margin:0;padding:10px 12px;border-radius:11px;border:1px solid rgba(255,107,94,.4);background:rgba(255,107,94,.1);color:#ffb1a8;font-size:14px;line-height:1.45}
+.lg-err::before{content:"!";flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--danger);color:#2a0d0a;font-weight:700;font-size:13px;line-height:1}
+.lg-go{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:52px;margin-top:4px;border:0;border-radius:14px;cursor:pointer;font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--accent-ink);background:linear-gradient(180deg,#ff944a,#ff7a1a 60%,#f06a0c);box-shadow:0 12px 28px -8px rgba(255,122,26,.7),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .2s var(--ease),box-shadow .25s,filter .2s}
+.lg-go:hover{transform:translateY(-2px);box-shadow:0 16px 34px -8px rgba(255,122,26,.85),inset 0 1px 0 rgba(255,255,255,.4)}
+.lg-go:active{transform:scale(.98)}
+.lg-go svg{width:20px;height:20px;transition:transform .25s var(--ease)}
+.lg-go:hover svg{transform:translateX(4px)}
+.lg-go:disabled{cursor:progress;filter:saturate(.7) brightness(.92);transform:none}
+.lg-spin{display:none;width:20px;height:20px;border-radius:50%;border:3px solid rgba(27,14,3,.25);border-top-color:var(--accent-ink);animation:lgspin .7s linear infinite}
+.busy .lg-spin{display:block}.busy .lg-go svg{display:none}
+.modal.login-modal.shake{animation:lgshake .45s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes lgfade{from{opacity:0}}
+@keyframes lgspin{to{transform:rotate(360deg)}}
+@keyframes lgshake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+@media (prefers-reduced-motion:reduce){.modal.login-modal.shake,#loginModal{animation:none}.lg-spin{animation-duration:1.6s}}
+.hint{flex-basis:100%;margin:0;color:var(--muted);font-size:13px}
+.hint.err{color:var(--danger)}
+.hint:empty{display:none}
+.admin-note{color:var(--muted);font-size:13px}
+.adminbar{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid rgba(255,122,26,.45);background:var(--accent-soft);border-radius:12px}
+.adminbar p{margin:0;font-size:14px}
+.adminbar-actions{display:flex;flex-wrap:wrap;gap:8px}
+
+/* toolbar */
+.toolbar{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
+.chips{display:inline-flex;flex-wrap:wrap;gap:2px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.chip{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border-radius:9px;border:0;background:transparent;cursor:pointer;font-weight:500;font-size:15px}
+.chip:hover{background:var(--surface-2)}
+.chip b{font-family:var(--font-plate);font-weight:600;font-size:12.5px;color:var(--muted);background:rgba(255,255,255,.07);border-radius:6px;padding:0 7px;font-variant-numeric:tabular-nums}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--c,var(--muted))}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.chip[aria-pressed="true"] b{color:var(--accent-ink);background:rgba(27,14,3,.18)}
+.chip[aria-pressed="true"] .dot{background:var(--accent-ink)}
+.search{position:relative;flex:1 1 240px;max-width:360px;margin-left:auto}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.search input{padding-left:38px;background:var(--surface)}
+
+/* status colors */
+.st-prog{--c:var(--st-prog);--cbg:rgba(255,122,26,.14);--cbd:rgba(255,122,26,.45)}
+.st-review{--c:var(--st-review);--cbg:rgba(108,182,255,.13);--cbd:rgba(108,182,255,.42)}
+.st-done{--c:var(--st-done);--cbg:rgba(74,222,128,.12);--cbd:rgba(74,222,128,.4)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:4px 14px 4px 10px;border-radius:999px;background:var(--cbg);color:var(--c);border:1px solid var(--cbd);font-size:14px;font-weight:500;white-space:nowrap}
+.pill i,.gdot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);position:relative;flex:none}
+.st-review .pill i,.st-review.group .gdot{background:transparent;border:2px solid var(--c)}
+.st-done .pill i::after,.st-done.group .gdot::after{content:"";position:absolute;left:3.5px;top:1px;width:3px;height:6px;border:solid #06180d;border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
+.st-prog .pill i{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,122,26,.55)}60%{box-shadow:0 0 0 6px rgba(255,122,26,0)}}
+@media (prefers-reduced-motion:reduce){.st-prog .pill i{animation:none}}
+.st-select{appearance:none;-webkit-appearance:none;width:auto;min-width:168px;border-radius:999px;border:1px solid var(--cbd);color:var(--c);font-weight:500;font-size:14px;padding:5px 32px 5px 14px;cursor:pointer;background:var(--cbg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a79e91' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center/10px}
+.st-select option{background:#181512;color:var(--fg)}
+.field select{appearance:none;-webkit-appearance:none;padding-right:34px;background:#0e0c0a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a79e91' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center/10px}
+
+/* board */
+.board-wrap{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
+.board-scroll{overflow-x:auto}
+.board{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 132px;min-width:920px}
+.board.admin{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 132px 132px;min-width:1050px}
+.head,.row{display:grid;grid-template-columns:var(--cols);gap:0 16px;align-items:center;padding-inline:18px}
+.head{padding-block:12px;border-bottom:1px solid var(--line-strong);color:var(--muted);font-size:13px;font-weight:500;letter-spacing:.02em;background:#100e0c}
+.board:not(.admin) .h-act{display:none}
+.row{padding-block:13px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--surface-2)}
+.group{background:var(--bg)}
+.group-in{display:flex;align-items:center;gap:10px;padding:14px 18px 8px}
+.group-in::after{content:"";flex:1;height:1px;background:var(--line)}
+.gname{font-weight:600;color:var(--c)}
+.gcount{font-family:var(--font-plate);font-size:13px;color:var(--muted)}
+.c-no,.c-img,.c-car,.c-issue,.c-status,.c-time,.c-act{min-width:0}
+.no{font-family:var(--font-plate);font-weight:600;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.no-inline{display:none}
+.plate{display:inline-block;font-family:var(--font-plate);font-weight:600;font-size:15px;letter-spacing:.08em;padding:2px 10px;border:1.5px solid var(--accent);border-radius:6px;background:var(--bg);color:#fff;white-space:nowrap;box-shadow:inset 0 0 0 2px var(--bg),inset 0 0 0 3px rgba(255,122,26,.35)}
+.issue{font-size:15px;overflow-wrap:anywhere}
+.reporter{margin-top:2px;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.t-main{font-family:var(--font-plate);font-weight:600;font-size:15px;font-variant-numeric:tabular-nums;display:block}
+.t-sub{color:var(--muted);font-size:13px}
+.c-act{display:flex;flex-wrap:wrap;gap:6px}
+.thumb{width:104px;height:66px;max-width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--line-strong);background:#0f0d0b;padding:0;cursor:zoom-in;position:relative;display:block}
+.thumb:hover{border-color:var(--accent)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .fb{display:none;position:absolute;inset:0;place-items:center;font-size:12px;color:var(--accent);background:#0f0d0b}
+.thumb.broken img{display:none}
+.thumb.broken .fb{display:grid}
+.thumb.empty{display:grid;place-items:center;color:#6f675c;font-size:12px;border-style:dashed;cursor:default}
+.thumb.empty:hover{border-color:var(--line-strong)}
+.empty-state{padding:44px 20px;text-align:center;color:var(--muted)}
+.empty-state p{margin:0 0 14px}
+.foot{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;color:var(--muted);font-size:13px}
+.foot p{margin:0}
+
+/* overlays */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(5,4,3,.82);display:grid;overflow:auto;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.overlay>*{margin:auto}
+.modal,.lb{width:min(580px,100%);background:var(--surface);border:1px solid var(--line-strong);border-radius:14px;padding:22px;display:grid;gap:14px;box-shadow:var(--shadow)}
+.lb{width:min(880px,100%)}
+.modal h2{margin:0;font-size:20px;font-weight:600}
+.modal .lead{margin:-6px 0 0;color:var(--muted);font-size:13.5px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fgrid>*,.field{min-width:0}
+.field label{display:block;margin-bottom:5px;font-size:13px;color:var(--muted)}
+.field.full{grid-column:1/-1}
+.field .help{margin:5px 0 0;font-size:12.5px;color:var(--muted)}
+.snippet{margin:0;padding:12px 14px;background:#0e0c0a;border:1px solid var(--line-strong);border-radius:9px;font-family:var(--font-plate);font-size:12.5px;line-height:1.6;overflow-x:auto;color:#ffd3b0;white-space:pre}
+.form-err{margin:0;color:var(--danger);font-size:14px}
+.modal-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.modal-actions .spacer{margin-right:auto}
+.lb-head{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.lb-title{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;min-width:0}
+.lb-img{aspect-ratio:16/10;max-width:100%;max-height:68vh;background:var(--bg);border-radius:10px;display:grid;place-items:center;overflow:hidden}
+.lb-img img{max-width:100%;max-height:100%;object-fit:contain}
+.lb-img p{margin:0;color:var(--muted);padding:16px;text-align:center}
+.lb a.btn{justify-self:start;text-decoration:none;color:var(--accent);border-color:rgba(255,122,26,.5)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 20px;border-radius:999px;font-weight:500;z-index:80;max-width:calc(100% - 32px);text-align:center}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr);padding-block:24px 22px}
+}
+/* phone: rows become cards */
+@media (max-width:860px){
+  .board-wrap{border:0;background:none;border-radius:0;overflow:visible;box-shadow:none}
+  .board-scroll{overflow:visible}
+  .board,.board.admin{min-width:0}
+  .head{display:none}
+  .group{background:none}
+  .group-in{padding:16px 2px 8px}
+  .row{grid-template-columns:104px minmax(0,1fr);grid-template-areas:"img car" "img issue" "status status" "time time";gap:10px 14px;align-items:start;padding:14px;margin-bottom:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+  .row:last-child{border-bottom:1px solid var(--line)}
+  .board.admin .row{grid-template-areas:"img car" "img issue" "status status" "time time" "act act"}
+  .c-no{display:none}
+  .no-inline{display:inline}
+  .c-img{grid-area:img}.c-car{grid-area:car}.c-issue{grid-area:issue}.c-status{grid-area:status}.c-time{grid-area:time;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}.c-act{grid-area:act}
+  .t-main{display:inline}
+  .plate-line{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .st-select{width:100%;max-width:280px}
+  .fgrid{grid-template-columns:1fr}
+  .search{max-width:none;margin-left:0}
+}
+
+/* ===== redesign layer ===== */
+:root{--font-display:'Prompt','IBM Plex Sans Thai',system-ui,sans-serif;--ease:cubic-bezier(.2,.8,.2,1)}
+body{background:
+ radial-gradient(520px circle at var(--mx,18%) var(--my,0px),rgba(255,122,26,.13),transparent 65%) no-repeat,
+ radial-gradient(900px 380px at 10% -120px,rgba(255,122,26,.14),transparent 70%) no-repeat,var(--bg);background-attachment:fixed,scroll,scroll}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 30% 0,#000 0,transparent 70%);mask-image:radial-gradient(ellipse at 30% 0,#000 0,transparent 70%)}
+h1,.action-txt b,.modal h2,.gname{font-family:var(--font-display)}
+h1{font-size:clamp(32px,5.6vw,54px);line-height:1.15;letter-spacing:-.01em;background:linear-gradient(180deg,#fff 30%,#e9d9c6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;padding:4px 12px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(255,122,26,.35);font-size:13.5px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
+.logo-btn img{transition:transform .3s var(--ease),filter .3s}
+.logo-btn:hover img{transform:scale(1.03);filter:drop-shadow(0 0 14px rgba(255,122,26,.45))}
+
+/* live stats */
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.stat{min-width:128px;padding:12px 16px 10px;border-radius:16px;background:var(--cbg);border:1px solid var(--cbd);backdrop-filter:blur(6px);transition:transform .3s var(--ease),box-shadow .3s}
+.stat:hover{transform:translateY(-3px);box-shadow:0 10px 26px -8px var(--c)}
+.stat b{display:block;font-family:var(--font-display);font-weight:700;font-size:38px;line-height:1.1;color:var(--c);font-variant-numeric:tabular-nums}
+.stat span{font-size:13.5px;color:var(--muted)}
+.meter{height:8px;margin-top:16px;max-width:430px;border-radius:99px;background:var(--surface-2);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.meter i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),#ffb347 55%,var(--st-done));transition:width 1.3s var(--ease) .5s}
+.meter-txt{margin:6px 0 0;font-size:13px;color:var(--muted)}
+
+/* action cards: cursor spotlight + shine */
+.action{position:relative;overflow:hidden;isolation:isolate;transition:transform .3s var(--ease),box-shadow .3s,filter .3s}
+.action::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--px,50%) var(--py,50%),rgba(255,255,255,.2),transparent 60%)}
+.action.secondary::before{background:radial-gradient(260px circle at var(--px,50%) var(--py,50%),rgba(255,122,26,.28),transparent 60%)}
+.action:hover{transform:translateY(-4px)}.action:hover::before{opacity:1}.action:active{transform:translateY(-1px) scale(.99)}
+.action .action-ico{transition:transform .4s var(--ease)}.action:hover .action-ico{transform:rotate(-8deg) scale(1.08)}
+.action .go{transition:transform .35s var(--ease),background .3s}.action:hover .go{transform:translate(3px,-3px) rotate(8deg);background:var(--accent-ink);color:var(--accent)}
+.action.secondary:hover .go{background:var(--accent);color:var(--accent-ink)}
+.hazard{height:3px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent) 12%,var(--accent) 88%,transparent);box-shadow:0 0 14px rgba(255,122,26,.45)}
+@keyframes slide{to{background-position:28px 0}}
+
+/* controls */
+.chips{padding:5px;border-radius:14px;background:rgba(20,18,16,.8);backdrop-filter:blur(8px)}
+.chip{transition:background .25s,color .25s,transform .2s var(--ease),box-shadow .3s}.chip:hover{transform:translateY(-1px)}.chip:active{transform:scale(.96)}
+.chip[aria-pressed="true"]{box-shadow:0 6px 18px -4px rgba(255,122,26,.55)}
+.search input{border-radius:14px;transition:box-shadow .25s,border-color .25s}.search:focus-within svg{color:var(--accent)}
+.btn,.mini{transition:transform .2s var(--ease),background .2s,box-shadow .25s}.btn:hover,.mini:hover{transform:translateY(-1px)}.btn:active,.mini:active{transform:scale(.96)}
+.btn.primary:hover{box-shadow:0 8px 22px -6px rgba(255,122,26,.7)}
+
+/* board */
+.board-wrap{border:0;background:none;box-shadow:none;overflow:visible;border-radius:0}
+.board-scroll{padding:3px}
+.head{background:none;border-bottom:0;padding-block:6px;font-size:12.5px}
+.group{background:none}
+.group-in{padding-top:20px}
+.group-in::after{background:linear-gradient(90deg,var(--c),transparent);opacity:.35}
+.gname{font-size:17px}
+.gdot{box-shadow:0 0 0 4px var(--cbg)}
+.gcount{padding:1px 10px;border-radius:99px;background:var(--cbg);color:var(--c);border:1px solid var(--cbd)}
+.row[data-st=prog]{--c:var(--st-prog)}.row[data-st=review]{--c:var(--st-review)}.row[data-st=done]{--c:var(--st-done)}
+.row,.row:last-child{margin:0 0 8px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,var(--surface),#100e0c);box-shadow:inset 3px 0 0 var(--c,var(--line-strong));transition:border-color .25s,background .25s,box-shadow .3s,transform .3s var(--ease)}
+.row:hover{background:linear-gradient(180deg,var(--surface-2),var(--surface));border-color:var(--line-strong);box-shadow:inset 3px 0 0 var(--c,var(--accent)),0 10px 28px -12px rgba(0,0,0,.8),0 0 0 1px rgba(255,122,26,.08)}
+.plate{background:linear-gradient(#fcf8ef,#e6dcc8);color:#17120c;border:2px solid #17120c;border-radius:8px;padding:1px 11px;letter-spacing:.1em;box-shadow:0 0 0 2px rgba(255,122,26,.4),0 5px 12px rgba(0,0,0,.45);transition:transform .3s var(--ease)}
+.row:hover .plate{transform:rotate(-2deg) scale(1.05)}
+.thumb{border-radius:11px;transition:transform .35s var(--ease),border-color .25s,box-shadow .3s}
+.thumb img{transition:transform .5s var(--ease)}
+.thumb:hover{transform:scale(1.04);box-shadow:0 8px 22px -6px rgba(255,122,26,.5)}.thumb:hover img{transform:scale(1.12)}
+.pill{font-weight:600}
+.no{color:var(--c,var(--muted));opacity:.85}
+.empty-state{border:1px dashed var(--line-strong);border-radius:16px;padding:56px 20px}
+
+/* overlays */
+.overlay{backdrop-filter:blur(10px) saturate(1.2);animation:fade .25s both}
+.modal,.lb{border-radius:20px;background:linear-gradient(180deg,#1b1815,#120f0d);animation:pop .4s var(--ease) both;box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 0 1px rgba(255,122,26,.12)}
+.toast{background:linear-gradient(135deg,#ff9440,#ff6a00);color:var(--accent-ink);font-weight:600;box-shadow:0 12px 30px rgba(255,106,0,.4);animation:toast .45s var(--ease) both}
+.foot{border-top-color:var(--line)}
+@keyframes fade{from{opacity:0}}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.95)}}
+@keyframes toast{from{opacity:0;transform:translate(-50%,20px)}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}}
+
+/* one page-load sequence */
+.hero .eyebrow,.hero h1,.hero .sub,.stats,.meter,.meter-txt,.action{animation:rise .8s var(--ease) both}
+.hero h1{animation-delay:.08s}.hero .sub{animation-delay:.16s}.stats{animation-delay:.24s}.meter{animation-delay:.3s}.meter-txt{animation-delay:.34s}
+.action.primary{animation-delay:.2s}.action.secondary{animation-delay:.32s}
+.boot #rows>*{animation:rise .6s var(--ease) both}
+.boot #rows>*:nth-child(1){animation-delay:0.39s}.boot #rows>*:nth-child(2){animation-delay:0.44s}.boot #rows>*:nth-child(3){animation-delay:0.48s}.boot #rows>*:nth-child(4){animation-delay:0.53s}.boot #rows>*:nth-child(5){animation-delay:0.57s}.boot #rows>*:nth-child(6){animation-delay:0.62s}.boot #rows>*:nth-child(7){animation-delay:0.67s}.boot #rows>*:nth-child(8){animation-delay:0.71s}.boot #rows>*:nth-child(9){animation-delay:0.75s}.boot #rows>*:nth-child(10){animation-delay:0.80s}.boot #rows>*:nth-child(11){animation-delay:0.84s}.boot #rows>*:nth-child(12){animation-delay:0.89s}.boot #rows>*:nth-child(13){animation-delay:0.93s}.boot #rows>*:nth-child(14){animation-delay:0.98s}
+
+/* header + cell alignment, long text */
+.issue{white-space:pre-wrap;line-height:1.55}
+.issue.clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.more{margin-top:4px;padding:0;border:0;background:none;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer}
+.more:hover{text-decoration:underline}
+textarea{min-height:120px;line-height:1.55}
+@media (min-width:861px){
+  .head>div,.c-no,.c-img,.c-car,.c-status,.c-time,.c-act{text-align:center}
+  .head>div:nth-child(4),.c-issue{text-align:left}
+  .c-img .thumb{margin-inline:auto}
+  .c-status,.c-act{display:flex;justify-content:center}
+  .c-time .t-main,.c-time .t-sub{display:block}
+}
+
+/* intro loader */
+#loader{position:fixed;inset:0;z-index:9999;background:#000;display:grid;place-items:center;touch-action:none;overscroll-behavior:contain;transition:opacity .6s ease,visibility .6s}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
+#loader::before{content:"";position:absolute;left:50%;top:50%;width:min(780px,96vw);height:240px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,106,0,calc(.05 + var(--k,0) * .22)),transparent);pointer-events:none}
+.ld-in{position:relative;display:grid;justify-items:center;gap:22px;padding:0 16px}
+.ld-logo{position:relative;display:inline-block;transform:skewX(-9deg);font-family:'Anton','Prompt',Impact,sans-serif;font-size:clamp(40px,10.5vw,96px);line-height:1.05;letter-spacing:.02em;white-space:nowrap;user-select:none}
+.ld-base{display:block;color:transparent;-webkit-text-stroke:1px rgba(255,122,26,.28)}
+.ld-fillwrap{position:absolute;inset:0;filter:drop-shadow(0 0 8px rgba(255,122,26,.95)) drop-shadow(0 0 24px rgba(255,90,0,.65))}
+.ld-fill{display:block;color:#fff;clip-path:inset(0 calc(100% - var(--p,0%)) 0 0)}
+.ld-fill .or{color:#ffa23d;text-shadow:0 0 6px rgba(255,190,110,.55)}
+.ld-scan{position:absolute;top:-6%;bottom:-6%;left:var(--p,0%);width:2px;margin-left:-1px;background:linear-gradient(transparent,#ffd2a1 20%,#fff 50%,#ffd2a1 80%,transparent);box-shadow:0 0 12px 2px rgba(255,140,40,.9);opacity:var(--s,1)}
+.ld-num{font-family:var(--font-plate);font-weight:600;font-size:14px;letter-spacing:.5em;margin-right:-.5em;color:var(--accent);font-variant-numeric:tabular-nums}
+body.ld,html.ld{overflow:hidden}
+body.ld :not(#loader):not(#loader *){animation-play-state:paused!important}
+
+.bprev{aspect-ratio:16/5;margin-bottom:10px;border-radius:10px;overflow:hidden;border:1px dashed var(--line-strong);background:#0e0c0a}
+.bprev img{display:block;width:100%;height:100%;object-fit:cover}
+.yrow{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+.yrow input[type=range]{flex:1;padding:0;border:0;background:none;box-shadow:none;accent-color:var(--accent);cursor:pointer}
+/* banner */
+.banner{position:relative;margin:22px 0 0;aspect-ratio:16/5;border-radius:20px;overflow:hidden;border:1px solid var(--line-strong);background:var(--surface);box-shadow:0 18px 44px -18px rgba(0,0,0,.85),0 0 0 1px rgba(255,122,26,.08);animation:rise .8s var(--ease) .4s both}
+.banner img{display:block;width:100%;height:100%;object-fit:cover}
+.banner::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.banner-edit{position:absolute;top:12px;right:12px;z-index:2;background:rgba(11,10,9,.72);backdrop-filter:blur(8px)}
+.banner-empty{width:100%;height:100%;border:0;background:none;color:var(--muted);font-size:14px;cursor:pointer;transition:color .2s,background .2s}
+.banner-empty:hover{color:var(--accent);background:var(--accent-soft)}
+.banner.is-empty{aspect-ratio:auto;min-height:110px;border-style:dashed}
+.banner.is-empty::after{display:none}
+@media (max-width:860px){.banner{aspect-ratio:16/8;border-radius:16px}}
+/* tier button + modal */
+html{scrollbar-gutter:stable}
+html.lock,html.lock body{overflow:hidden}
+.overlay{overscroll-behavior:contain}
+.tier-open{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:14px;border:1px solid #ffa35c;background:linear-gradient(135deg,#ff8f33,#ff6a00);color:var(--accent-ink);font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 8px 22px -6px rgba(255,106,0,.6),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s var(--ease),filter .25s,box-shadow .3s}
+.tier-open svg.i{width:18px;height:18px}
+.tier-open:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 12px 28px -6px rgba(255,106,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+.tier-open:active{transform:scale(.96)}
+.tier-modal{width:min(1120px,100%);height:min(600px,calc(100dvh - 32px));grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:24px;overflow:hidden}
+.tier-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tier-ttl{display:flex;align-items:center;gap:14px;min-width:0}
+.tier-ttl h2{font-size:22px;line-height:1.2}
+.tier-ttl p{margin:2px 0 0;color:var(--muted);font-size:13.5px}
+.tier-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,#ff8f33,#ff6a00);color:var(--accent-ink);box-shadow:0 8px 20px -6px rgba(255,106,0,.55)}
+.tier-ico svg.i{width:24px;height:24px}
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:0}
+.tier-panel{--tc:var(--accent);--tcs:rgba(255,122,26,.14);position:relative;display:flex;flex-direction:column;min-height:0;min-width:0;border:1px solid var(--line-strong);border-radius:16px;background:linear-gradient(180deg,#171411,#0f0d0b);overflow:hidden}
+.tier-panel.ev{--tc:var(--st-review);--tcs:rgba(108,182,255,.14)}
+.tp-head{display:flex;align-items:center;gap:12px;padding:16px 18px 14px}
+.tp-ico{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--tcs);color:var(--tc);border:1px solid var(--tcs)}
+.tp-ico svg.i{width:19px;height:19px}
+.tp-head h3{margin:0;font-family:var(--font-display);font-size:18px;font-weight:600}
+.tp-count{margin-left:auto;font-size:12.5px;color:var(--tc);background:var(--tcs);padding:2px 11px;border-radius:99px;font-weight:600}
+.tier-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 10px 10px;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
+.tier-table{width:100%;border-collapse:separate;border-spacing:0 6px;table-layout:fixed}
+.tier-table thead th{position:sticky;top:0;z-index:1;background:#13110f;padding:8px 12px;text-align:left;color:var(--muted);font-size:12px;font-weight:500;letter-spacing:.04em}
+.tier-table thead th:first-child{width:52%}
+.tier-table td{padding:11px 12px;background:rgba(255,255,255,.03);border-top:1px solid transparent;border-bottom:1px solid transparent;vertical-align:middle;transition:background .2s}
+.tier-table td:first-child{border-radius:12px 0 0 12px}
+.tier-table td:last-child{border-radius:0 12px 12px 0}
+.tier-table tbody tr:hover td{background:var(--tcs)}
+.t-cell{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px;line-height:1.4;min-width:0}
+.t-name{min-width:0;overflow-wrap:anywhere}
+.t-badge{width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;font-family:var(--font-plate);font-weight:600;font-size:14px;background:var(--tcs);color:var(--tc);border:1px solid var(--tc)}
+.s-cell{display:grid;gap:7px}
+.s-num{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+.s-num b{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1;color:var(--fg)}
+.s-num small{font-size:12px;color:var(--muted)}
+.s-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.s-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--tc),#ffd2a1);transform-origin:left;animation:grow .9s var(--ease) .15s both}
+.tier-panel.ev .s-bar i{background:linear-gradient(90deg,var(--tc),#d4ebff)}
+.ed{padding:7px 10px;font-size:14px;border-radius:9px}
+.ed.sp{width:96px;flex:none;font-family:var(--font-plate);font-weight:600}
+.s-top{display:flex;align-items:center;gap:8px}
+.s-top small{font-size:12px;color:var(--muted)}
+.s-top .mini{margin-left:auto}
+.tier-add{display:block;width:calc(100% - 4px);margin:4px 2px 2px;padding:10px;border:1px dashed var(--line-strong);border-radius:12px;background:none;color:var(--tc);font-weight:600;font-size:14px;cursor:pointer;transition:background .2s,border-color .2s}
+.tier-add:hover{background:var(--tcs);border-color:var(--tc)}
+.tier-admin{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid rgba(255,122,26,.45);background:var(--accent-soft);border-radius:12px}
+.tier-admin p{margin:0;font-size:13px}
+.tier-admin-actions{display:flex;gap:8px}
+@keyframes grow{from{transform:scaleX(0)}}
+@media (max-width:640px){.tier-grid{grid-template-columns:1fr;grid-auto-rows:minmax(260px,1fr);overflow:auto;overscroll-behavior:contain}.tier-modal{height:min(600px,calc(100dvh - 32px));padding:18px}.tier-ttl p{display:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body class="ld">
+<div id="loader" role="status" aria-live="polite" aria-label="กำลังโหลด">
+  <div class="ld-in">
+    <div class="ld-logo" aria-hidden="true"><span class="ld-base">SUMMER <span class="or">CITY SS2</span></span><span class="ld-fillwrap"><span class="ld-fill">SUMMER <span class="or">CITY SS2</span></span></span><i class="ld-scan"></i></div>
+    <div class="ld-num" id="ldNum" aria-hidden="true">0 0 1</div>
+  </div>
+</div>
+<div class="wrap">
+  <div class="topbar">
+    <button type="button" class="logo-btn" id="logoBtn">
+      <img id="logoImg" src="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png" alt="SUMMER CITY SS2">
+      <span class="logo-mark" id="logoFallback" hidden>SC</span>
+      <span class="logo-text"><span class="lt-or">SUMMER CITY</span> <span class="lt-wh">SS2</span></span>
+    </button>
+  </div>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">ติดตามสถานะรถ</p>
+      <h1>กระดานคิวรถ</h1>
+      <p class="sub">ตรวจสอบคิวและความคืบหน้าของรถที่แจ้งปัญหา</p>
+      <div class="stats" id="stats">
+        <div class="stat st-prog"><b data-k="prog">0</b><span>กำลังดำเนินการ</span></div>
+        <div class="stat st-review"><b data-k="review">0</b><span>รอตรวจสอบ</span></div>
+        <div class="stat st-done"><b data-k="done">0</b><span>เสร็จแล้ว</span></div>
+      </div>
+      <div class="meter" aria-hidden="true"><i id="meterFill"></i></div>
+      <p class="meter-txt" id="meterTxt"></p>
+    </div>
+    <div class="actions">
+      <a class="action primary" id="actReport" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 3 20h18L12 4Z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+        <span class="action-txt"><b>แจ้งปัญหาการใช้งานรถ</b><small id="subReport"></small></span>
+        <span class="go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a class="action secondary" id="actCars" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></span>
+        <span class="action-txt"><b>ดูรหัสรายชื่อรถ</b><small id="subCars"></small></span>
+        <span class="go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+    </div>
+  </section>
+  <div class="hazard" aria-hidden="true"></div>
+
+  <figure class="banner" id="banner" hidden>
+    <img id="bannerImg" alt="แบนเนอร์ SUMMER CITY SS2" decoding="async" hidden>
+    <button type="button" class="mini banner-edit" id="bannerEdit" hidden>เปลี่ยนรูปแบนเนอร์</button>
+    <button type="button" class="banner-empty" id="bannerEmpty" hidden>ยังไม่มีรูปแบนเนอร์ · กดเพื่อใส่ลิงก์รูป</button>
+  </figure>
+
+  <div class="adminbar" id="adminBar" hidden>
+    <p><b id="adminWho">โหมดแอดมิน</b> · เปลี่ยนสถานะได้ที่ช่องสถานะในตารางได้เลย<br><span class="admin-note" id="adminNote"></span></p>
+    <div class="adminbar-actions">
+      <button class="btn primary" type="button" id="btnAdd">+ เพิ่มรายการ</button>
+      <button class="btn" type="button" id="btnLinks">ตั้งค่าแบนเนอร์</button>
+      <button class="btn" type="button" id="btnReset">คืนค่าตัวอย่าง</button>
+      <button class="btn" type="button" id="btnLogout">ออกจากระบบ</button>
+    </div>
+  </div>
+
+  <section class="toolbar" aria-label="ตัวกรอง">
+    <div class="chips" id="chips"></div>
+    <button type="button" class="tier-open" id="actTier"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19a9 9 0 1 1 14.2 0"/><path d="m12 14 4-5"/><path d="M12 14h.01"/></svg><span>เทียร์ความเร็วรถ</span></button>
+    <div class="search">
+      <label class="sr" for="q">ค้นหา</label>
+      <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="ค้นหารหัสรถหรือผู้แจ้ง" autocomplete="off">
+    </div>
+  </section>
+
+  <div class="board-wrap">
+    <div class="board-scroll">
+      <div class="board" id="board" role="table" aria-label="คิวแจ้งปัญหารถ">
+        <div class="head" role="row">
+          <div role="columnheader">คิว</div>
+          <div role="columnheader">รูปรถ</div>
+          <div role="columnheader">รหัสรถ</div>
+          <div role="columnheader">ปัญหาที่แจ้ง</div>
+          <div role="columnheader">สถานะ</div>
+          <div role="columnheader">เวลา</div>
+          <div role="columnheader" class="h-act">จัดการ</div>
+        </div>
+        <div id="rows" role="rowgroup"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <p>SUMMER CITY SS2 · กระดานคิวรถ</p>
+  </footer>
+</div>
+
+<div class="overlay" id="formModal" hidden>
+  <form class="modal" id="carForm" novalidate>
+    <h2 id="formTitle">เพิ่มรายการแจ้ง</h2>
+    <div class="fgrid">
+      <div class="field"><label for="f-code">รหัสรถ</label><input id="f-code" autocomplete="off" placeholder="เช่น A104"></div>
+      <div class="field"><label for="f-status">สถานะ</label><select id="f-status"></select></div>
+      <div class="field full"><label for="f-reporter">ผู้แจ้ง (ไม่บังคับ)</label><input id="f-reporter" autocomplete="off" placeholder="เว้นว่างได้ ถ้าไม่ประสงค์ระบุชื่อ"></div>
+      <div class="field full"><label for="f-issue">ปัญหาที่แจ้ง</label><textarea id="f-issue" rows="6" placeholder="อธิบายอาการของรถ เขียนยาวได้ ขึ้นบรรทัดใหม่ได้"></textarea></div>
+      <div class="field full"><label for="f-img">ลิงก์รูปรถ</label><input id="f-img" type="url" autocomplete="off" placeholder="https://…"><p class="help">วางลิงก์รูปที่ฝากไว้ที่อื่น เว็บจะไม่เก็บไฟล์รูปไว้เอง</p></div>
+    </div>
+    <p class="form-err" id="formErr" role="alert" hidden></p>
+    <div class="modal-actions">
+      <button class="btn" type="button" id="btnFormCancel">ยกเลิก</button>
+      <button class="btn primary" type="submit">บันทึก</button>
+    </div>
+  </form>
+</div>
+
+<div class="overlay" id="linkModal" hidden>
+  <form class="modal" id="linkForm" novalidate>
+    <h2>ตั้งค่าแบนเนอร์</h2>
+    <p class="lead">ตั้งรูปแบนเนอร์ที่แสดงใต้เส้นส้มบนหัวเว็บ</p>
+    <div class="fgrid">
+      <div class="field full"><label for="l-banner">รูปแบนเนอร์ (แสดงใต้เส้นส้มบนหัวเว็บ)</label><input id="l-banner" type="url" autocomplete="off" placeholder="https://…"><p class="help">แนะนำรูปแนวนอน 1920×600 พิกเซล (สัดส่วน 16:5) จะแสดงเต็มภาพพอดี ฝากรูปไว้ที่อื่นแล้ววางลิงก์ตรงนี้ เว้นว่างไว้ถ้าไม่ต้องการแสดงแบนเนอร์</p></div>
+      <div class="field full"><label for="l-by">เลื่อนตำแหน่งรูป ขึ้น–ลง (<output id="l-byv">50</output>%)</label>
+        <div class="bprev"><img id="bPrevImg" alt="" hidden></div>
+        <div class="yrow"><span>บน</span><input id="l-by" type="range" min="0" max="100" step="1" value="50"><span>ล่าง</span><button class="mini" type="button" id="btnYmid">กึ่งกลาง</button></div>
+        <p class="help">กรอบแบนเนอร์สัดส่วน 16:5 ถ้ารูปสูงกว่านี้จะถูกตัดบน/ล่าง เลื่อนแถบเพื่อเลือกส่วนที่อยากให้เห็น (ดูตัวอย่างในกรอบด้านบน)</p></div>
+    </div>
+    <p class="form-err" id="linkErr" role="alert" hidden></p>
+    <div class="modal-actions">
+      <button class="btn spacer" type="button" id="btnLinkClear">ล้างรูปแบนเนอร์</button>
+      <button class="btn" type="button" id="btnLinkCancel">ยกเลิก</button>
+      <button class="btn primary" type="submit">บันทึก</button>
+    </div>
+  </form>
+</div>
+
+<div class="overlay" id="tierModal" hidden>
+  <div class="modal tier-modal" role="dialog" aria-modal="true" aria-labelledby="tierTitle">
+    <div class="tier-head">
+      <div class="tier-ttl">
+        <span class="tier-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19a9 9 0 1 1 14.2 0"/><path d="m12 14 4-5"/><path d="M12 14h.01"/></svg></span>
+        <div><h2 id="tierTitle">เทียร์ความเร็วรถ</h2><p>ความเร็วปลายที่ล็อคไว้ของรถในแต่ละเทียร์</p></div>
+      </div>
+      <button class="mini" type="button" id="tierClose">ปิด</button>
+    </div>
+    <div class="tier-grid">
+      <section class="tier-panel fuel" aria-labelledby="tierFuelT">
+        <header class="tp-head">
+          <span class="tp-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M3 21h12"/><path d="M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="M7 8h4"/></svg></span>
+          <h3 id="tierFuelT">รถน้ำมัน</h3><span class="tp-count" id="tierFuelN"></span>
+        </header>
+        <div class="tier-scroll"><table class="tier-table"><thead><tr><th scope="col">เทียร์รถ</th><th scope="col">ความเร็วปลายที่ล็อค</th></tr></thead><tbody id="tierFuel"></tbody></table><button type="button" class="tier-add" data-add="fuel" hidden>+ เพิ่มเทียร์รถน้ำมัน</button></div>
+      </section>
+      <section class="tier-panel ev" aria-labelledby="tierEvT">
+        <header class="tp-head">
+          <span class="tp-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
+          <h3 id="tierEvT">รถไฟฟ้า</h3><span class="tp-count" id="tierEvN"></span>
+        </header>
+        <div class="tier-scroll"><table class="tier-table"><thead><tr><th scope="col">เทียร์รถ</th><th scope="col">ความเร็วปลายที่ล็อค</th></tr></thead><tbody id="tierEv"></tbody></table><button type="button" class="tier-add" data-add="ev" hidden>+ เพิ่มเทียร์รถไฟฟ้า</button></div>
+      </section>
+    </div>
+    <div class="tier-admin" id="tierAdmin" hidden><p id="tierAdminNote"></p></div>
+  </div>
+</div>
+
+<div class="overlay" id="loginModal" hidden>
+  <form class="modal login-modal" id="loginForm" role="dialog" aria-modal="true" aria-labelledby="loginTitle" novalidate>
+    <div class="lg-stripe" aria-hidden="true"></div>
+    <button class="lg-x" type="button" id="btnLoginCancel" aria-label="ปิด"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="lg-body">
+      <header class="lg-head">
+        <div class="lg-badge" id="lgBadge"><img src="https://i.postimg.cc/YqYFJfQ1/LOGOSMSS2.png" alt="" onerror="this.parentNode.classList.add('noimg')"><span class="fb">SC</span></div>
+        <p class="lg-brand" aria-hidden="true"><span class="lt-or">SUMMER CITY</span> <span class="lt-wh">SS2</span></p>
+        <h2 id="loginTitle">เข้าสู่ระบบ</h2>
+        <p class="lead">สำหรับทีมงานเท่านั้น</p>
+      </header>
+      <div class="lg-field">
+        <label for="loginUser">ชื่อผู้ใช้</label>
+        <div class="lg-in">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <input id="loginUser" placeholder="กรอกชื่อผู้ใช้" autocomplete="username" autocapitalize="none" spellcheck="false">
+        </div>
+      </div>
+      <div class="lg-field">
+        <label for="loginPass">รหัสผ่าน</label>
+        <div class="lg-in">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+          <input id="loginPass" type="password" placeholder="กรอกรหัสผ่าน" autocomplete="current-password">
+          <button class="lg-eye" type="button" id="loginEye" aria-label="แสดงรหัสผ่าน" aria-pressed="false">
+            <svg class="i on" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="i off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6A16.5 16.5 0 0 0 2 12s3.6 7 10 7a9.7 9.7 0 0 0 4.3-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+          </button>
+        </div>
+        <p class="lg-caps" id="loginCaps" hidden>Caps Lock เปิดอยู่</p>
+      </div>
+      <p class="lg-err" id="loginMsg" role="alert" hidden></p>
+      <button class="lg-go" type="submit" id="btnLoginGo"><span id="loginGoTxt">เข้าสู่ระบบ</span><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><i class="lg-spin" aria-hidden="true"></i></button>
+    </div>
+  </form>
+</div>
+
+<div class="overlay" id="lightbox" hidden>
+  <div class="lb" role="dialog" aria-modal="true" aria-label="รูปรถ">
+    <div class="lb-head">
+      <div class="lb-title"><span class="plate" id="lbPlate"></span></div>
+      <button class="mini" type="button" id="lbClose">ปิด</button>
+    </div>
+    <div class="lb-img"><img id="lbImg" alt="รูปรถที่แจ้งปัญหา"><p id="lbFail" hidden>โหลดรูปไม่สำเร็จ ลองเปิดรูปต้นฉบับ</p></div>
+    <a class="btn" id="lbLink" target="_blank" rel="noopener noreferrer" hidden>เปิดรูปต้นฉบับ ↗</a>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ===== ตั้งค่าโดยแอดมิน (แก้ตรงนี้ได้) ===== */
+  // ลิงก์ของปุ่มด้านบนหน้าเว็บ ใส่ลิงก์ที่ขึ้นต้นด้วย https:// เว้นว่างไว้ถ้ายังไม่ใช้
+  var LINKS = {
+    report: "https://docs.google.com/forms/d/e/1FAIpQLSee1Fo3c8UbzxDNj1H8FKTgGeYuxXwsVU7GCtUEuT19zebT_g/viewform?usp=header",   // ปุ่ม "แจ้งปัญหาการใช้งานรถ"
+    carList: "https://docs.google.com/spreadsheets/d/1vKWPcv2jcs3rFkBMteqtfNU1P6_mHdPHxnhOwAELqDY/edit?usp=sharing",  // ปุ่ม "ดูรหัสรายชื่อรถ"
+    banner: "",   // รูปแบนเนอร์ใต้เส้นส้ม (ลิงก์รูป ขึ้นต้นด้วย https://)
+    bannerY: 50   // ตำแหน่งรูปแนวตั้ง 0 = บนสุด, 50 = กึ่งกลาง, 100 = ล่างสุด
+  };
+  // ตารางเทียร์ความเร็วรถ: [ชื่อเทียร์, ความเร็วปลายที่ล็อค (กม./ชม.)] แก้ตัวเลขตรงนี้ได้ (ตอนนี้เป็นค่าตัวอย่าง)
+  var TIERS = {
+    fuel: [['เทียร์ 1',120],['เทียร์ 2',140],['เทียร์ 3',160],['เทียร์ 4',180],['เทียร์ 5',200],['เทียร์ 6',220]],
+    ev:   [['เทียร์ 1',110],['เทียร์ 2',130],['เทียร์ 3',150],['เทียร์ 4',170],['เทียร์ 5',190],['เทียร์ 6',210]]
+  };
+  // เชื่อม Firebase (Firestore): วางค่า config จาก Firebase Console > Project settings > Your apps
+  // เช่น {apiKey:"...", authDomain:"...", projectId:"...", appId:"..."} ถ้าเป็น null เว็บจะเก็บข้อมูลในเบราว์เซอร์เครื่องนี้ (โหมดทดลอง)
+  var FIREBASE_CONFIG = {
+    apiKey: "AIzaSyDkPwRTRRwGRn3m8izcd6ZBl2thckk65dg",
+    authDomain: "carfix-5c3f5.firebaseapp.com",
+    projectId: "carfix-5c3f5",
+    storageBucket: "carfix-5c3f5.firebasestorage.app",
+    messagingSenderId: "31662484182",
+    appId: "1:31662484182:web:403cfc0c1904476aba7777"
+  };
+  var FIREBASE_COLLECTION = 'summerCitySS2';   // ชื่อ collection ใน Firestore (มี 3 เอกสาร: items, tiers, links)
+  // ล็อคอินใช้ Firebase Authentication (สร้างผู้ใช้ที่ Firebase Console > Authentication > Users แบบ Email/Password)
+  // ถ้าพิมพ์ชื่อผู้ใช้ไม่มี @ ระบบจะต่อท้ายด้วย @ + ค่านี้ให้เอง เช่น พิมพ์ admin -> admin@ss2.local
+  var AUTH_EMAIL_DOMAIN = 'ss2.local';
+  /* ========================================= */
+
+  var MIN = 60000;
+  var ST = {
+    prog:   {label:'กำลังดำเนินการ', cls:'st-prog'},
+    review: {label:'รอตรวจสอบ',      cls:'st-review'},
+    done:   {label:'ดำเนินการสำเร็จ', cls:'st-done'}
+  };
+  var ORDER = ['prog','review','done'];
+  var FILTERS = [['review','รอตรวจสอบ','st-review'],['prog','กำลังดำเนินการ','st-prog'],['done','ดำเนินการสำเร็จ','st-done']];
+  var TINTS = ['#c9531a','#6f7c8a','#8c3030','#2f5f8f','#cfc2a3','#3f7d55','#8a6a2a','#5d4a7a'];
+  var URL_RE = /^https?:\/\//i;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
+  var fmtNo = function(n){ return '#' + String(n).padStart(3,'0'); };
+  var startToday = function(){ var d = new Date(); d.setHours(0,0,0,0); return d.getTime(); };
+  var ago = function(m){ return Date.now() - m*MIN; };
+  var todayAgo = function(m){ return Math.max(Date.now() - m*MIN, startToday() + MIN); };
+  var hhmm = function(ts){ var d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); };
+  function dayLabel(ts){
+    var t = startToday();
+    if (ts >= t) return 'วันนี้';
+    if (ts >= t - 864e5) return 'เมื่อวาน';
+    return new Date(ts).toLocaleDateString('th-TH',{day:'numeric',month:'short'});
+  }
+  function rel(ts){
+    var m = Math.floor((Date.now() - ts) / MIN);
+    if (m < 1) return 'เมื่อสักครู่';
+    if (m < 60) return m + ' นาทีที่แล้ว';
+    var h = Math.floor(m / 60);
+    if (h < 24) return h + ' ชม.ที่แล้ว';
+    return dayLabel(ts);
+  }
+
+  /* ----- sample car pictures (drawn, no external files) ----- */
+  function sampleArt(i){
+    var c = TINTS[i % TINTS.length];
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2420"/><stop offset="1" stop-color="#100e0c"/></linearGradient></defs><rect width="160" height="100" fill="url(#g)"/><rect y="78" width="160" height="22" fill="#0b0a09"/><path d="M16 70 L20 56 Q23 49 32 47 L56 43 Q64 32 80 30 L106 30 Q118 32 126 44 L140 48 Q148 50 149 58 L150 70 Z" fill="' + c + '"/><path d="M62 43 Q68 35 80 34 L104 34 Q112 36 118 44 Z" fill="#0b0a09" opacity=".75"/><circle cx="48" cy="71" r="12" fill="#0b0a09" stroke="#4a4036" stroke-width="3"/><circle cx="118" cy="71" r="12" fill="#0b0a09" stroke="#4a4036" stroke-width="3"/></svg>';
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+  function imgSrc(it){
+    if (!it.img) return '';
+    if (it.img.indexOf('sample:') === 0) return sampleArt(parseInt(it.img.slice(7),10) || 0);
+    return it.img;
+  }
+  var isSample = function(it){ return it.img && it.img.indexOf('sample:') === 0; };
+
+  function seed(){
+    return [
+      {id:'s1',no:38,code:'A104',reporter:'Pond_Zaa',issue:'ล้อหลังซ้ายหลุดหลังชนขอบทาง ขับต่อไม่ได้',img:'sample:0',status:'prog',at:ago(140),doneAt:null},
+      {id:'s2',no:40,code:'A217',reporter:'Mind.RP',issue:'เครื่องดับกลางถนน สตาร์ทไม่ติด',img:'sample:1',status:'prog',at:ago(95),doneAt:null},
+      {id:'s3',no:43,code:'B032',reporter:'Fern_Kk',issue:'ประตูฝั่งคนขับบัค เปิดไม่ได้',img:'sample:2',status:'prog',at:ago(41),doneAt:null},
+      {id:'s4',no:44,code:'B118',reporter:'Tonkla',issue:'สีรถลอกเป็นรอยด่างทั้งคัน',img:'sample:3',status:'review',at:ago(30),doneAt:null},
+      {id:'s5',no:45,code:'C071',reporter:'Aom_Nana',issue:'รถค้างในโรงรถ เรียกออกมาไม่ได้',img:'sample:4',status:'review',at:ago(22),doneAt:null},
+      {id:'s6',no:46,code:'C245',reporter:'Joe_Biker',issue:'ไฟหน้าไม่ติด มองไม่เห็นทางตอนกลางคืน',img:'sample:5',status:'review',at:ago(15),doneAt:null},
+      {id:'s7',no:47,code:'D009',reporter:'Ice_Kitt',issue:'ของในท้ายรถหายหลังเก็บรถเข้าโรงรถ',img:'sample:6',status:'review',at:ago(6),doneAt:null},
+      {id:'s8',no:36,code:'D130',reporter:'Gun_Gun',issue:'กระจกหน้าแตก มองทางไม่ชัด',img:'sample:7',status:'done',at:ago(380),doneAt:todayAgo(55)},
+      {id:'s9',no:37,code:'E056',reporter:'Bank_Rp',issue:'เกียร์ค้าง เร่งความเร็วไม่ขึ้น',img:'sample:2',status:'done',at:ago(330),doneAt:todayAgo(125)},
+      {id:'s10',no:35,code:'E202',reporter:'Mew_Mew',issue:'รถจมน้ำแล้วหายไปจากโรงรถ',img:'sample:1',status:'done',at:ago(2000),doneAt:ago(1700)}
+    ];
+  }
+  function save(){ Store.set('items', state.items); }
+
+  /* ===== ชั้นเก็บข้อมูล (Store) =====
+     ทุกส่วนของเว็บอ่าน/เขียนผ่าน Store.subscribe(key, cb) และ Store.set(key, value) เท่านั้น
+     key: items (รายการรถ), tiers (เทียร์ความเร็ว), links (แบนเนอร์)
+     ถ้าใส่ FIREBASE_CONFIG ข้อมูลจะซิงก์กับ Firestore แบบเรียลไทม์ ทุกคนเห็นตรงกัน */
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  var USING_FB = !!(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey);
+  var fbCore = USING_FB ? (function(){
+    var base = 'https://www.gstatic.com/firebasejs/10.12.2/';
+    return Promise.all([import(base + 'firebase-app.js'), import(base + 'firebase-firestore.js'), import(base + 'firebase-auth.js')]).then(function(m){
+      var app = m[0].initializeApp(FIREBASE_CONFIG);
+      return {fs: m[1], db: m[1].getFirestore(app), au: m[2], auth: m[2].getAuth(app)};
+    });
+  })() : null;
+  var LOCAL_KEYS = {items:'carq.v2', tiers:'carq.tiers.v1', links:'carq.links.v1'};
+  var localBackend = {
+    listen: function(key, cb){
+      function read(){ try { var r = localStorage.getItem(LOCAL_KEYS[key]); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
+      cb(read());
+      window.addEventListener('storage', function(e){ if (e.key === LOCAL_KEYS[key]) cb(read()); });
+    },
+    write: function(key, val){ try { localStorage.setItem(LOCAL_KEYS[key], JSON.stringify(val)); } catch(e) {} }
+  };
+  function firebaseBackend(cfg){
+    var ready = fbCore;
+    return {
+      listen: function(key, cb){
+        ready.then(function(r){
+          r.fs.onSnapshot(r.fs.doc(r.db, FIREBASE_COLLECTION, key), function(snap){
+            if (snap.metadata.hasPendingWrites) return;   // ข้ามเสียงสะท้อนของที่เราเพิ่งเขียนเอง
+            var v = null;
+            if (snap.exists()) { try { v = JSON.parse(snap.data().json); } catch(e) {} }
+            cb(v);
+          }, function(err){ console.error(err); cb(null); });
+        }).catch(function(err){ console.error(err); cb(null); });
+      },
+      write: function(key, val){
+        ready.then(function(r){
+          return r.fs.setDoc(r.fs.doc(r.db, FIREBASE_COLLECTION, key), {json: JSON.stringify(val), updatedAt: Date.now()});
+        }).catch(function(err){ console.error(err); if (window.__toast) window.__toast('บันทึกไม่สำเร็จ ตรวจสอบการเชื่อมต่อหรือสิทธิ์'); });
+      }
+    };
+  }
+  var Store = (function(){
+    var subs = {}, cache = {}, backend = USING_FB ? firebaseBackend(FIREBASE_CONFIG) : localBackend;
+    function emit(k){ (subs[k] || []).forEach(function(cb){ cb(cache[k]); }); }
+    ['items','tiers','links'].forEach(function(k){
+      backend.listen(k, function(v){ cache[k] = (v === undefined ? null : v); emit(k); });
+    });
+    return {
+      subscribe: function(k, cb){ (subs[k] = subs[k] || []).push(cb); if (k in cache) cb(cache[k]); },
+      set: function(k, v){ cache[k] = v; emit(k); backend.write(k, v); }
+    };
+  })();
+
+  var state = {items: [], ready:false, filter:'review', q:'', admin:false, confirmId:null, editId:null};
+  var find = function(id){ return state.items.filter(function(i){ return i.id === id; })[0]; };
+
+  var toastTimer;
+  window.__toast = function(m){ toast(m); };
+  function toast(msg){
+    var t = $('toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.hidden = true; }, 2600);
+  }
+
+  /* ----- action buttons (links set by admin) ----- */
+  var linksData = {};
+  function readOverride(){ return linksData; }
+  function effectiveLinks(){
+    var o = readOverride();
+    return {
+      report: LINKS.report,
+      carList: LINKS.carList,
+      banner: (typeof o.banner === 'string' && o.banner) ? o.banner : LINKS.banner,
+      bannerY: (typeof o.bannerY === 'number') ? o.bannerY : (typeof LINKS.bannerY === 'number' ? LINKS.bannerY : 50)
+    };
+  }
+  function applyOne(elId, subId, url, desc){
+    var el = $(elId), sub = $(subId);
+    if (url && URL_RE.test(url)) {
+      el.href = url; el.setAttribute('data-url', url);
+      sub.textContent = desc;
+    } else {
+      el.href = '#'; el.removeAttribute('data-url');
+      sub.textContent = desc;
+    }
+  }
+  var bannerFail = '';
+  function applyBanner(url, y){
+    var box = $('banner'), img = $('bannerImg'), empty = $('bannerEmpty');
+    var want = !!(url && URL_RE.test(url)), ok = want && url !== bannerFail;
+    if (ok) { if (img.dataset.u !== url) { img.dataset.u = url; img.src = url; } }
+    else { img.removeAttribute('src'); img.dataset.u = ''; }
+    img.hidden = !ok;
+    img.style.objectPosition = '50% ' + (typeof y === 'number' ? y : 50) + '%';
+    empty.textContent = want ? 'โหลดรูปแบนเนอร์ไม่สำเร็จ · กดเพื่อตรวจสอบลิงก์' : 'ยังไม่มีรูปแบนเนอร์ · กดเพื่อใส่ลิงก์รูป';
+    empty.hidden = ok || !state.admin;
+    $('bannerEdit').hidden = !(ok && state.admin);
+    box.classList.toggle('is-empty', !ok);
+    box.hidden = !ok && !state.admin;
+  }
+  $('bannerImg').addEventListener('error', function(){ if (this.dataset.u) { bannerFail = this.dataset.u; var L = effectiveLinks(); applyBanner(L.banner, L.bannerY); } });
+  ['bannerEdit','bannerEmpty'].forEach(function(id){ $(id).addEventListener('click', function(){ openLinkForm(); $('l-banner').focus(); }); });
+  function applyLinks(){
+    var l = effectiveLinks();
+    applyOne('actReport', 'subReport', l.report, 'ส่งเรื่องให้ทีมงานตรวจสอบ');
+    applyOne('actCars', 'subCars', l.carList, 'ตรวจสอบดูรหัสรถทุกคันก่อนส่งแจ้งปัญหา');
+    applyBanner(l.banner, l.bannerY);
+  }
+  ['actReport','actCars'].forEach(function(id){
+    $(id).addEventListener('click', function(e){
+      if ($(id).getAttribute('data-url')) return;
+      e.preventDefault();
+      if (state.admin) openLinkForm(); else toast('ปุ่มนี้ยังไม่เปิดใช้งานในตอนนี้');
+    });
+  });
+
+  function openLinkForm(){
+    var l = effectiveLinks();
+    $('l-banner').value = l.banner || ''; $('l-by').value = l.bannerY; updatePrev();
+    $('linkErr').hidden = true;
+    $('linkModal').hidden = false;
+    $('l-banner').focus();
+  }
+  function closeLinkForm(){ $('linkModal').hidden = true; }
+  function updatePrev(){
+    var v = $('l-banner').value.trim(), y = Number($('l-by').value), im = $('bPrevImg');
+    $('l-byv').textContent = y;
+    if (URL_RE.test(v)) { if (im.dataset.u !== v) { im.dataset.u = v; im.src = v; } im.hidden = false; } else { im.hidden = true; }
+    im.style.objectPosition = '50% ' + y + '%';
+  }
+  ['l-banner','l-by'].forEach(function(id){ $(id).addEventListener('input', updatePrev); });
+  $('btnYmid').addEventListener('click', function(){ $('l-by').value = 50; updatePrev(); });
+  $('btnLinks').addEventListener('click', openLinkForm);
+  $('btnLinkCancel').addEventListener('click', closeLinkForm);
+  $('linkModal').addEventListener('click', function(e){ if (e.target === this) closeLinkForm(); });
+  $('btnLinkClear').addEventListener('click', function(){
+    Store.set('links', {});
+    applyLinks(); closeLinkForm(); toast('ล้างรูปแบนเนอร์แล้ว');
+  });
+  $('linkForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var b = $('l-banner').value.trim();
+    function fail(msg, fid){ var el = $('linkErr'); el.textContent = msg; el.hidden = false; $(fid).focus(); }
+    if (b && !URL_RE.test(b)) return fail('ลิงก์ต้องขึ้นต้นด้วย https://', 'l-banner');
+    var o = {}; if (b) o.banner = b; o.bannerY = Number($('l-by').value);
+    Store.set('links', o);
+    applyLinks(); closeLinkForm(); toast('บันทึกการตั้งค่าแล้ว');
+  });
+
+  /* ----- board ----- */
+  function visible(){
+    var q = state.q.trim().toLowerCase().replace(/^#/, '');
+    return state.items.filter(function(it){
+      if (state.filter === 'prog' && it.status !== 'prog') return false;
+      if (state.filter === 'review' && it.status !== 'review') return false;
+      if (state.filter === 'done' && it.status !== 'done') return false;
+      if (q) {
+        var hay = [it.code, it.reporter, it.issue, String(it.no), String(it.no).padStart(3,'0')].join(' ').toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+  }
+
+  function rowHtml(it){
+    var st = ST[it.status] || ST.review;
+    var src = imgSrc(it);
+    var thumb = src
+      ? '<button type="button" class="thumb" data-act="zoom" data-id="' + esc(it.id) + '" aria-label="ดูรูปรถ ' + esc(it.code) + '"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async"><span class="fb">เปิดรูป</span></button>'
+      : '<div class="thumb empty">ไม่มีรูป</div>';
+    var statusCell = state.admin
+      ? '<select class="st-select ' + st.cls + '" data-act="status" data-id="' + esc(it.id) + '" aria-label="สถานะของ ' + esc(it.code) + '">' + ORDER.map(function(k){ return '<option value="' + k + '"' + (k === it.status ? ' selected' : '') + '>' + ST[k].label + '</option>'; }).join('') + '</select>'
+      : '<span class="pill ' + st.cls + '"><i></i>' + st.label + '</span>';
+    var timeMain = it.status === 'done' && it.doneAt ? hhmm(it.doneAt) : hhmm(it.at);
+    var timeSub = it.status === 'done' && it.doneAt ? 'เสร็จ · ' + dayLabel(it.doneAt) : 'แจ้ง · ' + rel(it.at);
+    var act = '';
+    if (state.admin) {
+      act = state.confirmId === it.id
+        ? '<button type="button" class="mini danger" data-act="del-yes" data-id="' + esc(it.id) + '">ยืนยันลบ</button><button type="button" class="mini" data-act="del-no" data-id="' + esc(it.id) + '">ไม่ลบ</button>'
+        : '<button type="button" class="mini" data-act="edit" data-id="' + esc(it.id) + '">แก้ไข</button><button type="button" class="mini danger" data-act="del" data-id="' + esc(it.id) + '">ลบ</button>';
+      act = '<div class="c-act" role="cell">' + act + '</div>';
+    }
+    return '<div class="row ' + st.cls + '" role="row">'
+      + '<div class="c-no" role="cell"><span class="no">' + fmtNo(it.no) + '</span></div>'
+      + '<div class="c-img" role="cell">' + thumb + '</div>'
+      + '<div class="c-car" role="cell"><div class="plate-line"><span class="no no-inline">' + fmtNo(it.no) + '</span><span class="plate">' + esc(it.code) + '</span></div></div>'
+      + '<div class="c-issue" role="cell"><div class="issue">' + esc(it.issue) + '</div>' + (it.reporter ? '<div class="reporter">แจ้งโดย ' + esc(it.reporter) + '</div>' : '') + '</div>'
+      + '<div class="c-status" role="cell">' + statusCell + '</div>'
+      + '<div class="c-time" role="cell"><span class="t-main">' + timeMain + '</span><span class="t-sub">' + esc(timeSub) + '</span></div>'
+      + act
+      + '</div>';
+  }
+
+  function render(){
+    var items = state.items;
+    var counts = {all:items.length, prog:0, review:0, done:0};
+    items.forEach(function(i){
+      if (i.status === 'prog') counts.prog++;
+      if (i.status === 'review') counts.review++;
+      if (i.status === 'done') counts.done++;
+    });
+    $('chips').innerHTML = FILTERS.map(function(f){
+      return '<button type="button" class="chip ' + f[2] + '" data-f="' + f[0] + '" aria-pressed="' + (state.filter === f[0]) + '">' + (f[2] ? '<i class="dot"></i>' : '') + '<span>' + f[1] + '</span><b>' + counts[f[0]] + '</b></button>';
+    }).join('');
+
+    $('board').classList.toggle('admin', state.admin);
+    var list = visible();
+    var html = '';
+    ORDER.forEach(function(s){
+      var g = list.filter(function(i){ return i.status === s; });
+      if (!g.length) return;
+      g.sort(s === 'done' ? function(a,b){ return (b.doneAt||0) - (a.doneAt||0); } : function(a,b){ return a.at - b.at; });
+      html += '<div class="group ' + ST[s].cls + '" role="row"><div class="group-in" role="cell"><i class="gdot"></i><span class="gname">' + ST[s].label + '</span><span class="gcount">' + g.length + ' คัน</span></div></div>';
+      html += g.map(rowHtml).join('');
+    });
+    if (!state.ready) {
+      html = '<div class="empty-state"><p>กำลังโหลดข้อมูล…</p></div>';
+    } else if (!list.length) {
+      if (!items.length) {
+        html = '<div class="empty-state"><p>ยังไม่มีรายการแจ้งปัญหา' + (state.admin ? ' กด + เพิ่มรายการ เพื่อเริ่มต้น' : '') + '</p></div>';
+      } else {
+        html = '<div class="empty-state"><p>ไม่พบรถที่ตรงกับตัวกรองนี้</p><button type="button" class="btn" data-act="clear">ล้างตัวกรอง</button></div>';
+      }
+    }
+    $('rows').innerHTML = html;
+  }
+
+  /* ----- role / login (Firebase Authentication) ----- */
+  function setAdmin(user){
+    var on = !!user;
+    state.admin = on; state.confirmId = null;
+    $('adminBar').hidden = !on;
+    if (on) {
+      var em = user.email || '', suf = '@' + AUTH_EMAIL_DOMAIN;
+      $('adminWho').textContent = (em.slice(-suf.length).toLowerCase() === suf.toLowerCase() ? em.slice(0, -suf.length) : em) + ' · แอดมิน';
+      closeLogin();
+    }
+    if (!$('tierModal').hidden) renderTiers();
+    applyLinks();
+    render();
+  }
+  /* the logo is the hidden admin entrance: opens a centered login popup */
+  function openLogin(){
+    $('loginUser').value = ''; $('loginPass').value = ''; $('loginMsg').hidden = true; setEye(false);
+    $('loginModal').hidden = false; $('loginUser').focus();
+  }
+  var loginBusy = false;
+  function setEye(on){ $('loginPass').type = on ? 'text' : 'password'; $('loginEye').setAttribute('aria-pressed', on ? 'true' : 'false'); $('loginEye').setAttribute('aria-label', on ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'); }
+  function closeLogin(){ $('loginModal').hidden = true; $('loginPass').value = ''; setEye(false); $('loginCaps').hidden = true; }
+  $('loginEye').addEventListener('click', function(){ setEye($('loginPass').type === 'password'); $('loginPass').focus(); });
+  ['keydown','keyup'].forEach(function(t){ $('loginPass').addEventListener(t, function(e){ $('loginCaps').hidden = !(e.getModifierState && e.getModifierState('CapsLock')); }); });
+  $('loginPass').addEventListener('blur', function(){ $('loginCaps').hidden = true; });
+  function setBusy(on){
+    loginBusy = on; $('btnLoginGo').disabled = on; $('loginForm').classList.toggle('busy', on);
+    $('loginGoTxt').textContent = on ? 'กำลังตรวจสอบ…' : 'เข้าสู่ระบบ';
+  }
+  $('logoBtn').addEventListener('click', function(){ if (!state.admin) openLogin(); });
+  $('btnLoginCancel').addEventListener('click', closeLogin);
+  $('loginModal').addEventListener('click', function(e){ if (e.target === this) closeLogin(); });
+  $('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if (loginBusy) return;
+    var msg = $('loginMsg');
+    function err(t, fid){
+      msg.textContent = t; msg.hidden = false; if (fid) $(fid).focus();
+      var f = $('loginForm'); f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+    }
+    var name = $('loginUser').value.trim(), pw = $('loginPass').value;
+    if (!name) return err('กรอกชื่อผู้ใช้ก่อน', 'loginUser');
+    if (!pw) return err('กรอกรหัสผ่านก่อน', 'loginPass');
+    if (!fbCore) return err('ยังไม่ได้เชื่อม Firebase จึงยังเข้าสู่ระบบไม่ได้');
+    var email = name.indexOf('@') > -1 ? name : name + '@' + AUTH_EMAIL_DOMAIN;
+    setBusy(true); msg.hidden = true;
+    fbCore.then(function(r){ return r.au.signInWithEmailAndPassword(r.auth, email, pw); })
+      .then(function(){ toast('เข้าสู่ระบบแล้ว'); })
+      .catch(function(ex){
+        var c = ex && ex.code || '';
+        if (c === 'auth/network-request-failed') err('เชื่อมต่อไม่ได้ ตรวจสอบอินเทอร์เน็ตแล้วลองใหม่');
+        else if (c === 'auth/too-many-requests') err('Firebase ระงับการเข้าสู่ระบบชั่วคราว ลองใหม่ภายหลัง');
+        else if (c === 'auth/user-disabled') err('บัญชีนี้ถูกปิดใช้งาน');
+        else if (c === 'auth/operation-not-allowed') err('ยังไม่ได้เปิดล็อคอินแบบ Email/Password ใน Firebase');
+        else err('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง', 'loginPass');
+        $('loginPass').select();
+      })
+      .then(function(){ setBusy(false); });
+  });
+  $('btnLogout').addEventListener('click', function(){
+    if (!fbCore) { setAdmin(null); return; }
+    fbCore.then(function(r){ return r.au.signOut(r.auth); }).then(function(){ toast('ออกจากระบบแล้ว'); });
+  });
+  if (fbCore) fbCore.then(function(r){ r.au.onAuthStateChanged(r.auth, function(u){ setAdmin(u); }); })
+    .catch(function(ex){ console.error(ex); });
+
+  var resetArmed = false, resetTimer;
+  $('btnReset').addEventListener('click', function(){
+    var b = $('btnReset');
+    if (!resetArmed) {
+      resetArmed = true; b.textContent = 'กดอีกครั้งเพื่อยืนยัน';
+      resetTimer = setTimeout(function(){ resetArmed = false; b.textContent = 'คืนค่าตัวอย่าง'; }, 3000);
+      return;
+    }
+    clearTimeout(resetTimer); resetArmed = false; b.textContent = 'คืนค่าตัวอย่าง';
+    state.items = seed(); save(); render(); toast('คืนค่าข้อมูลตัวอย่างแล้ว');
+  });
+
+  /* ----- list actions ----- */
+  function setStatus(id, s){
+    var it = find(id); if (!it || it.status === s || !ST[s]) return;
+    it.status = s; it.doneAt = s === 'done' ? Date.now() : null;
+    save(); render();
+    var sel = document.querySelector('select[data-id="' + id + '"]'); if (sel) sel.focus();
+    toast('อัปเดตสถานะ ' + it.code + ' เป็น ' + ST[s].label);
+  }
+  function removeItem(id){
+    var it = find(id); if (!it) return;
+    state.items = state.items.filter(function(i){ return i.id !== id; });
+    state.confirmId = null; save(); render(); toast('ลบ ' + it.code + ' แล้ว');
+  }
+
+  document.addEventListener('click', function(e){
+    var f = e.target.closest('[data-f]');
+    if (f) { var fv = f.getAttribute('data-f'); state.filter = fv; render(); return; }
+    var a = e.target.closest('[data-act]'); if (!a) return;
+    var act = a.getAttribute('data-act'), id = a.getAttribute('data-id');
+    if (act === 'zoom') openLightbox(id);
+    else if (act === 'edit') openForm(id);
+    else if (act === 'del') { state.confirmId = id; render(); }
+    else if (act === 'del-no') { state.confirmId = null; render(); }
+    else if (act === 'del-yes') removeItem(id);
+    else if (act === 'clear') { state.filter = 'review'; state.q = ''; $('q').value = ''; render(); }
+  });
+  document.addEventListener('change', function(e){
+    var s = e.target.closest('select[data-act="status"]');
+    if (s) setStatus(s.getAttribute('data-id'), s.value);
+  });
+  $('q').addEventListener('input', function(){ state.q = this.value; render(); });
+
+  /* broken image links fall back to a text button */
+  document.addEventListener('error', function(e){
+    var t = e.target;
+    if (t && t.id === 'logoImg') { t.hidden = true; $('logoFallback').hidden = false; return; }
+    if (t && t.tagName === 'IMG') { var th = t.closest('.thumb'); if (th) th.classList.add('broken'); }
+  }, true);
+
+  /* ----- lightbox ----- */
+  function openLightbox(id){
+    var it = find(id); if (!it) return;
+    var src = imgSrc(it); if (!src) return;
+    $('lbPlate').textContent = it.code;
+    var img = $('lbImg'); img.hidden = false; $('lbFail').hidden = true; img.src = src;
+    var link = $('lbLink');
+    if (isSample(it)) { link.hidden = true; } else { link.hidden = false; link.href = src; }
+    $('lightbox').hidden = false;
+    $('lbClose').focus();
+  }
+  $('lbImg').addEventListener('error', function(){ this.hidden = true; $('lbFail').hidden = false; });
+  function closeLightbox(){ $('lightbox').hidden = true; $('lbImg').removeAttribute('src'); }
+  $('lbClose').addEventListener('click', closeLightbox);
+  $('lightbox').addEventListener('click', function(e){ if (e.target === this) closeLightbox(); });
+
+  /* ----- add / edit form ----- */
+  $('f-status').innerHTML = ORDER.map(function(k){ return '<option value="' + k + '">' + ST[k].label + '</option>'; }).join('');
+  function openForm(id){
+    state.editId = id || null;
+    var it = id ? find(id) : null;
+    $('formTitle').textContent = it ? 'แก้ไขรายการ ' + fmtNo(it.no) : 'เพิ่มรายการแจ้ง';
+    $('f-code').value = it ? it.code : '';
+    $('f-reporter').value = it ? (it.reporter || '') : '';
+    $('f-issue').value = it ? it.issue : '';
+    $('f-status').value = it ? it.status : 'review';
+    $('f-img').value = it && it.img && !isSample(it) ? it.img : '';
+    $('f-img').placeholder = it && isSample(it) ? 'ตอนนี้ใช้รูปตัวอย่าง วางลิงก์เพื่อเปลี่ยน' : 'https://…';
+    $('formErr').hidden = true;
+    $('formModal').hidden = false;
+    $('f-code').focus();
+  }
+  function closeForm(){ $('formModal').hidden = true; }
+  $('btnAdd').addEventListener('click', function(){ openForm(null); });
+  $('btnFormCancel').addEventListener('click', closeForm);
+  $('formModal').addEventListener('click', function(e){ if (e.target === this) closeForm(); });
+  $('carForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = {
+      code: $('f-code').value.trim().toUpperCase(),
+      reporter: $('f-reporter').value.trim(),
+      issue: $('f-issue').value.trim(),
+      img: $('f-img').value.trim(),
+      status: $('f-status').value
+    };
+    function fail(msg, fid){ var el = $('formErr'); el.textContent = msg; el.hidden = false; $(fid).focus(); }
+    if (!v.code) return fail('กรอกรหัสรถก่อนบันทึก', 'f-code');
+    if (!v.issue) return fail('กรอกปัญหาที่แจ้งก่อนบันทึก', 'f-issue');
+    if (v.img && !URL_RE.test(v.img)) return fail('ลิงก์รูปต้องขึ้นต้นด้วย https://', 'f-img');
+    var it = state.editId ? find(state.editId) : null;
+    if (it) {
+      var oldSample = isSample(it);
+      it.code = v.code; it.reporter = v.reporter; it.issue = v.issue;
+      if (v.img || !oldSample) it.img = v.img;
+      if (it.status !== v.status) { it.status = v.status; it.doneAt = v.status === 'done' ? Date.now() : null; }
+      toast('บันทึกการแก้ไขแล้ว');
+    } else {
+      var maxNo = state.items.reduce(function(m, i){ return Math.max(m, i.no || 0); }, 0);
+      state.items.push({id:'u' + Date.now().toString(36), no:maxNo + 1, code:v.code, reporter:v.reporter, issue:v.issue, img:v.img, status:v.status, at:Date.now(), doneAt:v.status === 'done' ? Date.now() : null});
+      toast('เพิ่มรายการ ' + v.code + ' แล้ว');
+    }
+    save(); closeForm(); render();
+  });
+
+  /* ----- tier speed table ----- */
+  var TIERS_FILE = clone(TIERS);
+  function validTiers(o){
+    var ok = function(a){ return Array.isArray(a) && a.every(function(r){ return Array.isArray(r) && typeof r[0] === 'string' && typeof r[1] === 'number'; }); };
+    return !!o && ok(o.fuel) && ok(o.ev);
+  }
+  var tiers = clone(TIERS_FILE), tSaveT;
+  function saveTiers(){ clearTimeout(tSaveT); tSaveT = setTimeout(function(){ Store.set('tiers', tiers); }, 400); }
+  var TMODES = {fuel:{tb:'tierFuel', n:'tierFuelN'}, ev:{tb:'tierEv', n:'tierEvN'}};
+  function tmax(){ return Math.max.apply(null, [1].concat(tiers.fuel.concat(tiers.ev).map(function(r){ return r[1]; }))); }
+  function barW(v){ return Math.max(6, Math.round(v / tmax() * 100)); }
+  function tierRows(mode){
+    var admin = state.admin;
+    return tiers[mode].map(function(r, i){
+      var name = admin
+        ? '<input class="ed" data-tf="name" data-m="' + mode + '" data-i="' + i + '" value="' + esc(r[0]) + '" maxlength="80" placeholder="ชื่อเทียร์" aria-label="ชื่อเทียร์ที่ ' + (i + 1) + '">'
+        : '<span class="t-name">' + esc(r[0]) + '</span>';
+      var top = admin
+        ? '<div class="s-top"><input class="ed sp" type="number" inputmode="numeric" min="0" max="9999" step="1" data-tf="spd" data-m="' + mode + '" data-i="' + i + '" value="' + esc(r[1]) + '" aria-label="ความเร็วปลายของเทียร์ที่ ' + (i + 1) + '"><small>กม./ชม.</small><button type="button" class="mini danger" data-tdel data-m="' + mode + '" data-i="' + i + '">ลบ</button></div>'
+        : '<div class="s-num"><b>' + esc(r[1]) + '</b><small>กม./ชม.</small></div>';
+      return '<tr><td><div class="t-cell"><span class="t-badge">' + (i + 1) + '</span>' + name + '</div></td>'
+        + '<td><div class="s-cell">' + top + '<div class="s-bar"><i style="width:' + barW(r[1]) + '%"></i></div></div></td></tr>';
+    }).join('');
+  }
+  function renderTiers(){
+    ['fuel','ev'].forEach(function(m){
+      $(TMODES[m].tb).innerHTML = tierRows(m);
+      $(TMODES[m].n).textContent = tiers[m].length + ' เทียร์';
+    });
+    document.querySelectorAll('.tier-add').forEach(function(b){ b.hidden = !state.admin; });
+    $('tierAdmin').hidden = !state.admin;
+  }
+  function updateBars(){
+    ['fuel','ev'].forEach(function(m){
+      var bars = $(TMODES[m].tb).querySelectorAll('.s-bar i');
+      tiers[m].forEach(function(r, i){ if (bars[i]) bars[i].style.width = barW(r[1]) + '%'; });
+    });
+  }
+  function closeTier(){ $('tierModal').hidden = true; document.documentElement.classList.remove('lock'); $('actTier').focus(); }
+  $('actTier').addEventListener('click', function(){ renderTiers(); document.documentElement.classList.add('lock'); $('tierModal').hidden = false; $('tierClose').focus(); });
+  $('tierClose').addEventListener('click', closeTier);
+  $('tierModal').addEventListener('click', function(e){
+    if (e.target === this) { closeTier(); return; }
+    var add = e.target.closest('[data-add]');
+    if (add && state.admin) {
+      var m = add.getAttribute('data-add'), list = tiers[m], last = list.length ? list[list.length - 1][1] : 100;
+      list.push(['เทียร์ ' + (list.length + 1), last]);
+      saveTiers(); renderTiers();
+      var sc = add.closest('.tier-scroll'); if (sc) sc.scrollTop = sc.scrollHeight;
+      var ins = $(TMODES[m].tb).querySelectorAll('input[data-tf="name"]'); if (ins.length) { ins[ins.length - 1].focus(); ins[ins.length - 1].select(); }
+      return;
+    }
+    var del = e.target.closest('[data-tdel]');
+    if (del && state.admin) {
+      var dm = del.getAttribute('data-m'), di = parseInt(del.getAttribute('data-i'), 10);
+      var removed = tiers[dm].splice(di, 1)[0];
+      saveTiers(); renderTiers(); toast('ลบ ' + (removed && removed[0] ? removed[0] : 'เทียร์') + ' แล้ว');
+    }
+  });
+  $('tierModal').addEventListener('input', function(e){
+    var t = e.target; if (!state.admin || !t.getAttribute) return;
+    var f = t.getAttribute('data-tf'); if (!f) return;
+    var row = tiers[t.getAttribute('data-m')][parseInt(t.getAttribute('data-i'), 10)]; if (!row) return;
+    if (f === 'name') row[0] = t.value;
+    else { var n = Math.max(0, Math.min(9999, Math.round(Number(t.value) || 0))); row[1] = n; updateBars(); }
+    saveTiers();
+  });
+  $('tierAdminNote').textContent = USING_FB ? 'โหมดแอดมิน · แก้ชื่อเทียร์และความเร็วได้เลย บันทึกอัตโนมัติ ทุกคนเห็นตรงกัน' : 'โหมดแอดมิน · แก้ไขได้เลย บันทึกอัตโนมัติ (ยังไม่ได้เชื่อม Firebase จึงเก็บในเบราว์เซอร์นี้)';
+  Store.subscribe('tiers', function(v){
+    if (!$('tierModal').hidden && state.admin) return;   // กำลังแก้อยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
+    tiers = validTiers(v) ? v : clone(TIERS_FILE);
+    renderTiers();
+  });
+  renderTiers();
+
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    if (!$('loginModal').hidden) closeLogin();
+    else if (!$('lightbox').hidden) closeLightbox();
+    else if (!$('tierModal').hidden) closeTier();
+    else if (!$('linkModal').hidden) closeLinkForm();
+    else if (!$('formModal').hidden) closeForm();
+  });
+
+  $('adminNote').textContent = USING_FB ? 'ข้อมูลทั้งหมดซิงก์กับ Firebase ทุกคนเห็นตรงกันแบบเรียลไทม์' : 'ยังไม่ได้เชื่อม Firebase · ข้อมูลที่แก้จะเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น';
+  $('btnReset').hidden = USING_FB;
+  Store.subscribe('links', function(v){ linksData = (v && typeof v === 'object') ? v : {}; applyLinks(); });
+  Store.subscribe('items', function(v){
+    state.items = Array.isArray(v) ? v : (USING_FB ? [] : seed());
+    state.ready = true;
+    render();
+  });
+  applyLinks();
+  render();
+})();
+</script>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,root=document.documentElement,body=document.body;
+  window.__startPage=function(){body.classList.add('boot');setTimeout(function(){body.classList.remove('boot')},1800);var f=document.getElementById('meterFill');f.style.transition='none';f.style.width='0';f.offsetWidth;f.style.transition='';document.querySelectorAll('[data-k]').forEach(function(e){e.textContent=0});stats()};
+  function counts(){var o={};document.querySelectorAll('#chips .chip').forEach(function(c){var b=c.querySelector('b');o[c.dataset.f]=b?+b.textContent||0:0});return o}
+  function tween(el,to){var from=+el.textContent||0;if(from===to||reduce){el.textContent=to;return}var t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/800);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
+  function stats(){var c=counts();['prog','review','done'].forEach(function(k){var el=document.querySelector('[data-k="'+k+'"]');if(el)tween(el,c[k]||0)});
+    var all=(c.prog||0)+(c.review||0)+(c.done||0),pct=all?Math.round((c.done||0)/all*100):0;document.getElementById('meterFill').style.width=pct+'%';
+    document.getElementById('meterTxt').textContent='\u0e1b\u0e34\u0e14\u0e07\u0e32\u0e19\u0e41\u0e25\u0e49\u0e27 '+pct+'% \u0e08\u0e32\u0e01\u0e17\u0e31\u0e49\u0e07\u0e2b\u0e21\u0e14 '+all+' \u0e04\u0e31\u0e19'}
+  function tag(){document.querySelectorAll('#rows .row').forEach(function(r){var e=r.querySelector('.pill,.st-select');if(!e)return;var m=e.className.match(/st-(prog|review|done)/);if(m)r.dataset.st=m[1]})}
+  new MutationObserver(tag).observe(document.getElementById('rows'),{childList:true});
+  new MutationObserver(stats).observe(document.getElementById('chips'),{childList:true});
+  tag();stats();
+  function clampIssues(){document.querySelectorAll('#rows .issue').forEach(function(el){
+    el.classList.add('clamp');
+    if(el.scrollHeight>el.clientHeight+2){var b=document.createElement('button');b.type='button';b.className='more';b.textContent='ดูเพิ่มเติม';
+      b.onclick=function(){var open=el.classList.toggle('clamp');b.textContent=open?'ดูเพิ่มเติม':'ย่อข้อความ'};el.after(b)}
+  })}
+  new MutationObserver(clampIssues).observe(document.getElementById('rows'),{childList:true});
+  clampIssues();
+
+  if(!reduce)document.addEventListener('pointermove',function(e){
+    root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px');
+    var a=e.target.closest&&e.target.closest('.action');if(a){var r=a.getBoundingClientRect();a.style.setProperty('--px',e.clientX-r.left+'px');a.style.setProperty('--py',e.clientY-r.top+'px')}
+  },{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var L=document.getElementById('loader'),num=document.getElementById('ldNum'),DUR=2000;
+  var lock=document.querySelectorAll('.wrap,.overlay,.toast');
+  lock.forEach(function(e){e.inert=true});
+  function stop(e){e.preventDefault();e.stopPropagation()}
+  ['keydown','wheel','touchmove','contextmenu'].forEach(function(t){window.addEventListener(t,stop,{capture:true,passive:false})});
+  var ease=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
+  var t0;
+  function done(){
+    ['keydown','wheel','touchmove','contextmenu'].forEach(function(t){window.removeEventListener(t,stop,{capture:true})});
+    lock.forEach(function(e){e.inert=false});
+    document.body.classList.remove('ld');
+    L.classList.add('out');
+    if(window.__startPage)window.__startPage();
+    setTimeout(function(){L.remove()},800);
+  }
+  function tick(now){
+    t0=t0||now;var t=Math.min(1,(now-t0)/DUR),p=.55*t+.45*ease(t),n=Math.max(1,Math.round(p*100));
+    L.style.setProperty('--p',(p*100)+'%');L.style.setProperty('--k',p);L.style.setProperty('--s',t>=1?0:1);
+    num.textContent=String(n).padStart(3,'0').split('').join(' ');
+    if(t<1)requestAnimationFrame(tick);else setTimeout(done,350);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
