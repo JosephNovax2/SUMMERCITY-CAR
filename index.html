@@ -303,7 +303,6 @@ h1{font-size:clamp(32px,5.6vw,54px);line-height:1.15;letter-spacing:-.01em;backg
 .eyebrow{display:inline-flex;padding:4px 12px;border-radius:999px;background:var(--accent-soft);border:1px solid rgba(255,122,26,.35);font-size:13.5px}
 .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
 .logo-btn img{transition:transform .3s var(--ease),filter .3s}
-.logo-btn:hover img{transform:scale(1.03);filter:drop-shadow(0 0 14px rgba(255,122,26,.45))}
 
 /* live stats */
 .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
@@ -490,6 +489,17 @@ a[role="link"]{cursor:pointer}
 html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text}
 img{-webkit-user-drag:none;user-drag:none}
+/* สกอร์บาร์โทนส้มเข้ม หนาขึ้น */
+/* Chrome/Edge ใหม่จะเมินสไตล์ ::-webkit-scrollbar ถ้าตั้ง scrollbar-color ไว้ จึงตั้งเฉพาะ Firefox */
+@supports not selector(::-webkit-scrollbar){*{scrollbar-width:auto;scrollbar-color:#8f4210 #14110e}}
+::-webkit-scrollbar{width:18px;height:18px}
+::-webkit-scrollbar-track{background:#14110e}
+::-webkit-scrollbar-thumb{background:#8f4210;border-radius:999px;border:4px solid #14110e}
+::-webkit-scrollbar-thumb:hover{background:#a64d12}
+::-webkit-scrollbar-corner{background:#14110e}
+::-webkit-scrollbar-button,::-webkit-scrollbar-button:single-button,::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment{display:none;width:0;height:0;background:none}
+.logo-btn,.logo-text{cursor:default}
+.logo-btn,.logo-btn *{outline:none}
 </style>
 </head>
 <body class="ld">
@@ -1098,7 +1108,8 @@ img{-webkit-user-drag:none;user-drag:none}
     loginBusy = on; $('btnLoginGo').disabled = on; $('loginForm').classList.toggle('busy', on);
     $('loginGoTxt').textContent = on ? 'กำลังตรวจสอบ…' : 'เข้าสู่ระบบ';
   }
-  $('logoBtn').addEventListener('click', function(){ if (!state.admin) openLogin(); });
+  /* ทางเข้าแอดมิน: กดได้เฉพาะรูปโลโก้เล็กๆ เท่านั้น (ตัวหนังสือ SUMMER CITY SS2 กดไม่ได้) */
+  ['logoImg','logoFallback'].forEach(function(id){ $(id).addEventListener('click', function(e){ e.stopPropagation(); if (!state.admin) openLogin(); }); });
   $('btnLoginCancel').addEventListener('click', closeLogin);
   $('loginModal').addEventListener('click', function(e){ if (e.target === this) closeLogin(); });
   $('loginForm').addEventListener('submit', function(e){
