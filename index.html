@@ -163,6 +163,20 @@ textarea{resize:vertical;min-height:84px}
 .adminbar p{margin:0;font-size:14px}
 .adminbar-actions{display:flex;flex-wrap:wrap;gap:8px}
 
+/* announcement marquee */
+.notice{margin-top:16px;display:flex;align-items:center;gap:12px;padding:7px 8px 7px 7px;border:1px solid rgba(255,122,26,.4);border-radius:14px;background:linear-gradient(90deg,rgba(255,122,26,.18),rgba(255,122,26,.05) 70%);overflow:hidden}
+.notice-tag{flex:none;display:inline-flex;align-items:center;gap:7px;padding:6px 13px 6px 10px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;line-height:1.2;box-shadow:0 6px 18px -6px rgba(255,122,26,.7)}
+.notice-tag svg{width:18px;height:18px}
+.notice-view{flex:1 1 0;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 22px),transparent)}
+.notice-track{display:flex;width:max-content;animation:mqmove 30s linear infinite;will-change:transform}
+.mq-g{display:flex;flex:none;align-items:center}
+.mq-i{white-space:nowrap;font-weight:500;font-size:15.5px;line-height:1.5}
+.mq-i{margin-right:64px}
+.notice-empty{flex:1 1 0;min-width:0;margin:0;color:var(--muted);font-size:14px}
+.notice-edit{flex:none}
+@keyframes mqmove{to{transform:translateX(-50%)}}
+@media (max-width:560px){.notice-tag span{display:none}.notice-tag{padding:7px 9px}}
+
 /* toolbar */
 .toolbar{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
 .chips{display:inline-flex;flex-wrap:wrap;gap:2px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
@@ -410,7 +424,20 @@ html.lock,html.lock body{overflow:hidden}
 .tier-open svg.i{width:18px;height:18px}
 .tier-open:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 12px 28px -6px rgba(255,106,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
 .tier-open:active{transform:scale(.96)}
-.tier-modal{width:min(1120px,100%);height:min(600px,calc(100dvh - 32px));grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:24px;overflow:hidden}
+.tier-modal{width:min(1120px,100%);height:min(600px,calc(100dvh - 32px));grid-template-rows:auto minmax(0,1fr);gap:18px;padding:24px;overflow:hidden}
+.tier-modal{position:relative}
+.tier-close{position:absolute;top:10px;right:12px;z-index:3;width:34px;height:34px;display:grid;place-items:center;padding:0;border-radius:10px;border:1px solid rgba(255,90,78,.6);background:rgba(255,90,78,.16);color:#ff5a4e;cursor:pointer;transition:background .2s,transform .2s,color .2s}
+.tier-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
+.tier-close:hover{background:#ff4136;color:#fff;transform:scale(1.06)}
+.tier-close:active{transform:scale(.94)}
+.mini.save{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.tier-prompt{position:absolute;inset:0;z-index:6;display:grid;place-items:center;padding:20px;background:rgba(6,5,4,.72);backdrop-filter:blur(3px);border-radius:inherit}
+.tier-prompt[hidden]{display:none}
+.tp-card{width:min(460px,100%);max-height:100%;overflow:auto;padding:22px;border-radius:16px;border:1px solid rgba(255,122,26,.55);background:#1a1613;box-shadow:0 24px 60px -12px rgba(0,0,0,.8)}
+.tp-card h3{margin:0 0 6px;font-size:18px}
+.tp-card p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.tp-card ul{margin:0 0 16px;padding:10px 12px 10px 28px;border-radius:10px;background:rgba(255,255,255,.04);font-size:13.5px;line-height:1.7}
+.tp-acts{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
 .tier-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .tier-ttl{display:flex;align-items:center;gap:14px;min-width:0}
 .tier-ttl h2{font-size:22px;line-height:1.2}
@@ -418,14 +445,16 @@ html.lock,html.lock body{overflow:hidden}
 .tier-ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,#ff8f33,#ff6a00);color:var(--accent-ink);box-shadow:0 8px 20px -6px rgba(255,106,0,.55)}
 .tier-ico svg.i{width:24px;height:24px}
 .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:0}
-.tier-panel{--tc:var(--accent);--tcs:rgba(255,122,26,.14);position:relative;display:flex;flex-direction:column;min-height:0;min-width:0;border:1px solid var(--line-strong);border-radius:16px;background:linear-gradient(180deg,#171411,#0f0d0b);overflow:hidden}
-.tier-panel.ev{--tc:var(--st-review);--tcs:rgba(108,182,255,.14)}
+.tier-panel{--tc:var(--accent);--tcs:rgba(255,122,26,.14);position:relative;display:flex;flex-direction:column;min-height:0;min-width:0;border:1px solid var(--tb);border-radius:16px;background:linear-gradient(180deg,#171411,#0f0d0b);overflow:hidden;box-shadow:0 0 0 1px var(--tbg) inset,0 10px 30px -18px var(--tb)}
+.tier-panel{--tb:rgba(255,122,26,.55);--tbg:rgba(255,122,26,.08)}
+.tier-panel.ev{--tc:var(--st-review);--tcs:rgba(108,182,255,.14);--tb:rgba(108,182,255,.55);--tbg:rgba(108,182,255,.08)}
 .tp-head{display:flex;align-items:center;gap:12px;padding:16px 18px 14px}
 .tp-ico{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--tcs);color:var(--tc);border:1px solid var(--tcs)}
 .tp-ico svg.i{width:19px;height:19px}
 .tp-head h3{margin:0;font-family:var(--font-display);font-size:18px;font-weight:600}
 .tp-count{margin-left:auto;font-size:12.5px;color:var(--tc);background:var(--tcs);padding:2px 11px;border-radius:99px;font-weight:600}
-.tier-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 10px 10px;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent}
+.tier-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:0 10px 10px;scrollbar-width:none;-ms-overflow-style:none}
+.tier-scroll::-webkit-scrollbar{display:none;width:0;height:0}
 .tier-table{width:100%;border-collapse:separate;border-spacing:0 6px;table-layout:fixed}
 .tier-table thead th{position:sticky;top:0;z-index:1;background:#13110f;padding:8px 12px;text-align:left;color:var(--muted);font-size:12px;font-weight:500;letter-spacing:.04em}
 .tier-table thead th:first-child{width:52%}
@@ -454,8 +483,13 @@ html.lock,html.lock body{overflow:hidden}
 .tier-admin p{margin:0;font-size:13px}
 .tier-admin-actions{display:flex;gap:8px}
 @keyframes grow{from{transform:scaleX(0)}}
-@media (max-width:640px){.tier-grid{grid-template-columns:1fr;grid-auto-rows:minmax(260px,1fr);overflow:auto;overscroll-behavior:contain}.tier-modal{height:min(600px,calc(100dvh - 32px));padding:18px}.tier-ttl p{display:none}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:640px){.tier-grid{grid-template-columns:1fr;grid-auto-rows:minmax(260px,1fr);overflow:auto;overscroll-behavior:contain}.tier-modal{height:min(600px,calc(100dvh - 32px));padding:18px}.tier-ttl p{font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){*:not(.notice-track),*::before,*::after{animation:none!important;transition:none!important}}   /* ป้ายประกาศวิ่งต้องเคลื่อนไหวเสมอ จึงยกเว้น .notice-track */
+a[role="link"]{cursor:pointer}
+/* กันคลุมดำ/คัดลอกทั้งเว็บ (ช่องกรอกข้อมูลยังพิมพ์/คัดลอกได้ตามปกติ) */
+html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text}
+img{-webkit-user-drag:none;user-drag:none}
 </style>
 </head>
 <body class="ld">
@@ -474,6 +508,13 @@ html.lock,html.lock body{overflow:hidden}
     </button>
   </div>
 
+  <section class="notice" id="notice" aria-label="ประกาศ" hidden>
+    <span class="notice-tag"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 6a9 9 0 0 1 0 12"/></svg><span>ประกาศ</span></span>
+    <div class="notice-view" id="noticeView" hidden><span class="sr" id="noticeSr"></span><div class="notice-track" id="noticeTrack" aria-hidden="true"></div></div>
+    <p class="notice-empty" id="noticeEmpty" hidden>ยังไม่มีประกาศ · กด "แก้ประกาศ" เพื่อตั้งข้อความ (คนทั่วไปจะไม่เห็นป้ายนี้จนกว่าจะมีข้อความ)</p>
+    <button type="button" class="mini notice-edit" id="noticeEdit" hidden>แก้ประกาศ</button>
+  </section>
+
   <section class="hero">
     <div>
       <p class="eyebrow">ติดตามสถานะรถ</p>
@@ -488,12 +529,12 @@ html.lock,html.lock body{overflow:hidden}
       <p class="meter-txt" id="meterTxt"></p>
     </div>
     <div class="actions">
-      <a class="action primary" id="actReport" href="#" target="_blank" rel="noopener noreferrer">
+      <a class="action primary" id="actReport" role="link" tabindex="0">
         <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 3 20h18L12 4Z"/><path d="M12 10v4M12 17h.01"/></svg></span>
         <span class="action-txt"><b>แจ้งปัญหาการใช้งานรถ</b><small id="subReport"></small></span>
         <span class="go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
       </a>
-      <a class="action secondary" id="actCars" href="#" target="_blank" rel="noopener noreferrer">
+      <a class="action secondary" id="actCars" role="link" tabindex="0">
         <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></span>
         <span class="action-txt"><b>ดูรหัสรายชื่อรถ</b><small id="subCars"></small></span>
         <span class="go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
@@ -512,6 +553,7 @@ html.lock,html.lock body{overflow:hidden}
     <p><b id="adminWho">โหมดแอดมิน</b> · เปลี่ยนสถานะได้ที่ช่องสถานะในตารางได้เลย<br><span class="admin-note" id="adminNote"></span></p>
     <div class="adminbar-actions">
       <button class="btn primary" type="button" id="btnAdd">+ เพิ่มรายการ</button>
+      <button class="btn" type="button" id="btnNotice">ตั้งค่าประกาศ</button>
       <button class="btn" type="button" id="btnLinks">ตั้งค่าแบนเนอร์</button>
       <button class="btn" type="button" id="btnReset">คืนค่าตัวอย่าง</button>
       <button class="btn" type="button" id="btnLogout">ออกจากระบบ</button>
@@ -593,9 +635,9 @@ html.lock,html.lock body{overflow:hidden}
     <div class="tier-head">
       <div class="tier-ttl">
         <span class="tier-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19a9 9 0 1 1 14.2 0"/><path d="m12 14 4-5"/><path d="M12 14h.01"/></svg></span>
-        <div><h2 id="tierTitle">เทียร์ความเร็วรถ</h2><p>ความเร็วปลายที่ล็อคไว้ของรถในแต่ละเทียร์</p></div>
+        <div><h2 id="tierTitle">เทียร์ความเร็วรถ</h2><p>ความเร็วปลายที่ล็อคไว้ของรถในแต่ละเทียร์ กรณีรถบัคที่ไม่ได้ล็อคความเร็ว หรือความเร็วไม่ตรงตามตาราง ให้รีบมาแจ้งกับนายก Joseph โดยทันที หากฝ่าฝืนใช้ จะมีบทลงโทษร้ายแรง</p></div>
       </div>
-      <button class="mini" type="button" id="tierClose">ปิด</button>
+      <button class="tier-close" type="button" id="tierClose" aria-label="ปิด"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <div class="tier-grid">
       <section class="tier-panel fuel" aria-labelledby="tierFuelT">
@@ -613,8 +655,33 @@ html.lock,html.lock body{overflow:hidden}
         <div class="tier-scroll"><table class="tier-table"><thead><tr><th scope="col">เทียร์รถ</th><th scope="col">ความเร็วปลายที่ล็อค</th></tr></thead><tbody id="tierEv"></tbody></table><button type="button" class="tier-add" data-add="ev" hidden>+ เพิ่มเทียร์รถไฟฟ้า</button></div>
       </section>
     </div>
-    <div class="tier-admin" id="tierAdmin" hidden><p id="tierAdminNote"></p></div>
+    <div class="tier-prompt" id="tierPrompt" role="alertdialog" aria-modal="true" aria-labelledby="tpTitle" hidden>
+      <div class="tp-card">
+        <h3 id="tpTitle">บันทึกการแก้ไขนี้ไหม?</h3>
+        <p>ต้องเลือกก่อน ถึงจะแก้ไขต่อได้ ป้องกันการแก้ผิดโดยไม่ตั้งใจ</p>
+        <ul id="tpList"></ul>
+        <div class="tp-acts"><button class="btn" type="button" id="tpCancel">ยกเลิก (คืนค่าเดิม)</button><button class="btn primary" type="button" id="tpSave">บันทึก</button></div>
+      </div>
+    </div>
   </div>
+</div>
+
+<div class="overlay" id="noticeModal" hidden>
+  <form class="modal" id="noticeForm" novalidate>
+    <h2>ตั้งค่าประกาศ</h2>
+    <p class="lead">ข้อความจะวิ่งไปทางซ้ายเรื่อยๆ ที่หัวเว็บ ให้ทุกคนที่เข้ามาเห็น</p>
+    <div class="field full">
+      <label for="n-text">ข้อความประกาศ</label>
+      <textarea id="n-text" rows="5" maxlength="500" placeholder="เช่น ปิดปรับปรุงระบบคืนนี้ 22:00–23:00 น."></textarea>
+      <p class="help">ขึ้นบรรทัดใหม่เพื่อแยกหลายประกาศ (จะวิ่งต่อกันเป็นวง) · เว้นว่างแล้วบันทึกเพื่อปิดป้ายประกาศ · ไม่เกิน 500 ตัวอักษร</p>
+    </div>
+    <p class="form-err" id="noticeErr" role="alert" hidden></p>
+    <div class="modal-actions">
+      <button class="btn spacer" type="button" id="btnNoticeClear">ล้างข้อความ</button>
+      <button class="btn" type="button" id="btnNoticeCancel">ยกเลิก</button>
+      <button class="btn primary" type="submit">บันทึก</button>
+    </div>
+  </form>
 </div>
 
 <div class="overlay" id="loginModal" hidden>
@@ -660,7 +727,7 @@ html.lock,html.lock body{overflow:hidden}
       <button class="mini" type="button" id="lbClose">ปิด</button>
     </div>
     <div class="lb-img"><img id="lbImg" alt="รูปรถที่แจ้งปัญหา"><p id="lbFail" hidden>โหลดรูปไม่สำเร็จ ลองเปิดรูปต้นฉบับ</p></div>
-    <a class="btn" id="lbLink" target="_blank" rel="noopener noreferrer" hidden>เปิดรูปต้นฉบับ ↗</a>
+    <a class="btn" id="lbLink" role="link" tabindex="0" hidden>เปิดรูปต้นฉบับ ↗</a>
   </div>
 </div>
 
@@ -693,7 +760,7 @@ html.lock,html.lock body{overflow:hidden}
     messagingSenderId: "31662484182",
     appId: "1:31662484182:web:403cfc0c1904476aba7777"
   };
-  var FIREBASE_COLLECTION = 'summerCitySS2';   // ชื่อ collection ใน Firestore (มี 3 เอกสาร: items, tiers, links)
+  var FIREBASE_COLLECTION = 'summerCitySS2';   // ชื่อ collection ใน Firestore (มี 4 เอกสาร: items, tiers, links, notice)
   // ล็อคอินใช้ Firebase Authentication (สร้างผู้ใช้ที่ Firebase Console > Authentication > Users แบบ Email/Password)
   // ถ้าพิมพ์ชื่อผู้ใช้ไม่มี @ ระบบจะต่อท้ายด้วย @ + ค่านี้ให้เอง เช่น พิมพ์ admin -> admin@ss2.local
   var AUTH_EMAIL_DOMAIN = 'ss2.local';
@@ -764,7 +831,7 @@ html.lock,html.lock body{overflow:hidden}
 
   /* ===== ชั้นเก็บข้อมูล (Store) =====
      ทุกส่วนของเว็บอ่าน/เขียนผ่าน Store.subscribe(key, cb) และ Store.set(key, value) เท่านั้น
-     key: items (รายการรถ), tiers (เทียร์ความเร็ว), links (แบนเนอร์)
+     key: items (รายการรถ), tiers (เทียร์ความเร็ว), links (แบนเนอร์), notice (ป้ายประกาศ)
      ถ้าใส่ FIREBASE_CONFIG ข้อมูลจะซิงก์กับ Firestore แบบเรียลไทม์ ทุกคนเห็นตรงกัน */
   function clone(o){ return JSON.parse(JSON.stringify(o)); }
   var USING_FB = !!(FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey);
@@ -775,7 +842,7 @@ html.lock,html.lock body{overflow:hidden}
       return {fs: m[1], db: m[1].getFirestore(app), au: m[2], auth: m[2].getAuth(app)};
     });
   })() : null;
-  var LOCAL_KEYS = {items:'carq.v2', tiers:'carq.tiers.v1', links:'carq.links.v1'};
+  var LOCAL_KEYS = {items:'carq.v2', tiers:'carq.tiers.v1', links:'carq.links.v1', notice:'carq.notice.v1'};
   var localBackend = {
     listen: function(key, cb){
       function read(){ try { var r = localStorage.getItem(LOCAL_KEYS[key]); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
@@ -807,7 +874,7 @@ html.lock,html.lock body{overflow:hidden}
   var Store = (function(){
     var subs = {}, cache = {}, backend = USING_FB ? firebaseBackend(FIREBASE_CONFIG) : localBackend;
     function emit(k){ (subs[k] || []).forEach(function(cb){ cb(cache[k]); }); }
-    ['items','tiers','links'].forEach(function(k){
+    ['items','tiers','links','notice'].forEach(function(k){
       backend.listen(k, function(v){ cache[k] = (v === undefined ? null : v); emit(k); });
     });
     return {
@@ -816,7 +883,7 @@ html.lock,html.lock body{overflow:hidden}
     };
   })();
 
-  var state = {items: [], ready:false, filter:'review', q:'', admin:false, confirmId:null, editId:null};
+  var state = {items: [], ready:false, filter:'review', q:'', admin:false, confirmId:null, editId:null, pending:{}};
   var find = function(id){ return state.items.filter(function(i){ return i.id === id; })[0]; };
 
   var toastTimer;
@@ -842,10 +909,10 @@ html.lock,html.lock body{overflow:hidden}
   function applyOne(elId, subId, url, desc){
     var el = $(elId), sub = $(subId);
     if (url && URL_RE.test(url)) {
-      el.href = url; el.setAttribute('data-url', url);
+      el.setAttribute('data-url', url);
       sub.textContent = desc;
     } else {
-      el.href = '#'; el.removeAttribute('data-url');
+      el.removeAttribute('data-url');
       sub.textContent = desc;
     }
   }
@@ -871,12 +938,19 @@ html.lock,html.lock body{overflow:hidden}
     applyOne('actCars', 'subCars', l.carList, 'ตรวจสอบดูรหัสรถทุกคันก่อนส่งแจ้งปัญหา');
     applyBanner(l.banner, l.bannerY);
   }
-  ['actReport','actCars'].forEach(function(id){
-    $(id).addEventListener('click', function(e){
-      if ($(id).getAttribute('data-url')) return;
+  /* ลิงก์ไม่มี href จริง เพื่อไม่ให้เบราว์เซอร์โชว์ URL ที่มุมซ้ายล่างตอนเมาส์ชี้ — เปิดลิงก์ด้วย JS แทน */
+  function openUrl(u){ var w = window.open(u, '_blank'); if (w) { try { w.opener = null; } catch(_){} } }
+  ['actReport','actCars','lbLink'].forEach(function(id){
+    var el = $(id);
+    function go(e){
       e.preventDefault();
+      var u = el.getAttribute('data-url');
+      if (u) { openUrl(u); return; }
+      if (id === 'lbLink') return;
       if (state.admin) openLinkForm(); else toast('ปุ่มนี้ยังไม่เปิดใช้งานในตอนนี้');
-    });
+    }
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') go(e); });
   });
 
   function openLinkForm(){
@@ -933,14 +1007,17 @@ html.lock,html.lock body{overflow:hidden}
     var thumb = src
       ? '<button type="button" class="thumb" data-act="zoom" data-id="' + esc(it.id) + '" aria-label="ดูรูปรถ ' + esc(it.code) + '"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async"><span class="fb">เปิดรูป</span></button>'
       : '<div class="thumb empty">ไม่มีรูป</div>';
+    var pend = state.admin && state.pending && state.pending[it.id];
     var statusCell = state.admin
-      ? '<select class="st-select ' + st.cls + '" data-act="status" data-id="' + esc(it.id) + '" aria-label="สถานะของ ' + esc(it.code) + '">' + ORDER.map(function(k){ return '<option value="' + k + '"' + (k === it.status ? ' selected' : '') + '>' + ST[k].label + '</option>'; }).join('') + '</select>'
+      ? '<select class="st-select ' + (ST[pend] || st).cls + '" data-act="status" data-id="' + esc(it.id) + '" aria-label="สถานะของ ' + esc(it.code) + '">' + ORDER.map(function(k){ return '<option value="' + k + '"' + (k === (pend || it.status) ? ' selected' : '') + '>' + ST[k].label + '</option>'; }).join('') + '</select>'
       : '<span class="pill ' + st.cls + '"><i></i>' + st.label + '</span>';
     var timeMain = it.status === 'done' && it.doneAt ? hhmm(it.doneAt) : hhmm(it.at);
     var timeSub = it.status === 'done' && it.doneAt ? 'เสร็จ · ' + dayLabel(it.doneAt) : 'แจ้ง · ' + rel(it.at);
     var act = '';
     if (state.admin) {
-      act = state.confirmId === it.id
+      act = pend
+        ? '<button type="button" class="mini save" data-act="st-save" data-id="' + esc(it.id) + '">บันทึก</button><button type="button" class="mini" data-act="st-cancel" data-id="' + esc(it.id) + '">ยกเลิก</button>'
+        : state.confirmId === it.id
         ? '<button type="button" class="mini danger" data-act="del-yes" data-id="' + esc(it.id) + '">ยืนยันลบ</button><button type="button" class="mini" data-act="del-no" data-id="' + esc(it.id) + '">ไม่ลบ</button>'
         : '<button type="button" class="mini" data-act="edit" data-id="' + esc(it.id) + '">แก้ไข</button><button type="button" class="mini danger" data-act="del" data-id="' + esc(it.id) + '">ลบ</button>';
       act = '<div class="c-act" role="cell">' + act + '</div>';
@@ -1001,7 +1078,9 @@ html.lock,html.lock body{overflow:hidden}
       closeLogin();
     }
     if (!$('tierModal').hidden) renderTiers();
+    if (!on) { closeNotice(); state.pending = {}; if (typeof resetTierDraft === 'function') { resetTierDraft(); $('tierPrompt').hidden = true; } }
     applyLinks();
+    renderNotice();
     render();
   }
   /* the logo is the hidden admin entrance: opens a centered login popup */
@@ -1053,7 +1132,13 @@ html.lock,html.lock body{overflow:hidden}
     if (!fbCore) { setAdmin(null); return; }
     fbCore.then(function(r){ return r.au.signOut(r.auth); }).then(function(){ toast('ออกจากระบบแล้ว'); });
   });
-  if (fbCore) fbCore.then(function(r){ r.au.onAuthStateChanged(r.auth, function(u){ setAdmin(u); }); })
+  /* รีเฟรชเว็บทุกครั้ง = ต้องล็อกอินใหม่: เก็บเซสชันไว้ในหน่วยความจำอย่างเดียว และล้างเซสชันเก่าที่ค้างในเบราว์เซอร์ทิ้ง */
+  if (fbCore) fbCore.then(function(r){
+    var p = r.au.setPersistence ? r.au.setPersistence(r.auth, r.au.inMemoryPersistence) : Promise.resolve();
+    return Promise.resolve(p).catch(function(){}).then(function(){ return r.au.signOut(r.auth).catch(function(){}); }).then(function(){
+      r.au.onAuthStateChanged(r.auth, function(u){ setAdmin(u); });
+    });
+  })
     .catch(function(ex){ console.error(ex); });
 
   var resetArmed = false, resetTimer;
@@ -1092,11 +1177,13 @@ html.lock,html.lock body{overflow:hidden}
     else if (act === 'del') { state.confirmId = id; render(); }
     else if (act === 'del-no') { state.confirmId = null; render(); }
     else if (act === 'del-yes') removeItem(id);
+    else if (act === 'st-save') { var pv = state.pending[id]; delete state.pending[id]; if (pv) setStatus(id, pv); else render(); }
+    else if (act === 'st-cancel') { delete state.pending[id]; render(); }
     else if (act === 'clear') { state.filter = 'review'; state.q = ''; $('q').value = ''; render(); }
   });
   document.addEventListener('change', function(e){
     var s = e.target.closest('select[data-act="status"]');
-    if (s) setStatus(s.getAttribute('data-id'), s.value);
+    if (s) { var sid = s.getAttribute('data-id'), it2 = find(sid); if (!it2 || !state.admin) return; if (s.value === it2.status) delete state.pending[sid]; else state.pending[sid] = s.value; render(); var s2 = document.querySelector('select[data-id="' + sid + '"]'); if (s2) s2.focus(); }
   });
   $('q').addEventListener('input', function(){ state.q = this.value; render(); });
 
@@ -1114,7 +1201,7 @@ html.lock,html.lock body{overflow:hidden}
     $('lbPlate').textContent = it.code;
     var img = $('lbImg'); img.hidden = false; $('lbFail').hidden = true; img.src = src;
     var link = $('lbLink');
-    if (isSample(it)) { link.hidden = true; } else { link.hidden = false; link.href = src; }
+    if (isSample(it)) { link.hidden = true; } else { link.hidden = false; link.setAttribute('data-url', src); }
     $('lightbox').hidden = false;
     $('lbClose').focus();
   }
@@ -1177,8 +1264,11 @@ html.lock,html.lock body{overflow:hidden}
     var ok = function(a){ return Array.isArray(a) && a.every(function(r){ return Array.isArray(r) && typeof r[0] === 'string' && typeof r[1] === 'number'; }); };
     return !!o && ok(o.fuel) && ok(o.ev);
   }
-  var tiers = clone(TIERS_FILE), tSaveT;
-  function saveTiers(){ clearTimeout(tSaveT); tSaveT = setTimeout(function(){ Store.set('tiers', tiers); }, 400); }
+  var tiers = clone(TIERS_FILE), tiersSaved = clone(TIERS_FILE), tierDirty = false;
+  /* แก้เป็นฉบับร่างก่อน ต้องกด “บันทึก” ถึงจะมีผลกับทุกคน */
+  function saveTiers(){ tierDirty = true; syncTierBtns(); }
+  function syncTierBtns(){}
+  function resetTierDraft(){ tiers = clone(tiersSaved); tierDirty = false; syncTierBtns(); }
   var TMODES = {fuel:{tb:'tierFuel', n:'tierFuelN'}, ev:{tb:'tierEv', n:'tierEvN'}};
   function tmax(){ return Math.max.apply(null, [1].concat(tiers.fuel.concat(tiers.ev).map(function(r){ return r[1]; }))); }
   function barW(v){ return Math.max(6, Math.round(v / tmax() * 100)); }
@@ -1201,7 +1291,6 @@ html.lock,html.lock body{overflow:hidden}
       $(TMODES[m].n).textContent = tiers[m].length + ' เทียร์';
     });
     document.querySelectorAll('.tier-add').forEach(function(b){ b.hidden = !state.admin; });
-    $('tierAdmin').hidden = !state.admin;
   }
   function updateBars(){
     ['fuel','ev'].forEach(function(m){
@@ -1209,25 +1298,68 @@ html.lock,html.lock body{overflow:hidden}
       tiers[m].forEach(function(r, i){ if (bars[i]) bars[i].style.width = barW(r[1]) + '%'; });
     });
   }
-  function closeTier(){ $('tierModal').hidden = true; document.documentElement.classList.remove('lock'); $('actTier').focus(); }
+  var TLBL = {fuel:'รถน้ำมัน', ev:'รถไฟฟ้า'};
+  function tierChanges(){
+    var out = [];
+    ['fuel','ev'].forEach(function(m){
+      var a = tiersSaved[m], b = tiers[m], n = Math.max(a.length, b.length);
+      for (var i = 0; i < n; i++) {
+        var x = a[i], y = b[i], who = TLBL[m] + ' · ลำดับ ' + (i + 1);
+        if (!x) out.push(who + ': เพิ่ม “' + y[0] + '” ' + y[1] + ' กม./ชม.');
+        else if (!y) out.push(who + ': ลบ “' + x[0] + '”');
+        else {
+          if (x[0] !== y[0]) out.push(who + ': ชื่อ “' + x[0] + '” → “' + y[0] + '”');
+          if (x[1] !== y[1]) out.push(who + ' (' + y[0] + '): ' + x[1] + ' → ' + y[1] + ' กม./ชม.');
+        }
+      }
+    });
+    return out;
+  }
+  function showTierPrompt(){
+    if (!state.admin || !tierDirty) return;
+    var ch = tierChanges();
+    if (!ch.length) { tierDirty = false; syncTierBtns(); return; }
+    $('tpList').innerHTML = ch.slice(0, 8).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + (ch.length > 8 ? '<li>…และอีก ' + (ch.length - 8) + ' รายการ</li>' : '');
+    $('tierPrompt').hidden = false; $('tpSave').focus();
+  }
+  function hideTierPrompt(){ $('tierPrompt').hidden = true; }
+  function doTierSave(){
+    if (!state.admin || !tierDirty) { hideTierPrompt(); return; }
+    Store.set('tiers', tiers); tiersSaved = clone(tiers); tierDirty = false; syncTierBtns(); hideTierPrompt(); toast('บันทึกเทียร์แล้ว');
+  }
+  function doTierCancel(){ resetTierDraft(); renderTiers(); hideTierPrompt(); toast('ยกเลิกการแก้ไขแล้ว'); }
+  $('tpSave').addEventListener('click', doTierSave);
+  $('tpCancel').addEventListener('click', doTierCancel);
+  function closeTier(force){
+    if (force !== true && state.admin && tierDirty) { showTierPrompt(); return; }
+    if (tierDirty) { resetTierDraft(); renderTiers(); }
+    hideTierPrompt();
+    $('tierModal').hidden = true; document.documentElement.classList.remove('lock'); $('actTier').focus(); }
   $('actTier').addEventListener('click', function(){ renderTiers(); document.documentElement.classList.add('lock'); $('tierModal').hidden = false; $('tierClose').focus(); });
-  $('tierClose').addEventListener('click', closeTier);
+  $('tierClose').addEventListener('click', function(){ closeTier(); });
+  /* ทุกครั้งที่แก้ค่าเสร็จ (ออกจากช่อง/กด Enter) บังคับเด้งให้เลือก บันทึก หรือ ยกเลิก ก่อน */
+  $('tierModal').addEventListener('change', function(e){
+    var t = e.target; if (state.admin && tierDirty && t && t.getAttribute && t.getAttribute('data-tf')) showTierPrompt();
+  });
+  $('tierModal').addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && state.admin && tierDirty && e.target && e.target.getAttribute && e.target.getAttribute('data-tf')) { e.preventDefault(); e.target.blur(); showTierPrompt(); }
+  });
   $('tierModal').addEventListener('click', function(e){
-    if (e.target === this) { closeTier(); return; }
-    var add = e.target.closest('[data-add]');
+    var add = e.target.closest('[data-add]');   // คลิกพื้นหลังไม่ปิดแล้ว ต้องกดปุ่ม ปิด เท่านั้น
+
     if (add && state.admin) {
       var m = add.getAttribute('data-add'), list = tiers[m], last = list.length ? list[list.length - 1][1] : 100;
       list.push(['เทียร์ ' + (list.length + 1), last]);
-      saveTiers(); renderTiers();
+      saveTiers(); renderTiers(); showTierPrompt();
       var sc = add.closest('.tier-scroll'); if (sc) sc.scrollTop = sc.scrollHeight;
-      var ins = $(TMODES[m].tb).querySelectorAll('input[data-tf="name"]'); if (ins.length) { ins[ins.length - 1].focus(); ins[ins.length - 1].select(); }
+      
       return;
     }
     var del = e.target.closest('[data-tdel]');
     if (del && state.admin) {
       var dm = del.getAttribute('data-m'), di = parseInt(del.getAttribute('data-i'), 10);
       var removed = tiers[dm].splice(di, 1)[0];
-      saveTiers(); renderTiers(); toast('ลบ ' + (removed && removed[0] ? removed[0] : 'เทียร์') + ' แล้ว');
+      saveTiers(); renderTiers(); showTierPrompt();
     }
   });
   $('tierModal').addEventListener('input', function(e){
@@ -1238,25 +1370,79 @@ html.lock,html.lock body{overflow:hidden}
     else { var n = Math.max(0, Math.min(9999, Math.round(Number(t.value) || 0))); row[1] = n; updateBars(); }
     saveTiers();
   });
-  $('tierAdminNote').textContent = USING_FB ? 'โหมดแอดมิน · แก้ชื่อเทียร์และความเร็วได้เลย บันทึกอัตโนมัติ ทุกคนเห็นตรงกัน' : 'โหมดแอดมิน · แก้ไขได้เลย บันทึกอัตโนมัติ (ยังไม่ได้เชื่อม Firebase จึงเก็บในเบราว์เซอร์นี้)';
   Store.subscribe('tiers', function(v){
-    if (!$('tierModal').hidden && state.admin) return;   // กำลังแก้อยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
-    tiers = validTiers(v) ? v : clone(TIERS_FILE);
+    tiersSaved = validTiers(v) ? clone(v) : clone(TIERS_FILE);
+    if (!$('tierModal').hidden && state.admin && tierDirty) return;   // กำลังแก้ฉบับร่างอยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
+    tiers = clone(tiersSaved);
     renderTiers();
   });
-  renderTiers();
+  renderTiers(); syncTierBtns();
+
+  /* ----- ป้ายประกาศวิ่ง (แอดมินตั้งข้อความได้) ----- */
+  var noticeData = {}, MQ_SPEED = 45, mqW = 0;   // MQ_SPEED = ความเร็วเป็นพิกเซล/วินาที ยิ่งน้อยยิ่งช้า
+  function noticeText(){ return (noticeData && typeof noticeData.text === 'string') ? noticeData.text.trim() : ''; }
+  function buildMarquee(){
+    var view = $('noticeView'), track = $('noticeTrack'), text = noticeText();
+    track.style.animation = 'none';
+    if (!text) { track.innerHTML = ''; return; }
+    var unit = text.split(/\n+/).map(function(t){ return t.trim(); }).filter(Boolean).map(function(t){
+      return '<span class="mq-i">' + esc(t) + '</span>';
+    }).join('');
+    track.innerHTML = '<div class="mq-g">' + unit + '</div>';
+    var w = track.firstChild.offsetWidth, vw = view.clientWidth;
+    if (!w || !vw) return;   // ยังมองไม่เห็น รอ ResizeObserver เรียกใหม่
+    var n = Math.max(1, Math.ceil(vw / w)), g = new Array(n + 1).join(unit);
+    track.innerHTML = '<div class="mq-g">' + g + '</div><div class="mq-g" aria-hidden="true">' + g + '</div>';
+    track.style.animation = '';
+    track.style.animationDuration = Math.max(15, Math.round(w * n / MQ_SPEED)) + 's';
+  }
+  function renderNotice(){
+    var text = noticeText();
+    var isAdm = state.admin === true;
+    $('notice').hidden = !text && !isAdm;
+    $('noticeEdit').hidden = !isAdm;
+    $('noticeEmpty').hidden = !isAdm || !!text;
+    $('noticeView').hidden = !text;
+    $('noticeSr').textContent = text;
+    buildMarquee();
+  }
+  if (window.ResizeObserver) new ResizeObserver(function(){
+    var w = $('noticeView').clientWidth;
+    if (Math.abs(w - mqW) > 2) { mqW = w; buildMarquee(); }
+  }).observe($('noticeView'));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildMarquee);
+  function openNotice(){
+    if (!state.admin) return;
+    $('n-text').value = noticeText(); $('noticeErr').hidden = true;
+    $('noticeModal').hidden = false; $('n-text').focus();
+  }
+  function closeNotice(){ $('noticeModal').hidden = true; }
+  $('btnNotice').addEventListener('click', openNotice);
+  $('noticeEdit').addEventListener('click', openNotice);
+  $('btnNoticeCancel').addEventListener('click', closeNotice);
+  $('btnNoticeClear').addEventListener('click', function(){ $('n-text').value = ''; $('n-text').focus(); });
+  $('noticeForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!state.admin) return;
+    var t = $('n-text').value.split(/\n/).map(function(x){ return x.trim(); }).filter(Boolean).join('\n');
+    if (t.length > 500) { var el = $('noticeErr'); el.textContent = 'ข้อความยาวเกิน 500 ตัวอักษร'; el.hidden = false; return; }
+    Store.set('notice', {text: t});
+    closeNotice(); toast(t ? 'บันทึกประกาศแล้ว' : 'ปิดป้ายประกาศแล้ว');
+  });
 
   document.addEventListener('keydown', function(e){
     if (e.key !== 'Escape') return;
     if (!$('loginModal').hidden) closeLogin();
     else if (!$('lightbox').hidden) closeLightbox();
-    else if (!$('tierModal').hidden) closeTier();
+    else if (!$('tierModal').hidden) { /* เทียร์: ปิดได้ด้วยปุ่ม ปิด เท่านั้น */ }
+    else if (!$('noticeModal').hidden) closeNotice();
     else if (!$('linkModal').hidden) closeLinkForm();
     else if (!$('formModal').hidden) closeForm();
   });
 
   $('adminNote').textContent = USING_FB ? 'ข้อมูลทั้งหมดซิงก์กับ Firebase ทุกคนเห็นตรงกันแบบเรียลไทม์' : 'ยังไม่ได้เชื่อม Firebase · ข้อมูลที่แก้จะเก็บในเบราว์เซอร์เครื่องนี้เท่านั้น';
   $('btnReset').hidden = USING_FB;
+  Store.subscribe('notice', function(v){ noticeData = (v && typeof v === 'object') ? v : {}; renderNotice(); });
   Store.subscribe('links', function(v){ linksData = (v && typeof v === 'object') ? v : {}; applyLinks(); });
   Store.subscribe('items', function(v){
     state.items = Array.isArray(v) ? v : (USING_FB ? [] : seed());
@@ -1318,6 +1504,18 @@ html.lock,html.lock body{overflow:hidden}
     if(t<1)requestAnimationFrame(tick);else setTimeout(done,350);
   }
   requestAnimationFrame(tick);
+})();
+</script>
+
+<script>
+(function(){
+  function ok(e){ var t = e.target; return t && t.closest && t.closest('input,textarea,select,[contenteditable]'); }
+  ['copy','cut','selectstart','contextmenu','dragstart'].forEach(function(ev){
+    document.addEventListener(ev, function(e){ if (!ok(e)) e.preventDefault(); }, true);
+  });
+  document.addEventListener('keydown', function(e){
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && ['a','c','x','s','u'].indexOf((e.key || '').toLowerCase()) > -1 && !ok(e)) e.preventDefault();
+  }, true);
 })();
 </script>
 </body>
