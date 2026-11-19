@@ -232,8 +232,8 @@ textarea{resize:vertical;min-height:84px}
 /* board */
 .board-wrap{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
 .board-scroll{overflow-x:auto}
-.board{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 132px;min-width:920px}
-.board.admin{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 132px 132px;min-width:1050px}
+.board{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 224px;min-width:1012px}
+.board.admin{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 224px 132px;min-width:1142px}
 .head,.row{display:grid;grid-template-columns:var(--cols);gap:0 16px;align-items:center;padding-inline:18px}
 .head{padding-block:12px;border-bottom:1px solid var(--line-strong);color:var(--muted);font-size:13px;font-weight:500;letter-spacing:.02em;background:#100e0c}
 .board:not(.admin) .h-act{display:none}
@@ -254,6 +254,40 @@ textarea{resize:vertical;min-height:84px}
 .t-main{font-family:var(--font-plate);font-weight:600;font-size:15px;font-variant-numeric:tabular-nums;display:block}
 .t-sub{color:var(--muted);font-size:13px}
 .c-act{display:flex;flex-wrap:wrap;gap:6px}
+/* หัวข้อคอลัมน์ "แจ้งปัญหาอีกรอบ" ในหมวดดำเนินการสำเร็จ (แทนคอลัมน์เวลา) */
+.gi-done{display:grid;grid-template-columns:var(--cols);gap:0 16px;padding-inline:18px;align-items:center}
+.gi-done::after{display:none}
+.gi-left{grid-column:1/6;display:flex;align-items:center;gap:10px;min-width:0}
+.gi-left::after{content:"";flex:1;height:1px;background:var(--line)}
+.gi-col{grid-column:6;color:var(--muted);font-size:13px;font-weight:500;letter-spacing:.02em;white-space:nowrap}
+.rereport{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:inherit;font-weight:700;font-size:14px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:#ffd2ad;cursor:pointer;white-space:nowrap;box-shadow:0 0 12px rgba(255,122,26,.28);transition:transform .2s var(--ease),box-shadow .25s,background .2s,border-color .2s}
+.rereport svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.rereport:hover{background:rgba(255,122,26,.12);box-shadow:0 0 18px rgba(255,122,26,.5)}
+.rereport:active{transform:scale(.96)}
+.st-done .pill{background:transparent;border-color:transparent;padding-inline:0}
+.st-done .st-select{background-color:transparent;border-color:var(--line-strong)}
+.rr-modal{width:min(520px,100%);border-color:rgba(255,122,26,.7);border-top:6px solid var(--accent);background:linear-gradient(180deg,rgba(255,122,26,.16),transparent 55%),var(--surface);box-shadow:0 0 0 4px rgba(255,122,26,.08),0 24px 60px rgba(0,0,0,.6),0 0 40px rgba(255,122,26,.2);text-align:center;justify-items:center;padding:28px 26px 24px}
+.rr-ico{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:rgba(255,122,26,.18);border:1.5px solid var(--accent)}
+.rr-ico svg{width:28px;height:28px;fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.rr-modal h2{font-size:22px;color:#ffb070}
+.rr-modal p{margin:0;font-size:16px;line-height:1.7;color:var(--fg)}
+.rr-modal p b{color:#ffb070;font-weight:700}
+.rr-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:100%;margin-top:6px}
+.rr-ok{min-width:230px;font-family:inherit;font-weight:700;font-size:15px;padding:11px 20px;border-radius:999px;border:1px solid transparent;cursor:pointer;background:linear-gradient(180deg,#ff3b5c,#ff0a2e);color:#fff;text-shadow:0 0 8px rgba(255,255,255,.55);box-shadow:0 0 14px rgba(255,10,46,.85),0 0 30px rgba(255,10,46,.5),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .2s var(--ease),box-shadow .25s,filter .2s,background .3s,color .3s}
+.rr-ok:hover:not(:disabled){filter:brightness(1.12);box-shadow:0 0 20px rgba(255,10,46,1),0 0 44px rgba(255,10,46,.7);transform:translateY(-1px)}
+.rr-ok:disabled{background:#0a0908;color:#6b645a;text-shadow:none;border-color:#1f1c18;box-shadow:none;cursor:not-allowed;filter:none}
+.board-note[hidden]{display:none}
+.board-note{margin-top:18px;display:flex;gap:14px;align-items:flex-start;padding:16px 20px;border:1px solid rgba(255,122,26,.7);border-left:6px solid var(--accent);background:linear-gradient(100deg,rgba(255,122,26,.26),rgba(255,122,26,.09));border-radius:12px;font-size:16px;line-height:1.65;color:#fff;box-shadow:0 0 0 4px rgba(255,122,26,.08),0 8px 28px rgba(255,122,26,.22)}
+.board-note svg{flex:none;width:24px;height:24px;margin-top:2px;fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.board-note p{margin:0}.board-note b{color:#ffb070;font-weight:700}
+.board-note.blue{border-color:rgba(108,182,255,.7);border-left-color:var(--st-review);background:linear-gradient(100deg,rgba(108,182,255,.26),rgba(108,182,255,.09));box-shadow:0 0 0 4px rgba(108,182,255,.08),0 8px 28px rgba(108,182,255,.22)}
+.board-note.blue svg{stroke:var(--st-review)}
+.board-note.blue b{color:#a9d5ff}
+.rereport{position:relative;overflow:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+.rr-in{position:relative;display:inline-flex;align-items:center;gap:7px}
+.rr-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#ff7a1a,#ff9a45);pointer-events:none}
+.rereport.holding{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.45);box-shadow:0 0 20px rgba(255,122,26,.6)}
+.rereport:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .thumb{width:104px;height:66px;max-width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--line-strong);background:#0f0d0b;padding:0;cursor:zoom-in;position:relative;display:block}
 .thumb:hover{border-color:var(--accent)}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
@@ -307,6 +341,7 @@ textarea{resize:vertical;min-height:84px}
   .row:last-child{border-bottom:1px solid var(--line)}
   .board.admin .row{grid-template-areas:"img car" "img issue" "status status" "time time" "act act"}
   .c-no{display:none}
+  .gi-done{display:block;padding:16px 2px 8px}.gi-col{display:none}.gi-left{grid-column:auto}
   .no-inline{display:inline}
   .c-img{grid-area:img}.c-car{grid-area:car}.c-issue{grid-area:issue}.c-status{grid-area:status}.c-time{grid-area:time;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}.c-act{grid-area:act}
   .t-main{display:inline}
@@ -603,6 +638,11 @@ img{-webkit-user-drag:none;user-drag:none}
     </div>
   </section>
 
+
+  <div class="board-note" id="progNote" role="note" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><p><b>รถที่อยู่ในหมวด กำลังดำเนินการ</b> อาจใช้เวลาแก้ไขแตกต่างกันไปในแต่ละคัน และอาจเกิดความล่าช้าได้จากหลายสาเหตุ โดยช่างจะเร่งดำเนินการแก้ไขให้เร็วที่สุด ขอความร่วมมือผู้เล่นงดแจ้งซ้ำ หากรถของท่านอยู่ในหมวดดังกล่าวเเล้ว</p></div>
+
+  <div class="board-note blue" id="reviewNote" role="note" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><p><b>รถที่อยู่ในหมวด รอตรวจสอบ</b> จะเป็นรถที่ต้องรอเวลาในการพิจารณาในการเเก้ไขปัญหา อาจจะมีบางคันที่ได้ไปต่อ หรือ ไม่ได้รับการเเก้ไข พูดง่ายๆก็คือด่านเเรกในการคัดกรองรถนั่นเอง</p></div>
+
   <div class="board-wrap">
     <div class="board-scroll">
       <div class="board" id="board" role="table" aria-label="คิวแจ้งปัญหารถ">
@@ -612,7 +652,7 @@ img{-webkit-user-drag:none;user-drag:none}
           <div role="columnheader">รหัสรถ</div>
           <div role="columnheader">ปัญหาที่แจ้ง</div>
           <div role="columnheader">สถานะ</div>
-          <div role="columnheader">เวลา</div>
+          <div role="columnheader" id="hTime">เวลา</div>
           <div role="columnheader" class="h-act">จัดการ</div>
         </div>
         <div id="rows" role="rowgroup"></div>
@@ -641,6 +681,18 @@ img{-webkit-user-drag:none;user-drag:none}
       <button class="btn primary" type="submit">บันทึก</button>
     </div>
   </form>
+</div>
+
+<div class="overlay" id="rrModal" hidden>
+  <div class="modal rr-modal" role="dialog" aria-modal="true" aria-labelledby="rrTitle">
+    <div class="rr-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+    <h2 id="rrTitle">คำเตือน !!! โปรดอ่านก่อนแจ้ง</h2>
+    <p><b>กรณีแจ้งปัญหาอีกรอบ</b> ให้ตรวจสอบรถของท่านก่อน บางครั้งอาจใช้เวลาประมาณ 1 รี เนื่องจากต้องรอทาง DEV ลงให้ หากรอแล้วยังไม่ได้รับการแก้ไขภายใน 24 ชั่วโมง นับจากประกาศในช่องหมวดดำเนินการสำเร็จ ค่อยกดแจ้งปัญหามาอีกรอบ ขอบคุณครับ</p>
+    <div class="rr-actions">
+      <button type="button" class="btn" id="rrCancel">ยกเลิก</button>
+      <button type="button" class="rr-ok" id="rrOk" disabled>กรุณารอ 10 วินาที</button>
+    </div>
+  </div>
 </div>
 
 <div class="overlay" id="linkModal" hidden>
@@ -807,6 +859,16 @@ img{-webkit-user-drag:none;user-drag:none}
   var pad = function(n){ return String(n).padStart(2,'0'); };
   var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); };
   var fmtNo = function(n){ return '#' + String(n).padStart(3,'0'); };
+  /* เลขคิวแยกตามหมวด: นับ 1,2,3… จากบนลงล่างในแต่ละหมวด รายการใหม่ไปต่อท้ายล่างสุด */
+  var dispNo = {};
+  function cmpGroup(s){ return s === 'done' ? function(a,b){ return (a.doneAt||0) - (b.doneAt||0); } : function(a,b){ return a.at - b.at; }; }
+  function calcNos(){
+    dispNo = {};
+    ORDER.forEach(function(s){
+      state.items.filter(function(i){ return i.status === s; }).sort(cmpGroup(s)).forEach(function(it, idx){ dispNo[it.id] = idx + 1; });
+    });
+  }
+  function numOf(it){ return dispNo[it.id] || it.no; }
   var startToday = function(){ var d = new Date(); d.setHours(0,0,0,0); return d.getTime(); };
   var ago = function(m){ return Date.now() - m*MIN; };
   var todayAgo = function(m){ return Math.max(Date.now() - m*MIN, startToday() + MIN); };
@@ -1054,7 +1116,7 @@ img{-webkit-user-drag:none;user-drag:none}
       if (state.filter === 'review' && it.status !== 'review') return false;
       if (state.filter === 'done' && it.status !== 'done') return false;
       if (q) {
-        var hay = [it.code, it.reporter, it.issue, String(it.no), String(it.no).padStart(3,'0')].join(' ').toLowerCase();
+        var hay = [it.code, it.reporter, it.issue, String(numOf(it)), String(numOf(it)).padStart(3,'0')].join(' ').toLowerCase();
         if (hay.indexOf(q) === -1) return false;
       }
       return true;
@@ -1080,12 +1142,14 @@ img{-webkit-user-drag:none;user-drag:none}
       act = '<div class="c-act" role="cell">' + act + '</div>';
     }
     return '<div class="row ' + st.cls + '" role="row">'
-      + '<div class="c-no" role="cell"><span class="no">' + fmtNo(it.no) + '</span></div>'
+      + '<div class="c-no" role="cell"><span class="no">' + fmtNo(numOf(it)) + '</span></div>'
       + '<div class="c-img" role="cell">' + thumb + '</div>'
-      + '<div class="c-car" role="cell"><div class="plate-line"><span class="no no-inline">' + fmtNo(it.no) + '</span><span class="plate">' + esc(it.code) + '</span></div></div>'
+      + '<div class="c-car" role="cell"><div class="plate-line"><span class="no no-inline">' + fmtNo(numOf(it)) + '</span><span class="plate">' + esc(it.code) + '</span></div></div>'
       + '<div class="c-issue" role="cell"><div class="issue">' + esc(it.issue) + '</div>' + (it.reporter ? '<div class="reporter">แจ้งโดย ' + esc(it.reporter) + '</div>' : '') + '</div>'
       + '<div class="c-status" role="cell">' + statusCell + '</div>'
-      + '<div class="c-time" role="cell"><span class="t-main">' + timeMain + '</span>' + (timeSub ? '<span class="t-sub">' + esc(timeSub) + '</span>' : '') + '</div>'
+      + (it.status === 'done'
+          ? '<div class="c-time" role="cell"><button type="button" class="rereport" data-act="rereport" aria-label="กดค้างเพื่อแจ้งปัญหาอีกรอบ รถ ' + esc(it.code) + '"><span class="rr-fill"></span><span class="rr-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>กดค้างเพื่อแจ้งปัญหาอีกรอบ</span></button></div>'
+          : '<div class="c-time" role="cell"><span class="t-main">' + timeMain + '</span>' + (timeSub ? '<span class="t-sub">' + esc(timeSub) + '</span>' : '') + '</div>')
       + act
       + '</div>';
   }
@@ -1103,13 +1167,20 @@ img{-webkit-user-drag:none;user-drag:none}
     }).join('');
 
     $('board').classList.toggle('admin', state.admin);
+    calcNos();
+    $('progNote').hidden = state.filter !== 'prog';
+    $('reviewNote').hidden = state.filter !== 'review';
     var list = visible();
+    var onlyDone = list.length > 0 && list.every(function(i){ return i.status === 'done'; });
+    $('hTime').textContent = onlyDone ? 'แจ้งปัญหาอีกรอบ' : 'เวลา';
     var html = '';
     ORDER.forEach(function(s){
       var g = list.filter(function(i){ return i.status === s; });
       if (!g.length) return;
-      g.sort(s === 'done' ? function(a,b){ return (b.doneAt||0) - (a.doneAt||0); } : function(a,b){ return a.at - b.at; });
-      html += '<div class="group ' + ST[s].cls + '" role="row"><div class="group-in" role="cell"><i class="gdot"></i><span class="gname">' + ST[s].label + '</span><span class="gcount">' + g.length + ' คัน</span></div></div>';
+      g.sort(cmpGroup(s));
+      html += s === 'done'
+        ? '<div class="group ' + ST[s].cls + '" role="row"><div class="group-in gi-done" role="cell"><div class="gi-left"><i class="gdot"></i><span class="gname">' + ST[s].label + '</span><span class="gcount">' + g.length + ' คัน</span></div>' + (onlyDone ? '' : '<div class="gi-col">แจ้งปัญหาอีกรอบ</div>') + '</div></div>'
+        : '<div class="group ' + ST[s].cls + '" role="row"><div class="group-in" role="cell"><i class="gdot"></i><span class="gname">' + ST[s].label + '</span><span class="gcount">' + g.length + ' คัน</span></div></div>';
       html += g.map(rowHtml).join('');
     });
     if (!state.ready) {
@@ -1229,6 +1300,7 @@ img{-webkit-user-drag:none;user-drag:none}
     if (f) { var fv = f.getAttribute('data-f'); state.filter = fv; render(); return; }
     var a = e.target.closest('[data-act]'); if (!a) return;
     var act = a.getAttribute('data-act'), id = a.getAttribute('data-id');
+    if (act === 'rereport') return;   /* ต้องกดค้าง ไม่ทำงานจากการคลิกครั้งเดียว */
     if (act === 'zoom') openLightbox(id);
     else if (act === 'edit') openForm(id);
     else if (act === 'del') { state.confirmId = id; render(); }
@@ -1268,7 +1340,7 @@ img{-webkit-user-drag:none;user-drag:none}
   function openForm(id){
     state.editId = id || null;
     var it = id ? find(id) : null;
-    $('formTitle').textContent = it ? 'แก้ไขรายการ ' + fmtNo(it.no) : 'เพิ่มรายการแจ้ง';
+    $('formTitle').textContent = it ? 'แก้ไขรายการ ' + fmtNo(numOf(it)) : 'เพิ่มรายการแจ้ง';
     $('f-code').value = it ? it.code : '';
     $('f-reporter').value = it ? (it.reporter || '') : '';
     $('f-issue').value = it ? it.issue : '';
@@ -1495,8 +1567,76 @@ img{-webkit-user-drag:none;user-drag:none}
     closeNotice(); toast(items.length ? 'บันทึกประกาศแล้ว' : 'ปิดป้ายประกาศแล้ว');
   });
 
+  /* ----- ป๊อปอัปเตือนก่อนแจ้งปัญหาอีกรอบ (คูลดาวน์ 10 วินาที) ----- */
+  var RR_SEC = 10, rrTimer = null;
+  function closeRR(){
+    clearInterval(rrTimer); rrTimer = null; $('rrModal').hidden = true;
+    document.documentElement.style.overflow = ''; document.body.style.paddingRight = '';
+  }
+  function openRR(){
+    var left = RR_SEC, ok = $('rrOk');
+    clearInterval(rrTimer);
+    ok.disabled = true; ok.textContent = 'กรุณารอ ' + left + ' วินาที';
+    var sbw = window.innerWidth - document.documentElement.clientWidth;   /* ซ่อนแถบเลื่อนหลังเว็บ + กันหน้าเว็บกระตุก */
+    document.documentElement.style.overflow = 'hidden';
+    if (sbw > 0) document.body.style.paddingRight = sbw + 'px';
+    $('rrModal').hidden = false;
+    $('rrCancel').focus();
+    rrTimer = setInterval(function(){
+      left--;
+      if (left > 0) { ok.textContent = 'กรุณารอ ' + left + ' วินาที'; return; }
+      clearInterval(rrTimer); rrTimer = null;
+      ok.disabled = false; ok.textContent = 'ยืนยันแจ้งปัญหาอีกรอบ';
+    }, 1000);
+  }
+  /* กดเมาส์ค้างที่ปุ่ม "กดค้างเพื่อแจ้ง" ครบเวลา จึงเปิดป๊อปอัปเตือน */
+  var HOLD_MS = 2000, holdBtn = null, holdRaf = 0, holdT0 = 0;
+  /* เติมสีด้วย JS (requestAnimationFrame) ไม่พึ่ง CSS transition เพราะเครื่องที่ปิดแอนิเมชันจะทำให้เต็มทันที */
+  function holdTick(now){
+    if (!holdBtn) return;
+    var p = Math.min(1, (now - holdT0) / HOLD_MS);
+    holdBtn.firstElementChild.style.width = (p * 100) + '%';
+    if (p >= 1) { holdStop(); openRR(); return; }
+    holdRaf = requestAnimationFrame(holdTick);
+  }
+  function holdStart(b){
+    holdStop();
+    holdBtn = b; b.classList.add('holding');
+    holdT0 = performance.now();
+    holdRaf = requestAnimationFrame(holdTick);
+  }
+  function holdStop(){
+    cancelAnimationFrame(holdRaf); holdRaf = 0;
+    if (holdBtn) { holdBtn.classList.remove('holding'); holdBtn.firstElementChild.style.width = '0'; holdBtn = null; }
+  }
+  document.addEventListener('pointerdown', function(e){
+    var b = e.target.closest && e.target.closest('.rereport');
+    if (!b || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    holdStart(b);
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(t){ document.addEventListener(t, function(e){
+    if (!holdBtn) return;
+    if (t === 'pointerleave' && e.target !== holdBtn) return;
+    holdStop();
+  }, true); });
+  document.addEventListener('keydown', function(e){
+    var b = e.target.closest && e.target.closest('.rereport');
+    if (b && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); if (!e.repeat) holdStart(b); }
+  });
+  document.addEventListener('keyup', function(e){ if (e.key === 'Enter' || e.key === ' ') holdStop(); });
+  document.addEventListener('contextmenu', function(e){ if (e.target.closest && e.target.closest('.rereport')) e.preventDefault(); });
+  $('rrCancel').addEventListener('click', closeRR);
+  $('rrModal').addEventListener('click', function(e){ if (e.target === this) closeRR(); });
+  $('rrOk').addEventListener('click', function(){
+    if (this.disabled) return;
+    var u = effectiveLinks().report;
+    closeRR();
+    if (u) openUrl(u); else toast('ปุ่มนี้ยังไม่เปิดใช้งานในตอนนี้');
+  });
+
   document.addEventListener('keydown', function(e){
     if (e.key !== 'Escape') return;
+    if (!$('rrModal').hidden) { closeRR(); return; }
     if (!$('loginModal').hidden) closeLogin();
     else if (!$('lightbox').hidden) closeLightbox();
     else if (!$('tierModal').hidden) { /* เทียร์: ปิดได้ด้วยปุ่ม ปิด เท่านั้น */ }
