@@ -83,15 +83,15 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .eyebrow{margin:0;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-weight:600;font-size:14px;letter-spacing:.03em;color:var(--accent)}
 h1{margin:8px 0 8px;font-weight:700;font-size:clamp(34px,6vw,56px);line-height:1.25;text-wrap:balance}
 .sub{margin:0;color:var(--muted);max-width:52ch;font-size:16px}
-.actions{display:grid;gap:14px}
-.action{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:16px;text-decoration:none;color:var(--fg);min-width:0}
-.action-ico{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;flex:none}
-.action-ico svg.i{width:26px;height:26px}
+.actions{display:grid;gap:11px}
+.action{display:flex;align-items:center;gap:14px;padding:13px 16px;border-radius:14px;text-decoration:none;color:var(--fg);min-width:0}
+.action-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex:none}
+.action-ico svg.i{width:22px;height:22px}
 .action-txt{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
-.action-txt b{font-weight:700;font-size:19px;line-height:1.25}
-.action-txt small{font-size:13.5px;line-height:1.35}
-.action .go{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none}
-.action .go svg.i{width:18px;height:18px}
+.action-txt b{font-weight:700;font-size:17px;line-height:1.25}
+.action-txt small{font-size:12.5px;line-height:1.35}
+.action .go{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}
+.action .go svg.i{width:16px;height:16px}
 .action.primary{background:linear-gradient(135deg,#ff8f33,#ff6a00);border:2px solid #ffa35c;color:var(--accent-ink);box-shadow:0 12px 32px rgba(255,106,0,.32),inset 0 1px 0 rgba(255,255,255,.28)}
 .action.primary .action-ico{background:var(--accent-ink);color:#ff9440}
 .action.primary small{color:rgba(27,14,3,.8)}
@@ -102,6 +102,15 @@ h1{margin:8px 0 8px;font-weight:700;font-size:clamp(34px,6vw,56px);line-height:1
 .action.secondary small{color:#cdc3b5}
 .action.secondary .go{background:var(--accent-soft);color:var(--accent)}
 .action.secondary:hover{background:linear-gradient(180deg,#27211a,#1a1612);box-shadow:0 12px 30px rgba(0,0,0,.45),0 0 28px rgba(255,122,26,.28)}
+
+.action.remap{background:linear-gradient(135deg,#2b2110,#18130c);border:2px solid #ffc247;box-shadow:0 10px 26px rgba(0,0,0,.45),0 0 0 4px rgba(255,194,71,.09)}
+.action.remap .action-ico{background:linear-gradient(135deg,#ffd36b,#f0a216);color:#2a1c04}
+.action.remap small{color:#e6d6b0}
+.action.remap .go{background:rgba(255,194,71,.16);color:#ffc247}
+.action.remap:hover{background:linear-gradient(135deg,#342814,#1e170d);box-shadow:0 10px 26px rgba(0,0,0,.45),0 0 28px rgba(255,194,71,.3)}
+.action.remap::before{background:radial-gradient(260px circle at var(--px,50%) var(--py,50%),rgba(255,194,71,.28),transparent 60%)}
+.action.remap:hover .go{background:#ffc247;color:#2a1c04}
+.action.remap .tag{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:99px;background:#ffc247;color:#2a1c04;font-size:11px;font-weight:700;vertical-align:2px}
 .hazard{height:6px;border-radius:3px;background:repeating-linear-gradient(-45deg,var(--accent) 0 10px,var(--bg) 10px 20px)}
 
 /* buttons, fields */
@@ -201,7 +210,9 @@ textarea{resize:vertical;min-height:84px}
 @media (max-width:560px){.notice-tag span{display:none}.notice-tag{padding:7px 9px}}
 
 /* toolbar */
-.toolbar{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
+.toolbar{margin-top:22px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.toolbar .chips{max-width:100%}
+.toolbar-top{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
 .chips{display:inline-flex;flex-wrap:wrap;gap:2px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .chip{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border-radius:9px;border:0;background:transparent;cursor:pointer;font-weight:500;font-size:15px}
 .chip:hover{background:var(--surface-2)}
@@ -210,7 +221,7 @@ textarea{resize:vertical;min-height:84px}
 .chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .chip[aria-pressed="true"] b{color:var(--accent-ink);background:rgba(27,14,3,.18)}
 .chip[aria-pressed="true"] .dot{background:var(--accent-ink)}
-.search{position:relative;flex:1 1 240px;max-width:360px;margin-left:auto}
+.search{position:relative;width:100%}
 .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
 .search input{padding-left:38px;background:var(--surface)}
 
@@ -233,7 +244,7 @@ textarea{resize:vertical;min-height:84px}
 .board-wrap{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
 .board-scroll{overflow-x:auto}
 .board{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 224px;min-width:1012px}
-.board.admin{--cols:64px 104px minmax(170px,1.1fr) minmax(230px,2fr) 184px 224px 132px;min-width:1142px}
+.board.admin{--cols:64px 104px minmax(100px,1fr) minmax(130px,2fr) 156px 224px 84px;min-width:994px}
 .head,.row{display:grid;grid-template-columns:var(--cols);gap:0 16px;align-items:center;padding-inline:18px}
 .head{padding-block:12px;border-bottom:1px solid var(--line-strong);color:var(--muted);font-size:13px;font-weight:500;letter-spacing:.02em;background:#100e0c}
 .board:not(.admin) .h-act{display:none}
@@ -387,6 +398,9 @@ h1{font-size:clamp(32px,5.6vw,54px);line-height:1.15;letter-spacing:-.01em;backg
 .chips{padding:5px;border-radius:14px;background:rgba(20,18,16,.8);backdrop-filter:blur(8px)}
 .chip{transition:background .25s,color .25s,transform .2s var(--ease),box-shadow .3s}.chip:hover{transform:translateY(-1px)}.chip:active{transform:scale(.96)}
 .chip[aria-pressed="true"]{box-shadow:0 6px 18px -4px rgba(255,122,26,.55)}
+.chip[aria-pressed="true"][class*="st-"]{background:var(--c);color:#0c1118;box-shadow:0 6px 18px -4px rgba(255,255,255,.12);box-shadow:0 6px 18px -4px color-mix(in srgb,var(--c) 65%,transparent)}
+.chip[aria-pressed="true"][class*="st-"] b{color:#0c1118;background:rgba(0,0,0,.18)}
+.chip[aria-pressed="true"][class*="st-"] .dot{background:#0c1118;border:0}
 .search input{border-radius:14px;transition:box-shadow .25s,border-color .25s}.search:focus-within svg{color:var(--accent)}
 .btn,.mini{transition:transform .2s var(--ease),background .2s,box-shadow .25s}.btn:hover,.mini:hover{transform:translateY(-1px)}.btn:active,.mini:active{transform:scale(.96)}
 .btn.primary:hover{box-shadow:0 8px 22px -6px rgba(255,122,26,.7)}
@@ -426,7 +440,7 @@ h1{font-size:clamp(32px,5.6vw,54px);line-height:1.15;letter-spacing:-.01em;backg
 /* one page-load sequence */
 .hero .eyebrow,.hero h1,.hero .sub,.stats,.meter,.meter-txt,.action{animation:rise .8s var(--ease) both}
 .hero h1{animation-delay:.08s}.hero .sub{animation-delay:.16s}.stats{animation-delay:.24s}.meter{animation-delay:.3s}.meter-txt{animation-delay:.34s}
-.action.primary{animation-delay:.2s}.action.secondary{animation-delay:.32s}
+.action.primary{animation-delay:.2s}.action.secondary{animation-delay:.32s}.action.remap{animation-delay:.44s}
 .boot #rows>*{animation:rise .6s var(--ease) both}
 .boot #rows>*:nth-child(1){animation-delay:0.39s}.boot #rows>*:nth-child(2){animation-delay:0.44s}.boot #rows>*:nth-child(3){animation-delay:0.48s}.boot #rows>*:nth-child(4){animation-delay:0.53s}.boot #rows>*:nth-child(5){animation-delay:0.57s}.boot #rows>*:nth-child(6){animation-delay:0.62s}.boot #rows>*:nth-child(7){animation-delay:0.67s}.boot #rows>*:nth-child(8){animation-delay:0.71s}.boot #rows>*:nth-child(9){animation-delay:0.75s}.boot #rows>*:nth-child(10){animation-delay:0.80s}.boot #rows>*:nth-child(11){animation-delay:0.84s}.boot #rows>*:nth-child(12){animation-delay:0.89s}.boot #rows>*:nth-child(13){animation-delay:0.93s}.boot #rows>*:nth-child(14){animation-delay:0.98s}
 
@@ -488,6 +502,64 @@ html.lock,html.lock body{overflow:hidden}
 .tier-open svg.i{width:18px;height:18px}
 .tier-open:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 12px 28px -6px rgba(255,106,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
 .tier-open:active{transform:scale(.96)}
+/* compare-model modal */
+.cmp-modal{position:relative;border:1px solid rgba(255,255,255,.12);background:#181210;box-shadow:0 24px 64px rgba(0,0,0,.6);width:min(1320px,100%);height:min(760px,calc(100dvh - 32px));grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:24px 26px 22px;overflow:hidden}
+.cmp-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cmp-x{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--line-strong);background:rgba(255,255,255,.05);color:var(--fg);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s,transform .25s var(--ease),border-color .2s}
+.cmp-x svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.cmp-x:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:rotate(90deg)}
+.cmp-wrap{min-height:0;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;background:#100c0a}
+.cmp-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:none;-ms-overflow-style:none}
+.cmp-scroll::-webkit-scrollbar{display:none;width:0;height:0}
+.cmp-table{width:100%;min-width:980px;border-collapse:separate;border-spacing:0;table-layout:fixed;font-size:14px;line-height:1.5;text-align:left}
+.cmp-table thead th{position:sticky;top:0;z-index:2;background:#241710;padding:14px 14px;text-align:center;vertical-align:middle;color:#ffb36b;font-size:12.5px;font-weight:700;letter-spacing:.08em;border-bottom:2px solid rgba(255,122,26,.6)}
+.cmp-table thead th+th{border-left:1px solid rgba(255,255,255,.06)}
+.cmp-table th:nth-child(1){width:22%}.cmp-table th:nth-child(2){width:17%}.cmp-table th:nth-child(3){width:19%}.cmp-table th:nth-child(4){width:14%}.cmp-table th:nth-child(5){width:28%}
+.cmp-table td{padding:14px 16px;vertical-align:middle;text-align:left;border-bottom:1px solid rgba(255,255,255,.06);transition:background .2s}
+.cmp-table td+td{border-left:1px solid rgba(255,255,255,.05)}
+.cmp-table tbody tr:nth-child(even) td{background:rgba(255,255,255,.028)}
+.cmp-table tbody tr:last-child td{border-bottom:0}
+.cmp-table tbody tr:hover td{background:rgba(255,122,26,.09)}
+.cmp-table tbody td:first-child{box-shadow:inset 3px 0 0 rgba(255,122,26,.55)}
+.cmp-name{display:flex;gap:11px;align-items:center;justify-content:flex-start;font-weight:700;font-size:15px;color:var(--fg);text-align:left}
+.cmp-no{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-family:var(--font-plate);font-weight:700;font-size:13px;background:linear-gradient(135deg,rgba(255,143,51,.28),rgba(255,106,0,.12));color:#ffb36b;border:1px solid rgba(255,122,26,.5)}
+.cmp-hit b{font-family:var(--font-display);font-size:15px;color:#ffc08a}
+.cmp-note{display:block;margin-top:3px;font-size:12px;font-weight:500;color:var(--muted)}
+.cmp-na{color:var(--muted)}
+.cmp-extra{display:grid;gap:7px;justify-items:start}
+.cmp-extra p{margin:0;white-space:pre-line;overflow-wrap:anywhere}
+.cmp-table tr.hl td{background:rgba(255,194,71,.075)}
+.cmp-table tr.hl td:first-child{box-shadow:inset 3px 0 0 #ffc247}
+.cmp-table tr.hl .cmp-no{background:linear-gradient(135deg,rgba(255,211,107,.3),rgba(240,162,22,.14));color:#ffc247;border-color:rgba(255,194,71,.65)}
+.cmp-table tr.hl:hover td{background:rgba(255,194,71,.14)}
+/* admin editing: พิมพ์ได้อิสระ ไม่มีกรอบบังคับ */
+.cmp-table td{overflow-wrap:anywhere}
+.cmp-table .tx,.cmp-table .cmp-hit b,.cmp-table .cmp-note,.cmp-table .cmp-name span:last-child{white-space:pre-wrap}
+.cmp-table .cmp-hit b{display:block}
+.cmp-table textarea.ed{display:block;width:calc(100% + 18px);margin:0 0 0 -9px;padding:6px 8px;border:1px solid transparent;border-radius:8px;background:transparent;box-shadow:none;resize:none;overflow:hidden;min-height:0;font:inherit;line-height:1.5;color:inherit;transition:background .2s,border-color .2s,box-shadow .2s}
+.cmp-table textarea.ed:hover{border-color:rgba(255,255,255,.14)}
+.cmp-table textarea.ed:focus{background:rgba(255,255,255,.05);border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,122,26,.18)}
+.cmp-table textarea.ed::placeholder{color:rgba(255,255,255,.3);font-weight:400}
+.cmp-table .cmp-name textarea.ed{flex:1;min-width:0;width:auto;margin:0;font-weight:700;font-size:15px}
+.cmp-table textarea.ed.e-hit{font-family:var(--font-display);font-weight:700;font-size:15px;color:#ffc08a}
+.cmp-table textarea.ed.e-note{font-size:12px;color:var(--muted)}
+.cmp-table textarea.ed.e-note,.cmp-table textarea.ed.e-hit+textarea.ed{margin-top:2px}
+.cmp-tools{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+.cmp-tools label{white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);cursor:pointer}
+.cmp-add{display:block;width:calc(100% - 24px);margin:12px;padding:11px;border:1px dashed var(--line-strong);border-radius:12px;background:none;color:var(--accent);font-weight:600;font-size:14px;cursor:pointer;transition:background .2s,border-color .2s}
+.cmp-add:hover{background:var(--accent-soft);border-color:var(--accent)}
+/* admin row actions: ไอคอนเล็ก ไม่รก */
+.c-act{flex-wrap:nowrap;gap:8px;justify-content:center;align-items:center}
+.act-ico{width:34px;height:34px;padding:0;flex:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:10px;border:1px solid var(--line-strong);background:rgba(255,255,255,.04);color:var(--fg);cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .2s var(--ease)}
+.act-ico svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.act-ico .al{display:none;font-size:13px;font-weight:600}
+.act-ico:hover{transform:translateY(-1px);background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.act-ico.danger{color:#ff8a80;border-color:rgba(255,107,94,.4)}
+.act-ico.danger:hover{background:rgba(255,107,94,.14);border-color:#ff6b5e;color:#ff6b5e}
+.act-ico.ok{background:rgba(255,107,94,.18);border-color:#ff6b5e;color:#ff8a80}
+@media (max-width:860px){.c-act{justify-content:flex-start}.act-ico{width:auto;height:38px;padding:0 14px}.act-ico .al{display:inline}}
+@media (max-width:640px){.cmp-modal{padding:16px}.cmp-head .tier-ttl p{display:none}}
+
 .tier-modal{border-color:rgba(255,255,255,.14);background:radial-gradient(760px 340px at 50% -12%,rgba(255,255,255,.07),transparent 70%),linear-gradient(100deg,#26160b 0%,#18120d 40%,#0e1419 60%,#0a1219 100%);width:min(1120px,100%);height:min(600px,calc(100dvh - 32px));grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:24px;overflow:hidden}
 .tier-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .tier-ttl{display:flex;align-items:center;gap:14px;min-width:0}
@@ -585,7 +657,7 @@ img{-webkit-user-drag:none;user-drag:none}
 
   <section class="hero">
     <div>
-      <p class="eyebrow">ติดตามสถานะรถ</p>
+      
       <h1>กระดานคิวแก้ไขปัญหารถ</h1>
       <p class="sub">ตรวจสอบคิวและความคืบหน้าของรถที่แจ้งปัญหา</p>
       <div class="stats" id="stats">
@@ -597,14 +669,19 @@ img{-webkit-user-drag:none;user-drag:none}
       <p class="meter-txt" id="meterTxt"></p>
     </div>
     <div class="actions">
-      <a class="action primary" id="actReport" role="link" tabindex="0">
+      <a class="action primary" id="actCars" role="link" tabindex="0">
+        <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></span>
+        <span class="action-txt"><b>ดูรหัสรายชื่อรถ</b><small id="subCars"></small></span>
+        <span class="go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a class="action secondary" id="actReport" role="link" tabindex="0">
         <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 3 20h18L12 4Z"/><path d="M12 10v4M12 17h.01"/></svg></span>
         <span class="action-txt"><b>แจ้งปัญหาการใช้งานรถ</b><small id="subReport"></small></span>
         <span class="go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
       </a>
-      <a class="action secondary" id="actCars" role="link" tabindex="0">
-        <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></span>
-        <span class="action-txt"><b>ดูรหัสรายชื่อรถ</b><small id="subCars"></small></span>
+      <a class="action remap" id="actRemap" role="link" tabindex="0" data-url="https://docs.google.com/forms/d/e/1FAIpQLSeC694_HVaBWYBjWKfUZU3d1DaTrOBECckohr7NBlZCUosGPg/viewform?usp=dialog">
+        <span class="action-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3H9z"/><path d="M15 4.5h2a2 2 0 0 1 2 2V19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
+        <span class="action-txt"><b>ลงทะเบียนจองคิวรีแมพรถประมูล</b><small>กรอกข้อมูลเพื่อจองคิวรับบริการรีแมพรถประมูล</small></span>
         <span class="go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
       </a>
     </div>
@@ -629,12 +706,15 @@ img{-webkit-user-drag:none;user-drag:none}
   </div>
 
   <section class="toolbar" aria-label="ตัวกรอง">
-    <div class="chips" id="chips"></div>
-    <button type="button" class="tier-open" id="actTier"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19a9 9 0 1 1 14.2 0"/><path d="m12 14 4-5"/><path d="M12 14h.01"/></svg><span>เทียร์ความเร็วรถ</span></button>
+    <div class="toolbar-top">
+      <div class="chips" id="chips"></div>
+      <button type="button" class="tier-open" id="actTier"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.9 19a9 9 0 1 1 14.2 0"/><path d="m12 14 4-5"/><path d="M12 14h.01"/></svg><span>เทียร์ความเร็วรถ</span></button>
+      <button type="button" class="tier-open" id="actCmp"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span>ตารางเทียบโมเดล</span></button>
+    </div>
     <div class="search">
       <label class="sr" for="q">ค้นหา</label>
       <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="ค้นหารหัสรถหรือผู้แจ้ง" autocomplete="off">
+      <input id="q" type="search" placeholder="ค้นหารหัสรถหรือผู้แจ้ง · ค้นได้ทุกหมวด" autocomplete="off">
     </div>
   </section>
 
@@ -741,6 +821,23 @@ img{-webkit-user-drag:none;user-drag:none}
       </section>
     </div>
     <div class="tier-admin" id="tierAdmin" hidden><p id="tierAdminNote"></p></div>
+  </div>
+</div>
+
+<div class="overlay" id="cmpModal" hidden>
+  <div class="modal cmp-modal" role="dialog" aria-modal="true" aria-labelledby="cmpTitle">
+    <div class="cmp-head">
+      <div class="tier-ttl">
+        <span class="tier-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+        <div><h2 id="cmpTitle">ตารางเทียบโมเดล</h2><p>เปรียบเทียบสิทธิ์โมเดลรถแต่ละประเภท</p></div>
+      </div>
+      <button class="cmp-x" type="button" id="cmpClose" aria-label="ปิด"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="cmp-wrap"><div class="cmp-scroll">
+      <table class="cmp-table"><thead><tr><th scope="col">โมเดลรถ</th><th scope="col">กระจก</th><th scope="col">ยิงทะลุโมเดล</th><th scope="col">แฮนดิ้ง</th><th scope="col">เงื่อนไขเพิ่มเติม</th></tr></thead><tbody id="cmpBody"></tbody></table>
+      <button type="button" class="cmp-add" id="cmpAdd" hidden>+ เพิ่มแถวโมเดล</button>
+    </div></div>
+    <div class="tier-admin" id="cmpAdmin" hidden><p id="cmpAdminNote"></p></div>
   </div>
 </div>
 
@@ -930,7 +1027,7 @@ img{-webkit-user-drag:none;user-drag:none}
       return {fs: m[1], db: m[1].getFirestore(app), au: m[2], auth: m[2].getAuth(app)};
     });
   })() : null;
-  var LOCAL_KEYS = {items:'carq.v2', tiers:'carq.tiers.v1', links:'carq.links.v1', notice:'carq.notice.v1'};
+  var LOCAL_KEYS = {items:'carq.v2', tiers:'carq.tiers.v1', links:'carq.links.v1', notice:'carq.notice.v1', compare:'carq.compare.v1'};
   var localBackend = {
     listen: function(key, cb){
       function read(){ try { var r = localStorage.getItem(LOCAL_KEYS[key]); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
@@ -944,7 +1041,7 @@ img{-webkit-user-drag:none;user-drag:none}
      จะยิงไปอ่าน Firestore ก็ต่อเมื่อ cache เก่ากว่า CACHE_TTL เท่านั้น
      รีเฟรชกี่ครั้งภายในช่วงนี้ = อ่าน Firestore 0 ครั้ง
      ถ้ารีเฟรชถี่ผิดปกติ จะยืดเวลารอเป็น COOL_TTL */
-  var CACHE_TTL = 45000, COOL_TTL = 180000, BURST_N = 6, BURST_MS = 60000;
+  var CACHE_TTL = 180000, COOL_TTL = 360000, BURST_N = 6, BURST_MS = 60000;
   function cget(key){ try { var r = JSON.parse(localStorage.getItem('fbc.' + key)); return (r && typeof r.t === 'number') ? r : null; } catch(e) { return null; } }
   function cset(key, v){ try { localStorage.setItem('fbc.' + key, JSON.stringify({t: Date.now(), v: v})); } catch(e) {} }
   var burst = (function(){
@@ -988,14 +1085,23 @@ img{-webkit-user-drag:none;user-drag:none}
     };
   }
   var Store = (function(){
-    var subs = {}, cache = {}, backend = USING_FB ? firebaseBackend(FIREBASE_CONFIG) : localBackend;
+    var subs = {}, cache = {}, started = {}, loaded = {}, backend = USING_FB ? firebaseBackend(FIREBASE_CONFIG) : localBackend;
+    /* ลดการอ่าน Firebase: ข้อมูลที่เห็นเฉพาะในหน้าต่างป๊อปอัป (เทียร์ / ตารางเทียบโมเดล) จะเริ่มโหลด "ตอนที่ผู้ใช้กดเปิด" เท่านั้น
+       คนที่เข้าเว็บแล้วไม่เปิดป๊อปอัป จะไม่เสียโควต้าอ่านส่วนนี้เลย ส่วนคนที่เปิดแล้ว จะรับข้อมูลอัปเดตแบบเรียลไทม์เหมือนเดิม */
+    var LAZY = {tiers:true, compare:true};
     function emit(k){ (subs[k] || []).forEach(function(cb){ cb(cache[k]); }); }
-    ['items','tiers','links','notice'].forEach(function(k){
-      backend.listen(k, function(v){ cache[k] = (v === undefined ? null : v); emit(k); });
-    });
+    function start(k){
+      if (started[k]) return; started[k] = true;
+      backend.listen(k, function(v){ loaded[k] = true; cache[k] = (v === undefined ? null : v); emit(k); });
+    }
+    ['items','links','notice'].forEach(start);
     return {
       subscribe: function(k, cb){ (subs[k] = subs[k] || []).push(cb); if (k in cache) cb(cache[k]); },
-      set: function(k, v){ cache[k] = v; emit(k); backend.write(k, v); }
+      load: function(k){ start(k); },
+      set: function(k, v){
+        if (LAZY[k] && !loaded[k]) { if (window.__toast) window.__toast('กำลังโหลดข้อมูลล่าสุด รอสักครู่แล้วลองอีกครั้ง'); return false; }   // กันเขียนทับข้อมูลจริงด้วยค่าเริ่มต้น
+        cache[k] = v; emit(k); backend.write(k, v); return true;
+      }
     };
   })();
 
@@ -1056,7 +1162,7 @@ img{-webkit-user-drag:none;user-drag:none}
   }
   /* ลิงก์ไม่มี href จริง เพื่อไม่ให้เบราว์เซอร์โชว์ URL ที่มุมซ้ายล่างตอนเมาส์ชี้ — เปิดลิงก์ด้วย JS แทน */
   function openUrl(u){ var w = window.open(u, '_blank'); if (w) { try { w.opener = null; } catch(_){} } }
-  ['actReport','actCars'].forEach(function(id){
+  ['actReport','actCars','actRemap'].forEach(function(id){
     var el = $(id);
     function go(e){
       e.preventDefault();
@@ -1112,9 +1218,11 @@ img{-webkit-user-drag:none;user-drag:none}
   function visible(){
     var q = state.q.trim().toLowerCase().replace(/^#/, '');
     return state.items.filter(function(it){
-      if (state.filter === 'prog' && it.status !== 'prog') return false;
-      if (state.filter === 'review' && it.status !== 'review') return false;
-      if (state.filter === 'done' && it.status !== 'done') return false;
+      if (!q) {
+        if (state.filter === 'prog' && it.status !== 'prog') return false;
+        if (state.filter === 'review' && it.status !== 'review') return false;
+        if (state.filter === 'done' && it.status !== 'done') return false;
+      }
       if (q) {
         var hay = [it.code, it.reporter, it.issue, String(numOf(it)), String(numOf(it)).padStart(3,'0')].join(' ').toLowerCase();
         if (hay.indexOf(q) === -1) return false;
@@ -1137,8 +1245,8 @@ img{-webkit-user-drag:none;user-drag:none}
     var act = '';
     if (state.admin) {
       act = state.confirmId === it.id
-        ? '<button type="button" class="mini danger" data-act="del-yes" data-id="' + esc(it.id) + '">ยืนยันลบ</button><button type="button" class="mini" data-act="del-no" data-id="' + esc(it.id) + '">ไม่ลบ</button>'
-        : '<button type="button" class="mini" data-act="edit" data-id="' + esc(it.id) + '">แก้ไข</button><button type="button" class="mini danger" data-act="del" data-id="' + esc(it.id) + '">ลบ</button>';
+        ? '<button type="button" class="act-ico danger ok" data-act="del-yes" data-id="' + esc(it.id) + '" title="ยืนยันลบ" aria-label="ยืนยันลบ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span class="al">ยืนยันลบ</span></button>' + '<button type="button" class="act-ico" data-act="del-no" data-id="' + esc(it.id) + '" title="ไม่ลบ" aria-label="ไม่ลบ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg><span class="al">ไม่ลบ</span></button>'
+        : '<button type="button" class="act-ico" data-act="edit" data-id="' + esc(it.id) + '" title="แก้ไข" aria-label="แก้ไข"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4z"/><path d="m13.5 6.5 4 4"/></svg><span class="al">แก้ไข</span></button>' + '<button type="button" class="act-ico danger" data-act="del" data-id="' + esc(it.id) + '" title="ลบ" aria-label="ลบ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg><span class="al">ลบ</span></button>';
       act = '<div class="c-act" role="cell">' + act + '</div>';
     }
     return '<div class="row ' + st.cls + '" role="row">'
@@ -1163,13 +1271,14 @@ img{-webkit-user-drag:none;user-drag:none}
       if (i.status === 'done') counts.done++;
     });
     $('chips').innerHTML = FILTERS.map(function(f){
-      return '<button type="button" class="chip ' + f[2] + '" data-f="' + f[0] + '" aria-pressed="' + (state.filter === f[0]) + '">' + (f[2] ? '<i class="dot"></i>' : '') + '<span>' + f[1] + '</span><b>' + counts[f[0]] + '</b></button>';
+      return '<button type="button" class="chip ' + f[2] + '" data-f="' + f[0] + '" aria-pressed="' + (!state.q.trim() && state.filter === f[0]) + '">' + (f[2] ? '<i class="dot"></i>' : '') + '<span>' + f[1] + '</span><b>' + counts[f[0]] + '</b></button>';
     }).join('');
 
     $('board').classList.toggle('admin', state.admin);
     calcNos();
-    $('progNote').hidden = state.filter !== 'prog';
-    $('reviewNote').hidden = state.filter !== 'review';
+    var searching = !!state.q.trim();
+    $('progNote').hidden = searching || state.filter !== 'prog';
+    $('reviewNote').hidden = searching || state.filter !== 'review';
     var list = visible();
     var onlyDone = list.length > 0 && list.every(function(i){ return i.status === 'done'; });
     $('hTime').textContent = onlyDone ? 'แจ้งปัญหาอีกรอบ' : 'เวลา';
@@ -1206,6 +1315,7 @@ img{-webkit-user-drag:none;user-drag:none}
       closeLogin();
     }
     if (!$('tierModal').hidden) renderTiers();
+    if (!$('cmpModal').hidden) renderCompare();
     if (!on) closeNotice();
     applyLinks();
     renderNotice();
@@ -1390,7 +1500,8 @@ img{-webkit-user-drag:none;user-drag:none}
     return !!o && ok(o.fuel) && ok(o.ev);
   }
   var tiers = clone(TIERS_FILE), tSaveT;
-  function saveTiers(){ clearTimeout(tSaveT); tSaveT = setTimeout(function(){ Store.set('tiers', tiers); }, 400); }
+  var tDirty = false;
+  function saveTiers(){ tDirty = true; clearTimeout(tSaveT); tSaveT = setTimeout(function(){ Store.set('tiers', tiers); }, 400); }
   var TMODES = {fuel:{tb:'tierFuel', n:'tierFuelN'}, ev:{tb:'tierEv', n:'tierEvN'}};
   function tmax(){ return Math.max.apply(null, [1].concat(tiers.fuel.concat(tiers.ev).map(function(r){ return r[1]; }))); }
   function barW(v){ return Math.max(6, Math.round(v / tmax() * 100)); }
@@ -1421,8 +1532,89 @@ img{-webkit-user-drag:none;user-drag:none}
       tiers[m].forEach(function(r, i){ if (bars[i]) bars[i].style.width = barW(r[1]) + '%'; });
     });
   }
-  function closeTier(){ $('tierModal').hidden = true; document.documentElement.classList.remove('lock'); $('actTier').focus(); }
-  $('actTier').addEventListener('click', function(){ renderTiers(); document.documentElement.classList.add('lock'); $('tierModal').hidden = false; $('tierClose').focus(); });
+  /* ----- ตารางเทียบโมเดล ----- */
+  /* ข้อมูลเริ่มต้น — แอดมินแก้ไข/เพิ่ม/ลบแถวได้ในหน้าเว็บ (บันทึกอัตโนมัติ) */
+  var N100 = '[อาจจะไม่100%เพราะฟิสิกส์เกม]';
+  var COMPARE_FILE = [
+    {name:'รถประมูลธรรมดา ที่กำหนด', glass:'กระจกศา + แตกได้ตามปกติ', hit:'Basic 50%', handling:'แบบ Basic'},
+    {name:'รถประมูลรีแมพ ที่กำหนด', hl:true, glass:'กระจกศา + ฟีมดำ + กันกระสุน 4 นัด', hit:'ขั้นสุด 80%', note:N100, handling:'แบบ Basic',
+      extra:'สามารถเปลี่ยนโมเดลได้ 1 ครั้ง ไม่ข้ามรุ่น\nคัสต้อมได้แต่อยู่ในขอบเขตที่เป็นไปได้ [อาจจะต้องคุยกับคนทำโมเดล]\nคัสต้อมแฮนดิ้งได้แต่ต้องคุยส่วนตัวกับคนจูนรถหรือรีฟคร่าวๆได้'},
+    {name:'รถยอด 100k', glass:'กระจกศา + ฟีมดำ', hit:'ชั้นกลาง 60%', note:N100, handling:'แบบ Basic ตามเทียร์'},
+    {name:'รถ Topdonate', glass:'กระจกศา + ฟีมดำ', hit:'ขั้นสุด 80%', note:N100, handling:'แบบ Basic ตามเทียร์'},
+    {name:'รถตัวทอง', glass:'กระจกศา + ฟีมดำ', hit:'ชั้นกลาง 60%', note:N100, handling:'แบบ Basic ตามเทียร์'},
+    {name:'รถยอด 30k', glass:'กระจกศา + ฟีมดำ', hit:'ชั้นกลาง 60%', note:N100, handling:'แบบ Basic ตามเทียร์'},
+    {name:'รถกาชา', glass:'กระจกศา + แตกได้ตามปกติ', hit:'ชั้นกลาง 60%', note:N100, handling:'แบบ Basic ตามเทียร์'},
+    {name:'รถ Luckyspin', glass:'กระจกศา + ฟีมดำ', hit:'ชั้นกลาง 60%', note:N100, handling:'แบบ Basic ตามเทียร์'}
+  ];
+  function validCompare(v){ return Array.isArray(v) && v.length > 0 && v.every(function(r){ return r && typeof r === 'object' && typeof r.name === 'string'; }); }
+  /* ทุกช่องเป็นข้อความอิสระ (ขึ้นบรรทัดใหม่/เว้นบรรทัดได้) — ข้อมูลเก่าที่เป็นลิสต์จะถูกแปลงเป็นข้อความ */
+  function normCompare(a){ return a.map(function(r){ var o = {}; for (var k in r) o[k] = r[k]; if (Array.isArray(o.extra)) o.extra = o.extra.join('\n'); return o; }); }
+  var COMPARE = normCompare(COMPARE_FILE), cSaveT;
+  var cDirty = false;
+  function saveCompare(){ cDirty = true; clearTimeout(cSaveT); cSaveT = setTimeout(function(){ Store.set('compare', COMPARE); }, 400); }
+  function autosize(t){ t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
+  function renderCompare(){
+    var admin = state.admin;
+    var tx = function(v){ return v ? '<div class="tx">' + esc(v) + '</div>' : '<span class="cmp-na">-</span>'; };
+    $('cmpBody').innerHTML = COMPARE.map(function(r, i){
+      var nameCell, glass, hit, handling, extra;
+      if (admin) {
+        var d = ' data-i="' + i + '" rows="1"';
+        nameCell = '<div class="cmp-name"><span class="cmp-no">' + (i + 1) + '</span><textarea class="ed" data-cf="name"' + d + ' placeholder="ชื่อโมเดล" aria-label="ชื่อโมเดลแถวที่ ' + (i + 1) + '">' + esc(r.name || '') + '</textarea></div>'
+          + '<div class="cmp-tools"><label><input type="checkbox" data-cf="hl" data-i="' + i + '"' + (r.hl ? ' checked' : '') + '> ไฮไลต์สีทอง</label><button type="button" class="mini danger" data-cdel data-i="' + i + '">ลบแถว</button></div>';
+        glass = '<textarea class="ed" data-cf="glass"' + d + ' placeholder="พิมพ์ได้อิสระ กด Enter เพื่อขึ้นบรรทัดใหม่">' + esc(r.glass || '') + '</textarea>';
+        hit = '<textarea class="ed e-hit" data-cf="hit"' + d + ' placeholder="เช่น ขั้นสุด 80%">' + esc(r.hit || '') + '</textarea><textarea class="ed e-note" data-cf="note"' + d + ' placeholder="หมายเหตุ (ไม่ใส่ก็ได้)">' + esc(r.note || '') + '</textarea>';
+        handling = '<textarea class="ed" data-cf="handling"' + d + ' placeholder="เช่น แบบ Basic">' + esc(r.handling || '') + '</textarea>';
+        extra = '<textarea class="ed" data-cf="extra"' + d + ' placeholder="พิมพ์ได้อิสระ ขึ้นบรรทัดใหม่ เว้นบรรทัด ใส่เลขนำหน้าเองได้">' + esc(r.extra || '') + '</textarea>';
+      } else {
+        nameCell = '<div class="cmp-name"><span class="cmp-no">' + (i + 1) + '</span><span>' + esc(r.name) + '</span></div>';
+        glass = tx(r.glass);
+        hit = r.hit ? '<b>' + esc(r.hit) + '</b>' + (r.note ? '<span class="cmp-note">' + esc(r.note) + '</span>' : '') : '<span class="cmp-na">-</span>';
+        handling = tx(r.handling);
+        extra = tx(r.extra);
+      }
+      return '<tr' + (r.hl ? ' class="hl"' : '') + '><td>' + nameCell + '</td><td>' + glass + '</td><td class="cmp-hit">' + hit + '</td><td>' + handling + '</td><td>' + extra + '</td></tr>';
+    }).join('');
+    $('cmpAdd').hidden = !admin;
+    $('cmpAdmin').hidden = !admin;
+    if (admin) $('cmpBody').querySelectorAll('textarea.ed').forEach(autosize);
+  }
+  $('cmpAdminNote').textContent = USING_FB ? 'โหมดแอดมิน · คลิกที่ข้อความแล้วพิมพ์ได้เลย กด Enter เพื่อขึ้นบรรทัดใหม่ เว้นบรรทัดได้ · บันทึกอัตโนมัติ ทุกคนเห็นตรงกัน' : 'โหมดแอดมิน · คลิกที่ข้อความแล้วพิมพ์ได้เลย กด Enter เพื่อขึ้นบรรทัดใหม่ · บันทึกอัตโนมัติ (ยังไม่ได้เชื่อม Firebase จึงเก็บในเบราว์เซอร์นี้)';
+  $('cmpModal').addEventListener('click', function(e){
+    if (!state.admin) return;
+    if (e.target.closest('#cmpAdd')) {
+      COMPARE.push({name:'โมเดลใหม่', glass:'', hit:'', handling:'', extra:''});
+      saveCompare(); renderCompare();
+      var sc = $('cmpModal').querySelector('.cmp-scroll'); if (sc) sc.scrollTop = sc.scrollHeight;
+      var ins = $('cmpBody').querySelectorAll('textarea[data-cf="name"]'); if (ins.length) { ins[ins.length - 1].focus(); ins[ins.length - 1].select(); }
+      return;
+    }
+    var del = e.target.closest('[data-cdel]');
+    if (del) {
+      if (COMPARE.length <= 1) { toast('ต้องเหลืออย่างน้อย 1 แถว'); return; }
+      var gone = COMPARE.splice(parseInt(del.getAttribute('data-i'), 10), 1)[0];
+      saveCompare(); renderCompare(); toast('ลบ ' + ((gone && gone.name) || 'แถว') + ' แล้ว');
+    }
+  });
+  $('cmpModal').addEventListener('input', function(e){
+    var t = e.target; if (!state.admin || !t.getAttribute) return;
+    var f = t.getAttribute('data-cf'); if (!f) return;
+    var row = COMPARE[parseInt(t.getAttribute('data-i'), 10)]; if (!row) return;
+    if (f === 'hl') { row.hl = t.checked; var tr = t.closest('tr'); if (tr) tr.classList.toggle('hl', t.checked); }
+    else { row[f] = t.value; autosize(t); }
+    saveCompare();
+  });
+  Store.subscribe('compare', function(v){
+    if (cDirty && !$('cmpModal').hidden && state.admin) return;   // กำลังแก้อยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
+    COMPARE = validCompare(v) ? normCompare(v) : normCompare(COMPARE_FILE);
+    if (!$('cmpModal').hidden) renderCompare();
+  });
+  function closeCmp(){ cDirty = false; $('cmpModal').hidden = true; document.documentElement.classList.remove('lock'); $('actCmp').focus(); }
+  $('actCmp').addEventListener('click', function(){ Store.load('compare'); document.documentElement.classList.add('lock'); $('cmpModal').hidden = false; renderCompare(); $('cmpClose').focus(); });
+  $('cmpClose').addEventListener('click', closeCmp);   // คลิกพื้นหลัง / กด Esc ไม่ปิด ต้องกดปุ่มกากบาทเท่านั้น
+
+  function closeTier(){ tDirty = false; $('tierModal').hidden = true; document.documentElement.classList.remove('lock'); $('actTier').focus(); }
+  $('actTier').addEventListener('click', function(){ Store.load('tiers'); renderTiers(); document.documentElement.classList.add('lock'); $('tierModal').hidden = false; $('tierClose').focus(); });
   $('tierClose').addEventListener('click', closeTier);
   $('tierModal').addEventListener('click', function(e){
     var add = e.target.closest('[data-add]');   // คลิกพื้นหลังไม่ปิดแล้ว ต้องกดปุ่ม ปิด เท่านั้น
@@ -1452,7 +1644,7 @@ img{-webkit-user-drag:none;user-drag:none}
   });
   $('tierAdminNote').textContent = USING_FB ? 'โหมดแอดมิน · แก้ชื่อเทียร์และความเร็วได้เลย บันทึกอัตโนมัติ ทุกคนเห็นตรงกัน' : 'โหมดแอดมิน · แก้ไขได้เลย บันทึกอัตโนมัติ (ยังไม่ได้เชื่อม Firebase จึงเก็บในเบราว์เซอร์นี้)';
   Store.subscribe('tiers', function(v){
-    if (!$('tierModal').hidden && state.admin) return;   // กำลังแก้อยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
+    if (tDirty && !$('tierModal').hidden && state.admin) return;   // กำลังแก้อยู่ ไม่ทับด้วยข้อมูลที่เข้ามา
     tiers = validTiers(v) ? v : clone(TIERS_FILE);
     renderTiers();
   });
@@ -1639,6 +1831,7 @@ img{-webkit-user-drag:none;user-drag:none}
     if (!$('rrModal').hidden) { closeRR(); return; }
     if (!$('loginModal').hidden) closeLogin();
     else if (!$('lightbox').hidden) closeLightbox();
+    else if (!$('cmpModal').hidden) { /* ตารางเทียบโมเดล: ปิดได้ด้วยปุ่มกากบาทเท่านั้น */ }
     else if (!$('tierModal').hidden) { /* เทียร์: ปิดได้ด้วยปุ่ม ปิด เท่านั้น */ }
     else if (!$('noticeModal').hidden) closeNotice();
     else if (!$('linkModal').hidden) closeLinkForm();
